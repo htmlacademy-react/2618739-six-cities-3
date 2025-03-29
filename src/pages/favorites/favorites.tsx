@@ -1,7 +1,7 @@
 import Private from '../../components/private';
 function Favorites(): JSX.Element {
   return (
-    <Private>
+    <Private authorizationStatus="NotAuth">
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
