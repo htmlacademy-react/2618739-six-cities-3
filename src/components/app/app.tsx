@@ -6,20 +6,22 @@ import Login from '../../pages/login/login';
 import Main from '../../pages/main/main';
 import Offer from '../../pages/offer/offer';
 import Page404 from '../404';
+import TOffer from '../../types/offers';
 
 type MainPageProps = {
   rentCount: number;
+  offersProps: TOffer[];
 }
 
-function App({ rentCount }: MainPageProps): JSX.Element {
+function App({ rentCount, offersProps }: MainPageProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />} >
-          <Route index element={<Main rentCount={rentCount} />} />
+          <Route index element={<Main rentCount={rentCount} offersProps={offersProps} />} />
           <Route path="login" element={<Login />} />
           <Route path='favorites' element={<Favorites />} />
-          <Route path="offer/:id" element={<Offer />} />
+          <Route path="offer/:id" element={<Offer offersProps />} />
           <Route path="*" element={<Page404 />} />
         </Route >
       </Routes >

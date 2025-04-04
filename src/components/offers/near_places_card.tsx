@@ -1,4 +1,6 @@
-function NearPlacesCard(): JSX.Element {
+import TOffer from '../../types/offers';
+type OfferCardProps = { props: TOffer }
+function NearPlacesCard({ props }: OfferCardProps): JSX.Element {
   return (
     <article className="near-places__card place-card">
       <div className="place-card__mark">
@@ -29,9 +31,9 @@ function NearPlacesCard(): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">Nice, cozy, warm big bed apartment</a>
+          <a href="#">{props.description}</a>
         </h2>
-        <p className="place-card__type">Apartment</p>
+        <p className="place-card__type">{props.type}</p>
       </div>
     </article>
   );

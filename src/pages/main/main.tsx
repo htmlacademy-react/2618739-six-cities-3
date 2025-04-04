@@ -1,10 +1,12 @@
-import PlaceCard from '../../components/place-card/place-card';
+import PlaceCardList from '../../components/place-cards-list';
+import TOffer from '../../types/offers';
 
 type MainPageProps = {
   rentCount: number;
+  offersProps: TOffer[];
 }
 
-function Main({ rentCount }: MainPageProps): JSX.Element {
+function Main(mainPageProps: MainPageProps): JSX.Element {
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -48,7 +50,7 @@ function Main({ rentCount }: MainPageProps): JSX.Element {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{rentCount} places to stay in Amsterdam</b>
+            <b className="places__found">{mainPageProps.rentCount} places to stay in Amsterdam</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -64,11 +66,7 @@ function Main({ rentCount }: MainPageProps): JSX.Element {
                 <li className="places__option" tabIndex={0}>Top rated first</li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              <PlaceCard />
-              <PlaceCard />
-              <PlaceCard />
-            </div>
+            <PlaceCardList offersProps={mainPageProps.offersProps} />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"></section>
