@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 type PlaceCardProps = { offersProp: TOffer }
 
 function PlaceCard({ offersProp }: PlaceCardProps): JSX.Element {
-  offer_path = "/offer/" + offersProp.id
+  const offer_path = "/offer/" + offersProp.id
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
