@@ -1,7 +1,7 @@
 import Private from '../../components/private';
+import { Link } from "react-router-dom";
 type offersProps = { offers: TOffer[] }
 function Favorites({ offers }: offersProps): JSX.Element {
-
   const cards = offers.map((offer: TOffer) =>
     <article className="favorites__card place-card">
       <div className="place-card__mark">
@@ -11,9 +11,9 @@ function Favorites({ offers }: offersProps): JSX.Element {
         }
       </div>
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={"/offer/" + offer.id}>
           <img className="place-card__image" src={offer.images[0]} width="150" height="110" alt="Place image" />
-        </a>
+        </Link>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
@@ -35,11 +35,11 @@ function Favorites({ offers }: offersProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <Link to={'/offer/' + offer.id}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
-    </article>);
+    </article >);
   return (
     <Private authorizationStatus="Auth">
       <main className="page__main page__main--favorites">
