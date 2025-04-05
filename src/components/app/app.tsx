@@ -21,7 +21,7 @@ function App({ rentCount, offersProps }: MainPageProps): JSX.Element {
           <Route index element={<Main rentCount={rentCount} offersProps={offersProps} />} />
           <Route path="login" element={<Login />} />
           <Route path='favorites' element={<Favorites />} />
-          <Route path="offer/:id" element={<Offer offersProps />} />
+          <Route path="offer/:id" element={<Offer offers={offersProps} />} />
           <Route path="*" element={<Page404 />} />
         </Route >
       </Routes >
