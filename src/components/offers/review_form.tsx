@@ -5,13 +5,11 @@ function ReviewsForm(): JSX.Element {
   //type ReviewStateType = { stars: number; text: string };
   const [ReviewState, setReviewState] = useState({ stars: 0, text: '' });
   function setStars(newStars: number) {
-    console.log(newStars);
     setReviewState({
       ...ReviewState,
       stars: newStars
     });
   }
-  console.log(ReviewState);
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
