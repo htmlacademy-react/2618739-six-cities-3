@@ -1,5 +1,3 @@
-import Star from './star';
-import FormRatingInput from './form_rating_input';
 import ReviewsForm from './review_form';
 function OfferContainer(): JSX.Element {
   return (

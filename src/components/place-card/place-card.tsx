@@ -1,11 +1,11 @@
 import PlaceCardInfo from './place-card__info';
 import TOffer from '../../types/offers';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 type PlaceCardProps = { offersProp: TOffer }
 
 function PlaceCard({ offersProp }: PlaceCardProps): JSX.Element {
-  const offer_path = "/offer/" + offersProp.id
+  const offerPath = `/offer/${offersProp.id}`;
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
@@ -13,7 +13,7 @@ function PlaceCard({ offersProp }: PlaceCardProps): JSX.Element {
           <span>Premium</span> : null}
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={offer_path} >
+        <Link to={offerPath} >
           <img className="place-card__image" src={offersProp.images[0]} width="260" height="200" alt="Place image" />
         </Link>
       </div>

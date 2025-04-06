@@ -1,5 +1,5 @@
 import TOffer from '../../types/offers';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 type OfferCardProps = { props: TOffer }
 function NearPlacesCard({ props }: OfferCardProps): JSX.Element {
   return (
@@ -8,7 +8,7 @@ function NearPlacesCard({ props }: OfferCardProps): JSX.Element {
         <span>Premium</span>
       </div>
       <div className="near-places__image-wrapper place-card__image-wrapper">
-        <Link to={"/offer" + props.id}>
+        <Link to={`/offer${ props.id}`}>
           <img className="place-card__image" src={props.images[0]} width="260" height="200" alt="Place image" />
         </Link>
       </div>
@@ -32,7 +32,7 @@ function NearPlacesCard({ props }: OfferCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={"/offer" + props.id}>{props.description}</Link>
+          <Link to={`/offer${ props.id}`}>{props.description}</Link>
         </h2>
         <p className="place-card__type">{props.type}</p>
       </div>
