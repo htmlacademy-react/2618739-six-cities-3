@@ -1,7 +1,7 @@
-type RatingValue = { value: string };
-function FormRatingInput({ value }: RatingValue): JSX.Element {
+type RatingValue = { value: string, setRating: Function };
+function FormRatingInput({ value, setRating }: RatingValue): JSX.Element {
   return (
-    <input className="form__rating-input visually-hidden" name="rating" value={value} id="{value}-stars" type="radio" />
+    <input onChange={() => setRating(value)} className="form__rating-input visually-hidden" name="rating" value={value} id="{value}-stars" type="radio" />
   );
 }
 export default FormRatingInput;
