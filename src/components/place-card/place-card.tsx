@@ -2,12 +2,15 @@ import PlaceCardInfo from './place-card__info';
 import TOffer from '../../types/offers';
 import { Link } from 'react-router-dom';
 
-type PlaceCardProps = { offersProp: TOffer, setActiveCard: (id: number) => void }
+type PlaceCardProps = { offersProp: TOffer; setActiveCard: (id: number) => void }
 
 function PlaceCard({ offersProp, setActiveCard }: PlaceCardProps): JSX.Element {
   const offerPath = `/offer/${offersProp.id}`;
   return (
-    <article className="cities__card place-card" onMouseOver={() => { setActiveCard(offersProp.id) }}>
+    <article className="cities__card place-card" onMouseOver={() => {
+      setActiveCard(offersProp.id);
+    }}
+    >
       <div className="place-card__mark">
         {offersProp.isPremium ?
           <span>Premium</span> : null}

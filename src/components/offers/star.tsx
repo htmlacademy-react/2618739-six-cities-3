@@ -1,11 +1,12 @@
 type StarProps = {
-    for_star: string;
-    title_star: string;
+  for_star: string;
+  title_star: string;
+  setRating: () => void;
+};
 
-}
 function Star(props: StarProps): JSX.Element {
   return (
-    <label htmlFor={props.for_star} className="reviews__rating-label form__rating-label" title={props.title_star}>
+    <label htmlFor={props.for_star} className="reviews__rating-label form__rating-label" title={props.title_star} onClick={props.setRating}>
       <svg className="form__star-image" width="37" height="33">
         <use xlinkHref="#icon-star"></use>
       </svg>
