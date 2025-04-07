@@ -1,9 +1,12 @@
-function PlaceCardInfo(): JSX.Element {
+import TOffer from '../../types/offers';
+
+type cardInfoProps = { offersProp: TOffer };
+function PlaceCardInfo({ offersProp }: cardInfoProps): JSX.Element {
   return (
     <div className="place-card__info">
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
-          <b className="place-card__price-value">&euro;120</b>
+          <b className="place-card__price-value">&euro;{offersProp.price}</b>
           <span className="place-card__price-text">&#47;&nbsp;night</span>
         </div>
         <button className="place-card__bookmark-button button" type="button">
@@ -20,9 +23,9 @@ function PlaceCardInfo(): JSX.Element {
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#">Beautiful &amp; luxurious apartment at great location</a>
+        <a href="#">{offersProp.title}</a>
       </h2>
-      <p className="place-card__type">Apartment</p>
+      <p className="place-card__type">{offersProp.type}</p>
     </div>);
 }
 

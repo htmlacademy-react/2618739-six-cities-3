@@ -1,16 +1,26 @@
 import PlaceCardInfo from './place-card__info';
-function PlaceCard(): JSX.Element {
+import TOffer from '../../types/offers';
+import { Link } from 'react-router-dom';
+
+type PlaceCardProps = { offersProp: TOffer; setActiveCard: (id: number) => void }
+
+function PlaceCard({ offersProp, setActiveCard }: PlaceCardProps): JSX.Element {
+  const offerPath = `/offer/${offersProp.id}`;
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" onMouseOver={() => {
+      setActiveCard(offersProp.id);
+    }}
+    >
       <div className="place-card__mark">
-        <span>Premium</span>
+        {offersProp.isPremium ?
+          <span>Premium</span> : null}
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="Place image" />
-        </a>
+        <Link to={offerPath} >
+          <img className="place-card__image" src={offersProp.images[0]} width="260" height="200" alt="Place image" />
+        </Link>
       </div>
-      <PlaceCardInfo />
-    </article>);
+      <PlaceCardInfo offersProp={offersProp} />
+    </article >);
 }
 export default PlaceCard;
