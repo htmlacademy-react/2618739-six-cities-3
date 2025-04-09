@@ -8,5 +8,5 @@ export const AMSTERDAM = {
     title: "Amsterdam",
     lat: 52.373057,
     lng: 4.892557,
-    zoom: 1
+    zoom: 0.5
 }

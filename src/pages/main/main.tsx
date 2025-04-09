@@ -76,8 +76,9 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
             Выбрана карточка {activeCard}
           </section>
           <div className="cities__right-section">
+            Выбранное место: {SelectedPoint?.title}
             <section className="cities__map">
-              <Map city={AMSTERDAM} offers={mainPageProps.offersProps} selectedPoint={SelectedPoint} />
+              < Map city={AMSTERDAM} offers={mainPageProps.offersProps} selectedPoint={SelectedPoint} />
             </section>
           </div>
         </div>
