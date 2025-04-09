@@ -1,5 +1,8 @@
 import PlaceCardList from '../../components/place-cards-list';
 import TOffer from '../../types/offers';
+import Map from '../../components/map';
+import { AMSTERDAM } from '../../const'
+import { useState } from 'react';
 
 type MainPageProps = {
   rentCount: number;
@@ -7,6 +10,9 @@ type MainPageProps = {
 }
 
 function Main(mainPageProps: MainPageProps): JSX.Element {
+  const [activeCard, setActiveCard] = useState(0);
+  const selectedCard = mainPageProps.offersProps[activeCard];
+  const SelectedPoint = { title: selectedCard.title, lat: selectedCard.location[0], lng: selectedCard.location[0] };
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -66,10 +72,13 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
                 <li className="places__option" tabIndex={0}>Top rated first</li>
               </ul>
             </form>
-            <PlaceCardList offersProps={mainPageProps.offersProps} />
+            <PlaceCardList offersProps={mainPageProps.offersProps} setActiveCard={setActiveCard} />
+            Выбрана карточка {activeCard}
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <section className="cities__map">
+              <Map city={AMSTERDAM} offers={mainPageProps.offersProps} selectedPoint={SelectedPoint} />
+            </section>
           </div>
         </div>
       </div>
