@@ -1,7 +1,7 @@
 import TOffer from '../types/offers';
 import PlaceCard from './place-card/place-card';
 
-type PlaceCardListType = { offersProps: TOffer[], setActiveCard: (id: number) => void };
+type PlaceCardListType = { offersProps: TOffer[]; setActiveCard: (id: number) => void };
 
 function PlaceCardList({ offersProps, setActiveCard }: PlaceCardListType): JSX.Element {
   //const [activeCard, setActiveCard] = useState(0);

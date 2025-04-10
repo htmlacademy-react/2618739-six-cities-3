@@ -2,14 +2,16 @@ import TOffer from '../../types/offers';
 import { Link } from 'react-router-dom';
 type OfferCardProps = { props: TOffer }
 function NearPlacesCard({ props }: OfferCardProps): JSX.Element {
+  const linkToOffer = `/offer${props.id}`;
+  const placeCardImage: string = props.images[0];
   return (
     <article className="near-places__card place-card">
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
       <div className="near-places__image-wrapper place-card__image-wrapper">
-        <Link to={`/offer${props.id}`}>
-          <img className="place-card__image" src={props.images[0]} width="260" height="200" alt="Place image" />
+        <Link to={linkToOffer}>
+          <img className="place-card__image" src={placeCardImage} width="260" height="200" alt="Place image" />
         </Link>
       </div>
       <div className="place-card__info">
@@ -32,11 +34,11 @@ function NearPlacesCard({ props }: OfferCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${ props.id.toString()}`}>{props.description}</Link>
+          <Link to={linkToOffer}>{props.description}</Link>
         </h2>
         <p className="place-card__type">{props.type}</p>
       </div>
-    </article>
+    </article >
   );
 }
 export default NearPlacesCard;

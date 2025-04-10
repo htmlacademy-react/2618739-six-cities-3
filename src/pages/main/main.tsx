@@ -1,7 +1,7 @@
 import PlaceCardList from '../../components/place-cards-list';
 import TOffer from '../../types/offers';
 import Map from '../../components/map';
-import { AMSTERDAM } from '../../const'
+import { AMSTERDAM } from '../../const';
 import { useState } from 'react';
 
 type MainPageProps = {
