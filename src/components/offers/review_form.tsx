@@ -2,7 +2,6 @@ import FormRatingInput from './form_rating_input';
 import { useState } from 'react';
 import Star from './star';
 function ReviewsForm(): JSX.Element {
-  //type ReviewStateType = { stars: number; text: string };
   const [ReviewState, setReviewState] = useState({ stars: 0, text: '' });
   function setStars(newStars: number) {
     setReviewState({

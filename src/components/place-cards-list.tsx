@@ -7,7 +7,7 @@ function PlaceCardList({ offersProps, setActiveCard }: PlaceCardListType): JSX.E
   //const [activeCard, setActiveCard] = useState(0);
   const cards = offersProps.map((offer: TOffer) => (
     <PlaceCard offersProp={offer} key={offer.id} setActiveCard={() => {
-      setActiveCard(offer.id - 1);
+      setActiveCard(offer.id);
     }}
     />));
   return (
