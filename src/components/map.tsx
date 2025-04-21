@@ -7,9 +7,9 @@ import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../const';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
-    city: City;
-    offers: TOffer[];
-    selectedPoint: Point | undefined;
+  city: City;
+  offers: TOffer[];
+  selectedPoint: Point | undefined;
 };
 
 const defaultCustomIcon = new Icon({
@@ -52,7 +52,7 @@ function Map(props: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, selectedPoint]);
+  }, [map, offers, city, selectedPoint]);
 
   return <div style={{ height: '500px' }} ref={mapRef}></div>;
 }

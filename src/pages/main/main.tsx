@@ -1,8 +1,10 @@
 import PlaceCardList from '../../components/place-cards-list';
+import { selectCity } from '../../store/selectors/offers';
 import CitiesList from '../../components/cities_list';
+import { useAppSelector } from '../../hooks/index'
 import TOffer from '../../types/offers';
 import Map from '../../components/map';
-import { AMSTERDAM } from '../../const';
+import { CITIES } from '../../const';
 import { useState } from 'react';
 
 type MainPageProps = {
@@ -32,7 +34,7 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{mainPageProps.rentCount} places to stay in Amsterdam</b>
+            <b className="places__found">{mainPageProps.rentCount} places to stay in {useAppSelector(selectCity)}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -54,7 +56,8 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
           <div className="cities__right-section">
             Выбранное место: {SelectedPoint?.title}
             <section className="cities__map">
-              < Map city={AMSTERDAM} offers={mainPageProps.offersProps} selectedPoint={SelectedPoint} />
+              < Map city={CITIES[0] || CITIES.find((city) => city.title == useAppSelector(selectCity))
+              } offers={mainPageProps.offersProps.filter((offer) => offer.city == useAppSelector(selectCity))} selectedPoint={SelectedPoint} />
             </section>
           </div>
         </div>

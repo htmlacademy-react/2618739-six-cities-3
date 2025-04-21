@@ -70,7 +70,7 @@ const mockOffers = [{
   maxAdults: 3
 },
 {
-  id: 3,
+  id: 4,
   title: 'Moulin Rouge',
   price: 400,
   rating: 4.9,
