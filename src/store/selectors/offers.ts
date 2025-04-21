@@ -1,4 +1,4 @@
-import State from '../../types/store';
+import { State } from '../../types/store';
 
 const selectOffers = (state: State) => state.offers;
 

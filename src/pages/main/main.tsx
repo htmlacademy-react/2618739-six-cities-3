@@ -16,6 +16,7 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
   const [activeCard, setActiveCard] = useState(0);
   const selectedCard = mainPageProps.offersProps[activeCard];
   const SelectedPoint = { title: selectedCard.title, lat: selectedCard.location[0], lng: selectedCard.location[0] };
+  const selectedCity = CITIES.filter((city) => city.title == useAppSelector(selectCity))[0] || CITIES[0]
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -56,9 +57,10 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
           <div className="cities__right-section">
             Выбранное место: {SelectedPoint?.title}
             <section className="cities__map">
-              < Map city={CITIES[0] || CITIES.find((city) => city.title == useAppSelector(selectCity))
-              } offers={mainPageProps.offersProps.filter((offer) => offer.city == useAppSelector(selectCity))} selectedPoint={SelectedPoint} />
+              < Map city={selectedCity}
+                offers={mainPageProps.offersProps} selectedPoint={SelectedPoint} />
             </section>
+            на карте показан город {selectedCity.title}
           </div>
         </div>
       </div>

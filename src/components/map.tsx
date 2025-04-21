@@ -47,12 +47,13 @@ function Map(props: MapProps): JSX.Element {
           )
           .addTo(markerLayer);
       });
-
+      console.log(city.title)
+      map.setView({ lat: city.lat, lng: city.lng })
       return () => {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, city, selectedPoint]);
+  }, [offers, selectedPoint, city]);
 
   return <div style={{ height: '500px' }} ref={mapRef}></div>;
 }
