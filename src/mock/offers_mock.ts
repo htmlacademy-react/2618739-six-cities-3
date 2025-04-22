@@ -76,7 +76,7 @@ const mockOffers = [{
   rating: 4.9,
   type: 'Apartment',
   city: 'Paris',
-  location: [48.5303, 2.1956],
+  location: [48.83, 2.3],
   isFavorite: true,
   isPremium: true,
   description: 'Cool',

@@ -22,8 +22,8 @@ export const PARIS = {
 export const CITIES = [
   {
     title: 'Paris',
-    lat: 52.373057,
-    lng: 4.892557,
+    lat: 48.856614,
+    lng: 2.3522219,
     zoom: 0.5
   },
   {

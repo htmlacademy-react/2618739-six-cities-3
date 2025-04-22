@@ -8,11 +8,10 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const Settings = { rentCount: 312 } as const;
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App rentCount={Settings.rentCount} offersProps={getOffers()} />
+      <App offersProps={getOffers()} />
     </Provider>
   </React.StrictMode>
 );

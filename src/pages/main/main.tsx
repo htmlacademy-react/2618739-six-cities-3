@@ -8,7 +8,6 @@ import { CITIES } from '../../const';
 import { useState } from 'react';
 
 type MainPageProps = {
-  rentCount: number;
   offersProps: TOffer[];
 }
 
@@ -16,7 +15,8 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
   const [activeCard, setActiveCard] = useState(0);
   const selectedCard = mainPageProps.offersProps[activeCard];
   const SelectedPoint = { title: selectedCard.title, lat: selectedCard.location[0], lng: selectedCard.location[0] };
-  const selectedCity = CITIES.filter((city) => city.title == useAppSelector(selectCity))[0] || CITIES[0]
+  const selectedCity = CITIES.filter((city) => city.title == useAppSelector(selectCity))[0] || CITIES[0];
+  const selectedOffers = mainPageProps.offersProps.filter((offer) => offer.city == useAppSelector(selectCity));
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -35,7 +35,7 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{mainPageProps.rentCount} places to stay in {useAppSelector(selectCity)}</b>
+            <b className="places__found">{selectedOffers.length} places to stay in {selectedCity.title}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -51,14 +51,14 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
                 <li className="places__option" tabIndex={0}>Top rated first</li>
               </ul>
             </form>
-            <PlaceCardList offersProps={mainPageProps.offersProps} setActiveCard={setActiveCard} />
+            <PlaceCardList offersProps={selectedOffers} setActiveCard={setActiveCard} />
             Выбрана карточка {activeCard}
           </section>
           <div className="cities__right-section">
             Выбранное место: {SelectedPoint?.title}
             <section className="cities__map">
               < Map city={selectedCity}
-                offers={mainPageProps.offersProps} selectedPoint={SelectedPoint} />
+                offers={selectedOffers} selectedPoint={SelectedPoint} />
             </section>
             на карте показан город {selectedCity.title}
           </div>
