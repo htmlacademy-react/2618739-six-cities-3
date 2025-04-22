@@ -57,4 +57,4 @@ export const CITIES = [
     lng: 6.77616,
     zoom: 0.5
   },
-]
+];

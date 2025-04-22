@@ -1,22 +1,31 @@
 import PlaceCardList from '../../components/place-cards-list';
 import { selectCity } from '../../store/selectors/offers';
 import CitiesList from '../../components/cities_list';
-import { useAppSelector } from '../../hooks/index'
+import { useAppSelector } from '../../hooks/index';
 import TOffer from '../../types/offers';
 import Map from '../../components/map';
 import { CITIES } from '../../const';
 import { useState } from 'react';
+import { City } from '../../types/map_types';
 
 type MainPageProps = {
   offersProps: TOffer[];
+}
+
+function getCity(): City {
+  return (CITIES.filter((city) => city.title === useAppSelector(selectCity))[0] || CITIES[0]);
+}
+
+function filterOffers(offers: TOffer[]): TOffer[] {
+  return (offers.filter((offer) => offer.city === useAppSelector(selectCity)));
 }
 
 function Main(mainPageProps: MainPageProps): JSX.Element {
   const [activeCard, setActiveCard] = useState(0);
   const selectedCard = mainPageProps.offersProps[activeCard];
   const SelectedPoint = { title: selectedCard.title, lat: selectedCard.location[0], lng: selectedCard.location[0] };
-  const selectedCity = CITIES.filter((city) => city.title == useAppSelector(selectCity))[0] || CITIES[0];
-  const selectedOffers = mainPageProps.offersProps.filter((offer) => offer.city == useAppSelector(selectCity));
+  const selectedCity = getCity();
+  const selectedOffers = filterOffers(mainPageProps.offersProps);
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -28,7 +37,8 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
             { id: 3, cityName: 'Brussels' },
             { id: 4, cityName: 'Amsterdam' },
             { id: 5, cityName: 'Hamburg' },
-            { id: 6, cityName: 'Dusseldorf' }]} />
+            { id: 6, cityName: 'Dusseldorf' }]}
+          />
         </section>
       </div>
       <div className="cities">
@@ -58,7 +68,8 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
             Выбранное место: {SelectedPoint?.title}
             <section className="cities__map">
               < Map city={selectedCity}
-                offers={selectedOffers} selectedPoint={SelectedPoint} />
+                offers={selectedOffers} selectedPoint={SelectedPoint}
+              />
             </section>
             на карте показан город {selectedCity.title}
           </div>

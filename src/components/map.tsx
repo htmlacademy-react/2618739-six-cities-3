@@ -28,7 +28,7 @@ function Map(props: MapProps): JSX.Element {
   const { city, offers, selectedPoint } = props;
 
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const map = useMap(mapRef);
 
   useEffect(() => {
     if (map) {
@@ -47,13 +47,12 @@ function Map(props: MapProps): JSX.Element {
           )
           .addTo(markerLayer);
       });
-      console.log(city.title)
-      map.setView({ lat: city.lat, lng: city.lng })
+      map.setView({ lat: city.lat, lng: city.lng });
       return () => {
         map.removeLayer(markerLayer);
       };
     }
-  }, [offers, selectedPoint, city]);
+  }, [map, offers, selectedPoint, city]);
 
   return <div style={{ height: '500px' }} ref={mapRef}></div>;
 }

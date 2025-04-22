@@ -4,12 +4,12 @@ import mockOffers from '../mock/offers_mock';
 import { fillOffers, setCity } from './actions';
 
 type offerState = {
-    city: string;
-    offers: TOffer[];
+  city: string;
+  offers: TOffer[];
 }
 
 const initialState: offerState = {
-  city: 'Amsterdam',
+  city: 'Paris',
   offers: [],
 };
 
