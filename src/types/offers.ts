@@ -1,7 +1,7 @@
 type TOffer = {
     id: number;
     title: string;
-    offertype: string;
+    type: string;
     price: number;
     city: string;
     location: number[];

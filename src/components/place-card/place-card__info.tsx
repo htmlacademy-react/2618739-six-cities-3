@@ -25,7 +25,7 @@ function PlaceCardInfo({ offersProp }: cardInfoProps): JSX.Element {
       <h2 className="place-card__name">
         <a href="#">{offersProp.title}</a>
       </h2>
-      <p className="place-card__type">{offersProp.offertype}</p>
+      <p className="place-card__type">{offersProp.type}</p>
     </div>);
 }
 
