@@ -2,8 +2,8 @@ import { useAppDispatch, useAppSelector } from '../hooks/index';
 import { setCity } from '../store/actions';
 import { selectCity } from '../store/selectors/offers';
 
-type citiesType = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf'
-type cityEl = { id: number; cityName: citiesType }
+type citiesType = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
+type cityEl = { id: number; cityName: citiesType };
 type citiesLisrProps = { citiesList: cityEl[] };
 
 function CitiesList({ citiesList }: citiesLisrProps): JSX.Element {
@@ -21,7 +21,7 @@ function CitiesList({ citiesList }: citiesLisrProps): JSX.Element {
   return (
     <ul className="locations__list tabs__list">
       {cities}
-            Выбран город {useAppSelector(selectCity)}
+      Выбран город {useAppSelector(selectCity)}
     </ul>);
 }
 

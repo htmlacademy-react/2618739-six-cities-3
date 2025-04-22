@@ -1,9 +1,13 @@
-import TOffer from '../../types/offers';
 import { Link } from 'react-router-dom';
-type OfferCardProps = { props: TOffer }
-function NearPlacesCard({ props }: OfferCardProps): JSX.Element {
-  const linkToOffer = `/offer${props.id}`;
-  const placeCardImage: string = props.images[0];
+import TOffer from '../../types/offers';
+
+
+type OfferCardProps = { offer: TOffer }
+
+function NearPlacesCard({ offer }: OfferCardProps): JSX.Element {
+  const { id, price, images, description, offertype } = offer;
+  const linkToOffer = `/offer${id}`;
+  const placeCardImage: string = images[0];
   return (
     <article className="near-places__card place-card">
       <div className="place-card__mark">
@@ -17,7 +21,7 @@ function NearPlacesCard({ props }: OfferCardProps): JSX.Element {
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{props.price}</b>
+            <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button button" type="button">
@@ -34,9 +38,9 @@ function NearPlacesCard({ props }: OfferCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={linkToOffer}>{props.description}</Link>
+          <Link to={linkToOffer}>{description}</Link>
         </h2>
-        <p className="place-card__type">{props.type}</p>
+        <p className="place-card__type">{offertype}</p>
       </div>
     </article >
   );

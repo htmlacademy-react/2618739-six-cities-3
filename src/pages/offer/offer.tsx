@@ -35,9 +35,9 @@ function Offer(offersProps: offersProps): JSX.Element {
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
-            <NearPlacesCard props={offersProps.offers[0]} />
-            <NearPlacesCard props={offersProps.offers[1]} />
-            <NearPlacesCard props={offersProps.offers[2]} />
+            <NearPlacesCard offer={offersProps.offers[0]} />
+            <NearPlacesCard offer={offersProps.offers[1]} />
+            <NearPlacesCard offer={offersProps.offers[2]} />
           </div>
         </section>
       </div>
