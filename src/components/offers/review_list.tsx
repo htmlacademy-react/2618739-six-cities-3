@@ -7,6 +7,7 @@ function ReviewsList({ reviewList }: reviewListProp): JSX.Element {
   const reviews = reviewList.map((review) => (
     <ReviewsItem
       key={review.id}
+      id={review.id}
       userName={review.userName}
       text={review.text}
       dateTime={review.dateTime}
