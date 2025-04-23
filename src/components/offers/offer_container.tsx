@@ -1,16 +1,19 @@
 import ReviewsForm from './review_form';
 import ReviewsList from './review_list';
 import { mockReviews } from "../../mock/reviews";
-function OfferContainer(): JSX.Element {
+import TOffer from '../../types/offers';
+type offerProp = { offer: TOffer };
+function OfferContainer({ offer }: offerProp): JSX.Element {
   return (
     <div className="offer__container container">
       <div className="offer__wrapper">
         <div className="offer__mark">
-          <span>Premium</span>
+          {offer.isPremium ?
+            (<span>Premium</span>) : null}
         </div>
         <div className="offer__name-wrapper">
           <h1 className="offer__name">
-            Beautiful &amp; luxurious studio at great location
+            {offer.description}
           </h1>
           <button className="offer__bookmark-button button" type="button">
             <svg className="offer__bookmark-icon" width="31" height="33">
@@ -24,56 +27,32 @@ function OfferContainer(): JSX.Element {
             <span style={{ width: '80 %' }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
-          <span className="offer__rating-value rating__value">4.8</span>
+          <span className="offer__rating-value rating__value">{offer.rating}</span>
         </div>
         <ul className="offer__features">
           <li className="offer__feature offer__feature--entire">
-            Apartment
+            {offer.type}
           </li>
           <li className="offer__feature offer__feature--bedrooms">
-            3 Bedrooms
+            {offer.bedrooms} Bedrooms
           </li>
           <li className="offer__feature offer__feature--adults">
-            Max 4 adults
+            Max {offer.maxAdults} adults
           </li>
         </ul>
         <div className="offer__price">
-          <b className="offer__price-value">&euro;120</b>
+          <b className="offer__price-value">&euro;{offer.price}</b>
           <span className="offer__price-text">&nbsp;night</span>
         </div>
         <div className="offer__inside">
           <h2 className="offer__inside-title">What&apos;s inside</h2>
           <ul className="offer__inside-list">
-            <li className="offer__inside-item">
-              Wi-Fi
-            </li>
-            <li className="offer__inside-item">
-              Washing machine
-            </li>
-            <li className="offer__inside-item">
-              Towels
-            </li>
-            <li className="offer__inside-item">
-              Heating
-            </li>
-            <li className="offer__inside-item">
-              Coffee machine
-            </li>
-            <li className="offer__inside-item">
-              Baby seat
-            </li>
-            <li className="offer__inside-item">
-              Kitchen
-            </li>
-            <li className="offer__inside-item">
-              Dishwasher
-            </li>
-            <li className="offer__inside-item">
-              Cabel TV
-            </li>
-            <li className="offer__inside-item">
-              Fridge
-            </li>
+            {offer.goods.map((good) => (
+              <li className="offer__inside-item">
+                {good}
+              </li>
+            ))
+            }
           </ul>
         </div>
         <div className="offer__host">
@@ -83,7 +62,7 @@ function OfferContainer(): JSX.Element {
               <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
             </div>
             <span className="offer__user-name">
-              Angelina
+              {offer.host}
             </span>
             <span className="offer__user-status">
               Pro
