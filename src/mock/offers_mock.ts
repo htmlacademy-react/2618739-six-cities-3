@@ -87,6 +87,7 @@ const mockOffers = [{
   maxAdults: 3
 }];
 
+
 //export default mockOffers;
 
 const getOffers = (): TOffer[] => (mockOffers);
