@@ -4,10 +4,13 @@ import Map from '../../components/map';
 import TOffer from '../../types/offers';
 import { CITIES } from '../../const';
 import { useParams } from 'react-router-dom';
+import PlaceCard from '../../components/place-card/place-card';
+import { useState } from 'react';
 type offersProps = { offers: TOffer[] }
 function Offer(offersProps: offersProps): JSX.Element {
   const params = useParams();
-  const selectedOffer = offersProps.offers[Number(params.id)];
+  const [activeCard, setActiveCard] = useState(Number(params.id));
+  const selectedOffer = offersProps.offers[activeCard];
   const selectedOffers = offersProps.offers.filter((offer) => offer.city === selectedOffer.city)
   const selectedPoint = { title: selectedOffer.title, lat: selectedOffer.location[0], lng: selectedOffer.location[1] }
   return (
@@ -45,9 +48,9 @@ function Offer(offersProps: offersProps): JSX.Element {
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
-            <NearPlacesCard offer={offersProps.offers[0]} />
-            <NearPlacesCard offer={offersProps.offers[1]} />
-            <NearPlacesCard offer={offersProps.offers[2]} />
+            <PlaceCard offersProp={offersProps.offers[0]} setActiveCard={setActiveCard} cardClass={'near-places'} />
+            <PlaceCard offersProp={offersProps.offers[1]} setActiveCard={setActiveCard} cardClass={'near-places'} />
+            <PlaceCard offersProp={offersProps.offers[2]} setActiveCard={setActiveCard} cardClass={'near-places'} />
           </div>
         </section>
       </div>

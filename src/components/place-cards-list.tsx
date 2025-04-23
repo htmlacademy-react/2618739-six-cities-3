@@ -8,7 +8,7 @@ function PlaceCardList({ offersProps, setActiveCard }: PlaceCardListType): JSX.E
   const cards = offersProps.map((offer: TOffer) => (
     <PlaceCard offersProp={offer} key={offer.id} setActiveCard={() => {
       setActiveCard(offer.id);
-    }}
+    }} cardClass={'cities'}
     />));
   return (
     <div className="cities__places-list places__list tabs__content">
