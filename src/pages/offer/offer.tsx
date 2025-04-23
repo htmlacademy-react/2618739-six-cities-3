@@ -1,4 +1,3 @@
-import NearPlacesCard from '../../components/offers/near_places_card';
 import OfferContainer from '../../components/offers/offer_container';
 import Map from '../../components/map';
 import TOffer from '../../types/offers';
@@ -11,8 +10,8 @@ function Offer(offersProps: offersProps): JSX.Element {
   const params = useParams();
   const [activeCard, setActiveCard] = useState(Number(params.id));
   const selectedOffer = offersProps.offers[activeCard];
-  const selectedOffers = offersProps.offers.filter((offer) => offer.city === selectedOffer.city)
-  const selectedPoint = { title: selectedOffer.title, lat: selectedOffer.location[0], lng: selectedOffer.location[1] }
+  const selectedOffers = offersProps.offers.filter((offer) => offer.city === selectedOffer.city);
+  const selectedPoint = { title: selectedOffer.title, lat: selectedOffer.location[0], lng: selectedOffer.location[1] };
   return (
     <main className="page__main page__main--offer">
       <section className="offer">
@@ -39,9 +38,9 @@ function Offer(offersProps: offersProps): JSX.Element {
           </div>
         </div>
         <OfferContainer offer={selectedOffer} />
-        <section className="map">< Map city={CITIES.find((city) => city.title === selectedOffer.city) || CITIES[0]}
-          offers={selectedOffers} selectedPoint={selectedPoint}
-        /></section>
+        <section className="map">
+          < Map city={CITIES.find((city) => city.title === selectedOffer.city) || CITIES[0]} offers={selectedOffers} selectedPoint={selectedPoint} />
+        </section>
         {(CITIES.find((city) => city.title === selectedOffer.city) || CITIES[0]).title}
       </section >
       <div className="container">

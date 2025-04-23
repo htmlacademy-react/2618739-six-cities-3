@@ -1,6 +1,6 @@
 import ReviewsForm from './review_form';
 import ReviewsList from './review_list';
-import { mockReviews } from "../../mock/reviews";
+import { mockReviews } from '../../mock/reviews';
 import TOffer from '../../types/offers';
 type offerProp = { offer: TOffer };
 function OfferContainer({ offer }: offerProp): JSX.Element {
@@ -48,11 +48,10 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
           <h2 className="offer__inside-title">What&apos;s inside</h2>
           <ul className="offer__inside-list">
             {offer.goods.map((good) => (
-              <li className="offer__inside-item">
+              <li className="offer__inside-item" key={good}>
                 {good}
               </li>
-            ))
-            }
+            ))}
           </ul>
         </div>
         <div className="offer__host">
