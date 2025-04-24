@@ -1,8 +1,9 @@
+import React from 'react';
 import FormRatingInput from './form_rating_input';
 import { useState } from 'react';
 import Star from './star';
+
 function ReviewsForm(): JSX.Element {
-  //type ReviewStateType = { stars: number; text: string };
   const [ReviewState, setReviewState] = useState({ stars: 0, text: '' });
   function setStars(newStars: number) {
     setReviewState({
@@ -10,12 +11,14 @@ function ReviewsForm(): JSX.Element {
       stars: newStars
     });
   }
-  function setText(newText: string) {
+  function setText(event: React.ChangeEvent<HTMLTextAreaElement>) {
+    const newText = event.target.value;
     setReviewState({
       ...ReviewState,
       text: newText
     });
   }
+
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
@@ -31,20 +34,16 @@ function ReviewsForm(): JSX.Element {
         <FormRatingInput value={1} />
         <Star for_star={'1-stars'} title_star={'terribly'} setRating={() => setStars(1)} />
       </div>
-      <textarea onChange={(e) => {
-        const newText = e.target.value;
-        return (newText ? setText(newText) : null);
-      }} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"
-      >
+      <textarea onChange={setText} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved">
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-                    To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
       </div>
-            Ваша оценка: {ReviewState.stars} Ваш отзыв: {ReviewState.text}
-    </form>);
+      Ваша оценка: {ReviewState.stars} Ваш отзыв: {ReviewState.text}
+    </form >);
 }
 
 export default ReviewsForm;

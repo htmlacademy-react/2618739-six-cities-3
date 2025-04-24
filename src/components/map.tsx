@@ -7,9 +7,9 @@ import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../const';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
-    city: City;
-    offers: TOffer[];
-    selectedPoint: Point | undefined;
+  city: City;
+  offers: TOffer[];
+  selectedPoint: Point | undefined;
 };
 
 const defaultCustomIcon = new Icon({
@@ -28,7 +28,7 @@ function Map(props: MapProps): JSX.Element {
   const { city, offers, selectedPoint } = props;
 
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const map = useMap(mapRef);
 
   useEffect(() => {
     if (map) {
@@ -47,12 +47,12 @@ function Map(props: MapProps): JSX.Element {
           )
           .addTo(markerLayer);
       });
-
+      map.setView({ lat: city.lat, lng: city.lng });
       return () => {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, selectedPoint]);
+  }, [map, offers, selectedPoint, city]);
 
   return <div style={{ height: '500px' }} ref={mapRef}></div>;
 }

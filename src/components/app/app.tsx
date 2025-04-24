@@ -9,16 +9,15 @@ import Page404 from '../404';
 import TOffer from '../../types/offers';
 
 type MainPageProps = {
-  rentCount: number;
   offersProps: TOffer[];
 }
 
-function App({ rentCount, offersProps }: MainPageProps): JSX.Element {
+function App({ offersProps }: MainPageProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />} >
-          <Route index element={<Main rentCount={rentCount} offersProps={offersProps} />} />
+          <Route index element={<Main offersProps={offersProps} />} />
           <Route path="login" element={<Login />} />
           <Route path='favorites' element={<Favorites offers={offersProps} />} />
           <Route path="offer/:id" element={<Offer offers={offersProps} />} />
