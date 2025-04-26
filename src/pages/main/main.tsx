@@ -69,16 +69,13 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
             <b className="places__found">{selectedOffers.length} places to stay in {selectedCity.title}</b>
             <SortingVariants />
             <PlaceCardList offersProps={selectedOffers} setActiveCard={setActiveCard} />
-            Выбрана карточка {activeCard}
           </section>
           <div className="cities__right-section">
-            Выбранное место: {SelectedPoint?.title}
             <section className="cities__map">
               < Map city={selectedCity}
                 offers={selectedOffers} selectedPoint={SelectedPoint}
               />
             </section>
-            на карте показан город {selectedCity.title}
           </div>
         </div>
       </div>

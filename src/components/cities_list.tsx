@@ -21,7 +21,6 @@ function CitiesList({ citiesList }: citiesLisrProps): JSX.Element {
   return (
     <ul className="locations__list tabs__list">
       {cities}
-      Выбран город {useAppSelector(selectCity)}
     </ul>);
 }
 
