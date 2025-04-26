@@ -55,7 +55,7 @@ const mockOffers = [{
 {
   id: 3,
   title: 'Bells of Bockler',
-  price: 400,
+  price: 40,
   rating: 4.9,
   type: 'Apartment',
   city: 'Amsterdam',
