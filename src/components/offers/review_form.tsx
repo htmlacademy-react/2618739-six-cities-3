@@ -3,7 +3,7 @@ import FormRatingInput from './form_rating_input';
 import { useState } from 'react';
 import Star from './star';
 
-function ReviewsForm(): JSX.Element {
+function reviewsForm(): JSX.Element {
   const [ReviewState, setReviewState] = useState({ stars: 0, text: '' });
   function setStars(newStars: number) {
     setReviewState({
@@ -46,4 +46,4 @@ function ReviewsForm(): JSX.Element {
     </form >);
 }
 
-export default ReviewsForm;
+export default reviewsForm;

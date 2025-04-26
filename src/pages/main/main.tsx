@@ -34,7 +34,7 @@ function sortOffers(selectedOffers: TOffer[]): TOffer[] {
       return (selectedOffers.sort((a, b) => a.price - b.price).reverse());
     case 'Top rated first':
       console.log('Sorting by rating');
-      return (selectedOffers.sort((a, b) => a.rating - b.rating));
+      return (selectedOffers.sort((a, b) => a.rating - b.rating).reverse());
     default:
       console.log('Sorting by popularity');
       return (selectedOffers);
