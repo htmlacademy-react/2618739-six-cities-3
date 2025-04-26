@@ -1,6 +1,5 @@
-import { useAppDispatch, useAppSelector } from '../hooks/index';
+import { useAppDispatch } from '../hooks/index';
 import { setCity } from '../store/actions';
-import { selectCity } from '../store/selectors/offers';
 
 type citiesType = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
 type cityEl = { id: number; cityName: citiesType };

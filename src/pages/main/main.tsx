@@ -8,7 +8,7 @@ import { CITIES } from '../../const';
 import { useState } from 'react';
 import { City } from '../../types/map_types';
 import SortingVariants from '../../components/sorting_variants';
-import { selectSorting } from '../../store/selectors/offers';
+import useSortOffers from '../../hooks/sorting';
 
 type MainPageProps = {
   offersProps: TOffer[];
@@ -22,31 +22,13 @@ function filterOffers(offers: TOffer[]): TOffer[] {
   return (offers.filter((offer) => offer.city === useAppSelector(selectCity)));
 }
 
-function sortOffers(selectedOffers: TOffer[]): TOffer[] {
-  const selectedSorting = useAppSelector(selectSorting);
-  console.log(selectedSorting)
-  switch (selectedSorting) {
-    case 'Price: low to high':
-      console.log('Sorting by price');
-      return (selectedOffers.sort((a, b) => a.price - b.price));
-    case 'Price: high to low':
-      console.log('Sorting by price');
-      return (selectedOffers.sort((a, b) => a.price - b.price).reverse());
-    case 'Top rated first':
-      console.log('Sorting by rating');
-      return (selectedOffers.sort((a, b) => a.rating - b.rating).reverse());
-    default:
-      console.log('Sorting by popularity');
-      return (selectedOffers);
-  }
-}
 
 function Main(mainPageProps: MainPageProps): JSX.Element {
   const [activeCard, setActiveCard] = useState(0);
   const selectedCard = mainPageProps.offersProps[activeCard];
   const SelectedPoint = { title: selectedCard.title, lat: selectedCard.location[0], lng: selectedCard.location[0] };
   const selectedCity = getCity();
-  const selectedOffers = sortOffers(filterOffers(mainPageProps.offersProps));
+  const selectedOffers = useSortOffers(filterOffers(mainPageProps.offersProps));
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>

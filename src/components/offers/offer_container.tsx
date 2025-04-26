@@ -1,4 +1,4 @@
-import reviewsForm from './review_form';
+import ReviewsForm from './review_form';
 import ReviewsList from './review_list';
 import { mockReviews } from '../../mock/reviews';
 import TOffer from '../../types/offers';
@@ -79,7 +79,7 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
         <section className="offer__reviews reviews">
           <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{mockReviews.length}</span></h2>
           <ReviewsList reviewList={mockReviews} />
-          <reviewsForm />
+          <ReviewsForm />
         </section>
       </div>
     </div >);
