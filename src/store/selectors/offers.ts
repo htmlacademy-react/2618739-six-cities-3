@@ -4,4 +4,6 @@ const selectOffers = (state: State) => state.offers;
 
 const selectCity = (state: State) => state.city;
 
-export { selectOffers, selectCity };
+const selectSorting = (state: State) => state.sorting;
+
+export { selectOffers, selectCity, selectSorting };
