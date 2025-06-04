@@ -41,7 +41,7 @@ function Map(props: MapProps): JSX.Element {
 
         marker
           .setIcon(
-            selectedPoint !== undefined && offer.title === selectedPoint.title
+            selectedPoint !== undefined && offer.location.latitude === selectedPoint.lat && offer.location.longitude === selectedPoint.lng
               ? currentCustomIcon
               : defaultCustomIcon
           )
