@@ -17,7 +17,7 @@ function PlaceCard({ offersProp, setActiveCard, cardClass }: PlaceCardProps): JS
       </div>
       <div className={`${cardClass}__image-wrapper place-card__image-wrapper`}>
         <Link to={offerPath} >
-          <img className="place-card__image" src={offersProp.images[0]} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={offersProp.previewImage} width="260" height="200" alt="Place image" />
         </Link>
       </div>
       <PlaceCardInfo offersProp={offersProp} />

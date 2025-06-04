@@ -19,16 +19,21 @@ function getCity(): City {
 }
 
 function filterOffers(offers: TOffer[]): TOffer[] {
-  return (offers.filter((offer) => offer.city === useAppSelector(selectCity)));
+  console.log(useAppSelector(selectCity))
+  return (offers.filter((offer) => offer.city.name === useAppSelector(selectCity)));
 }
 
 
 function Main(mainPageProps: MainPageProps): JSX.Element {
   const [activeCard, setActiveCard] = useState(0);
   const selectedCard = mainPageProps.offersProps[activeCard];
-  const SelectedPoint = { title: selectedCard.title, lat: selectedCard.location[0], lng: selectedCard.location[0] };
+  console.log(selectedCard)
+  const SelectedPoint = { title: selectedCard.title, lat: selectedCard.location.latitude, lng: selectedCard.location.longitude };
+  console.log(SelectedPoint)
   const selectedCity = getCity();
+  console.log(selectedCity)
   const selectedOffers = useSortOffers(filterOffers(mainPageProps.offersProps));
+  console.log(selectedOffers)
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
