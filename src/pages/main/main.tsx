@@ -26,13 +26,13 @@ function filterOffers(offers: TOffer[]): TOffer[] {
 
 function Main(mainPageProps: MainPageProps): JSX.Element {
   const [activeCard, setActiveCard] = useState(0);
-  const selectedCard = mainPageProps.offersProps[activeCard];
+  const selectedOffers = useSortOffers(filterOffers(mainPageProps.offersProps));
+  const selectedCard = selectedOffers[activeCard];
   console.log(selectedCard)
   const SelectedPoint = { title: selectedCard.title, lat: selectedCard.location.latitude, lng: selectedCard.location.longitude };
   console.log(SelectedPoint)
   const selectedCity = getCity();
   console.log(selectedCity)
-  const selectedOffers = useSortOffers(filterOffers(mainPageProps.offersProps));
   console.log(selectedOffers)
   return (
     <main className="page__main page__main--index">
