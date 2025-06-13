@@ -4,13 +4,14 @@ import CitiesList from '../../components/cities_list';
 import { useAppSelector } from '../../hooks/index';
 import TOffer from '../../types/offers';
 import Map from '../../components/map';
-import { CITIES } from '../../const';
+import { CITIES, RequestStatus } from '../../const';
 import { useState } from 'react';
 import { City } from '../../types/map_types';
 import SortingVariants from '../../components/sorting_variants';
 import useSortOffers from '../../hooks/sorting';
 
 type MainPageProps = {
+  status: RequestStatus;
   offersProps: TOffer[];
 }
 
@@ -23,8 +24,14 @@ function filterOffers(offers: TOffer[]): TOffer[] {
   return (offers.filter((offer) => offer.city.name === useAppSelector(selectCity)));
 }
 
-
 function Main(mainPageProps: MainPageProps): JSX.Element {
+  if (mainPageProps.status && mainPageProps.status === RequestStatus.Loading) {
+    return (<div>Loading...
+      <div>
+        <img src="img/Spinner-5.gif" />
+      </div>
+    </div>);
+  }
   const [activeCard, setActiveCard] = useState(0);
   const selectedOffers = useSortOffers(filterOffers(mainPageProps.offersProps));
   const selectedCard = selectedOffers[activeCard];
@@ -34,6 +41,7 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
   const selectedCity = getCity();
   console.log(selectedCity);
   console.log(selectedOffers);
+
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>

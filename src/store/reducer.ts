@@ -3,17 +3,20 @@ import TOffer from '../types/offers';
 import { setCity, setSorting } from './actions';
 import { OffersSlice } from './slices/offers';
 import { ReviewsSlice } from './slices/review';
+import { RequestStatus } from '../const'
 
 type offerState = {
   city: string;
   offers: TOffer[];
   sorting: string;
+  status: RequestStatus
 }
 
 const initialState: offerState = {
   city: 'Paris',
   offers: [],
-  sorting: 'Popular'
+  sorting: 'Popular',
+  status: RequestStatus.Idle
 };
 
 const cityReducer = createReducer(initialState, (builder) => {

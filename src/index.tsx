@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { fetchOfferAction } from './store/api-actions';
 
-await store.dispatch(fetchOfferAction());
+store.dispatch(fetchOfferAction());
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

@@ -7,9 +7,9 @@ import { RequestStatus } from '../../const';
 
 
 interface OffersState {
-    city: string;
-    offers: TOffer[];
-    status: RequestStatus;
+  city: string;
+  offers: TOffer[];
+  status: RequestStatus;
 }
 
 const offers: TOffer[] = [];
@@ -25,9 +25,11 @@ const OffersSlice = createSlice(
   {
     initialState,
     name: 'offers',
-    reducers: { setCity: (state, action: PayloadAction<string>) => {
-      state.city = action.payload;
-    }, },
+    reducers: {
+      setCity: (state, action: PayloadAction<string>) => {
+        state.city = action.payload;
+      },
+    },
     extraReducers(builder) {
       builder.addCase(fetchOfferAction.pending, (state) => {
         state.status = RequestStatus.Loading;
@@ -44,4 +46,4 @@ const OffersSlice = createSlice(
 
 const offersActions = OffersSlice.actions;
 
-export { offersActions, OffersSlice };
+export { offersActions, OffersSlice, type OffersState };

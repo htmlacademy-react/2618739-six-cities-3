@@ -1,5 +1,7 @@
 import ReviewPropType from '../../types/reviews';
-function ReviewsItem({ userName, text, date }: ReviewPropType): JSX.Element {
+function ReviewsItem({ userName, comment, date }: ReviewPropType): JSX.Element {
+  console.log(date);
+  const date_from_string = new Date(date)
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -18,9 +20,9 @@ function ReviewsItem({ userName, text, date }: ReviewPropType): JSX.Element {
           </div>
         </div>
         <p className="reviews__text">
-          {text}
+          {comment}
         </p>
-        <time className="reviews__time" dateTime={date.toString()}>{date.getMonth()} {date.getFullYear()}</time>
+        <time className="reviews__time" dateTime={date}>{date_from_string.toDateString()}</time>
       </div>
     </li>
   );

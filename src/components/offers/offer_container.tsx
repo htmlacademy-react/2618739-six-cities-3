@@ -7,21 +7,28 @@ import TOffer from '../../types/offers';
 import { fetchReviewsAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 import { store } from '../../store';
+import { useAppSelector } from '../../hooks';
+import { selectReviews, selectReviewsStatus } from '../../store/selectors/reviews'
+import { RequestStatus } from '../../const';
 type offerProp = { offer: TOffer };
 
 function OfferContainer({ offer }: offerProp): JSX.Element {
-  const params = useParams();
-  if (!params.id) {
+  const id = useParams().id || '';
+  if (!id) {
     return (<div><Page404 /></div>)
   };
   useEffect(() => {
     const fetchReviews = async () => {
-      await store.dispatch(fetchReviewsAction(params.id || ''));
+      await store.dispatch(fetchReviewsAction(id));
     };
     fetchReviews();
-  }, [params.id]);
-  const Reviews = store.getState().reviews.reviews
-  console.log(offer.goods);
+  }, [id]);
+
+  const Reviews = useAppSelector(selectReviews);
+  const reviewsState = useAppSelector(selectReviewsStatus);
+  if (reviewsState === RequestStatus.Loading) {
+    return (<div>Loading...</div>)
+  }
   return (
     <div className="offer__container container">
       <div className="offer__wrapper">

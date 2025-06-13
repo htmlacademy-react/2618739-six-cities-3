@@ -1,4 +1,3 @@
-import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type ReviewPropType from '../../types/reviews';
 import { fetchReviewsAction } from '../api-actions';

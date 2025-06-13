@@ -10,8 +10,8 @@ function ReviewsList({ reviewList }: ReviewListProp): JSX.Element {
       key={review.id}
       id={review.id}
       userName={review.userName}
-      text={review.text}
-      dateTime={review.dateTime}
+      comment={review.comment}
+      date={review.date}
     />));
   return (
     <ul className="reviews__list">
