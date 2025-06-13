@@ -1,4 +1,6 @@
 import ReviewPropType from '../../types/reviews';
+import { format } from 'date-fns';
+import { ru } from 'date-fns/locale';
 function ReviewsItem({ userName, comment, date }: ReviewPropType): JSX.Element {
   console.log(date);
   const date_from_string = new Date(date)
@@ -22,7 +24,7 @@ function ReviewsItem({ userName, comment, date }: ReviewPropType): JSX.Element {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime={date}>{date_from_string.toDateString()}</time>
+        <time className="reviews__time" dateTime={date}>{format(date_from_string, 'LLLL yyyy', { locale: ru })}</time>
       </div>
     </li>
   );
