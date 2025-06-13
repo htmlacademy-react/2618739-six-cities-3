@@ -65,3 +65,7 @@ export enum APIRoute {
   Logout = '/logout',
   Reviews = '/comments'
 }
+
+export enum RequestStatus {
+  Idle, Loading, Success, Failed
+}

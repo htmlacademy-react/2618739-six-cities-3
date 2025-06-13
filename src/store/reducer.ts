@@ -1,7 +1,8 @@
-import { createReducer } from '@reduxjs/toolkit';
+import { createReducer, combineReducers } from '@reduxjs/toolkit';
 import TOffer from '../types/offers';
-import { fetchOfferAction } from '../store/api-actions';
-import { fillOffers, setCity, setSorting } from './actions';
+import { setCity, setSorting } from './actions';
+import { OffersSlice } from './slices/offers';
+import { ReviewsSlice } from './slices/review';
 
 type offerState = {
   city: string;
@@ -15,15 +16,18 @@ const initialState: offerState = {
   sorting: 'Popular'
 };
 
-const reducer = createReducer(initialState, (builder) => {
+const cityReducer = createReducer(initialState, (builder) => {
   builder.addCase(setCity, (state, action) => {
     state.city = action.payload;
   }
-  ).addCase(fillOffers, (state) => {
-    state.offers = fetchOfferAction();
-  }).addCase(setSorting, (state, action) => {
+  ).addCase(setSorting, (state, action) => {
     state.sorting = action.payload;
   });
 });
 
-export { reducer };
+
+export const reducer = combineReducers({
+  [OffersSlice.name]: OffersSlice.reducer,
+  [cityReducer.name]: cityReducer,
+  [ReviewsSlice.name]: ReviewsSlice.reducer
+});

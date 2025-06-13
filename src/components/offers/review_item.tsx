@@ -1,5 +1,5 @@
 import ReviewPropType from '../../types/reviews';
-function ReviewsItem({ userName, text, dateTime }: ReviewPropType): JSX.Element {
+function ReviewsItem({ userName, text, date }: ReviewPropType): JSX.Element {
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -20,7 +20,7 @@ function ReviewsItem({ userName, text, dateTime }: ReviewPropType): JSX.Element 
         <p className="reviews__text">
           {text}
         </p>
-        <time className="reviews__time" dateTime={dateTime.toString()}>{dateTime.getMonth()} {dateTime.getFullYear()}</time>
+        <time className="reviews__time" dateTime={date.toString()}>{date.getMonth()} {date.getFullYear()}</time>
       </div>
     </li>
   );

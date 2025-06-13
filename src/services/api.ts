@@ -8,16 +8,16 @@ const enum Default {
 }
 
 export const createAPI = (): AxiosInstance => {
-    const api = axious.create({
-        baseURL: Default.BaseUrl as string,
-        timeout: Default.Timeout as number,
-    });
-    api.interceptors.request.use((config) => {
-        const token = getToken();
-        if (token && config.headers) {
-            config.heades["X-Token"] = token;
-        }
-        return config;
-    })
-    return api;
-}
+  const api = axious.create({
+    baseURL: Default.BaseUrl as string,
+    timeout: Default.Timeout as number,
+  });
+  api.interceptors.request.use((config) => {
+    const token = getToken();
+    if (token && config.headers) {
+      config.headers['X-Token'] = token;
+    }
+    return config;
+  });
+  return api;
+};

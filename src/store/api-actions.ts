@@ -10,21 +10,23 @@ export const fetchOfferAction = createAsyncThunk<TOffer[], undefined, {
     state: State;
     extra: AxiosInstance;
 }>(
-    'data/fetchOffers',
-    async (_arg, { extra: api }) => {
-        const { data } = await api.get<TOffer[]>(APIRoute.Offers);
-        return data;
-    },
+  'data/fetchOffers',
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<TOffer[]>(APIRoute.Offers);
+    return data;
+  }
 );
 
-export const fetchReviewsAction = createAsyncThunk<ReviewPropType[], undefined, {
+type offer_id = string;
+
+export const fetchReviewsAction = createAsyncThunk<ReviewPropType[], offer_id, {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
 }>(
-    'data/fetchReviews',
-    async (_arg, { extra: api }) => {
-        const { data } = await api.get<ReviewPropType[]>(APIRoute.Reviews);
-        return data;
-    },
+  'data/fetchReviews',
+  async (id: offer_id, { extra: api }) => {
+    const { data } = await api.get<ReviewPropType[]>(`${APIRoute.Reviews }/${ id}`);
+    return data;
+  },
 );

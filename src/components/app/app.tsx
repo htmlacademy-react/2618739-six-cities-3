@@ -7,12 +7,10 @@ import Main from '../../pages/main/main';
 import Offer from '../../pages/offer/offer';
 import Page404 from '../404';
 import TOffer from '../../types/offers';
+import { store } from '../../store';
 
-type MainPageProps = {
-  offersProps: TOffer[];
-}
-
-function App({ offersProps }: MainPageProps): JSX.Element {
+function App(): JSX.Element {
+  const offersProps: TOffer[] = store.getState().offers.offers;
   return (
     <BrowserRouter>
       <Routes>
