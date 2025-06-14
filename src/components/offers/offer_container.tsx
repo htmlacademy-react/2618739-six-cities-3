@@ -1,33 +1,33 @@
 import { useParams } from 'react-router-dom';
 import ReviewsForm from './review_form';
 import ReviewsList from './review_list';
-import Page404 from '../404'
+import Page404 from '../404';
 
 import TOffer from '../../types/offers';
 import { fetchReviewsAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 import { store } from '../../store';
 import { useAppSelector } from '../../hooks';
-import { selectReviews, selectReviewsStatus } from '../../store/selectors/reviews'
+import { selectReviews, selectReviewsStatus } from '../../store/selectors/reviews';
 import { RequestStatus } from '../../const';
 type offerProp = { offer: TOffer };
 
 function OfferContainer({ offer }: offerProp): JSX.Element {
+  const Reviews = useAppSelector(selectReviews);
+  const reviewsState = useAppSelector(selectReviewsStatus);
   const id = useParams().id || '';
-  if (!id) {
-    return (<div><Page404 /></div>)
-  };
+
   useEffect(() => {
     const fetchReviews = async () => {
       await store.dispatch(fetchReviewsAction(id));
     };
     fetchReviews();
   }, [id]);
-
-  const Reviews = useAppSelector(selectReviews);
-  const reviewsState = useAppSelector(selectReviewsStatus);
+  if (!id) {
+    return (<div><Page404 /></div>);
+  }
   if (reviewsState === RequestStatus.Loading) {
-    return (<div>Loading...</div>)
+    return (<div>Loading...</div>);
   }
   return (
     <div className="offer__container container">

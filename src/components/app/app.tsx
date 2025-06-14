@@ -8,20 +8,11 @@ import Page404 from '../404';
 import { useAppSelector } from '../../hooks';
 import { selectOffers, selectStatus } from '../../store/selectors/offers';
 import { RequestStatus } from '../../const';
-import TOffer from '../../types/offers'
-
-function getOffers(): TOffer[] {
-  return (useAppSelector(selectOffers));
-}
-
-function getStatus(): RequestStatus {
-  return (useAppSelector(selectStatus));
-}
-
+import TOffer from '../../types/offers';
 
 function App(): JSX.Element {
-  const offers = getOffers();
-  const status = getStatus();
+  const offers: TOffer[] = useAppSelector(selectOffers);
+  const status: RequestStatus = useAppSelector(selectStatus);
   return (
     <BrowserRouter>
       <Routes>

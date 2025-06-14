@@ -19,29 +19,28 @@ function getCity(): City {
   return (CITIES.filter((city) => city.title === useAppSelector(selectCity))[0] || CITIES[0]);
 }
 
-function filterOffers(offers: TOffer[]): TOffer[] {
-  console.log(useAppSelector(selectCity));
-  return (offers.filter((offer) => offer.city.name === useAppSelector(selectCity)));
+function filterOffers(offers: TOffer[], selectedCity: City): TOffer[] {
+  if (offers.length < 1) {
+    return (offers);
+  }
+  return (offers.filter((offer) => offer.city.name === selectedCity.title));
 }
 
 function Main(mainPageProps: MainPageProps): JSX.Element {
-  if (mainPageProps.status && mainPageProps.status === RequestStatus.Loading) {
-    return (<div>Loading...
-      <div>
-        <img src="img/Spinner-5.gif" />
-      </div>
-    </div>);
-  }
   const [activeCard, setActiveCard] = useState(0);
-  const selectedOffers = useSortOffers(filterOffers(mainPageProps.offersProps));
-  const selectedCard = selectedOffers[activeCard];
-  console.log(selectedCard);
-  const SelectedPoint = { title: selectedCard.title, lat: selectedCard.location.latitude, lng: selectedCard.location.longitude };
-  console.log(SelectedPoint);
   const selectedCity = getCity();
-  console.log(selectedCity);
-  console.log(selectedOffers);
+  const selectedOffers = useSortOffers(filterOffers(mainPageProps.offersProps, selectedCity));
 
+  if (mainPageProps.status && mainPageProps.status === RequestStatus.Loading) {
+    return (
+      <div>Loading...
+        <div>
+          <img src="img/Spinner-5.gif" />
+        </div>
+      </div>);
+  }
+  const selectedCard = selectedOffers[activeCard];
+  const SelectedPoint = { title: selectedCard.title, lat: selectedCard.location.latitude, lng: selectedCard.location.longitude };
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>

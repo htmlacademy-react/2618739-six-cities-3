@@ -6,7 +6,6 @@ type PlaceCardListType = { offersProps: TOffer[]; setActiveCard: (id: number) =>
 function PlaceCardList({ offersProps, setActiveCard }: PlaceCardListType): JSX.Element {
   const cards = offersProps.map((offer: TOffer) => (
     <PlaceCard offersProp={offer} key={offer.id} setActiveCard={() => {
-      console.log(offer.id);
       setActiveCard(offersProps.indexOf(offer));
     }} cardClass={'cities'}
     />));

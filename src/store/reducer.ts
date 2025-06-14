@@ -3,13 +3,13 @@ import TOffer from '../types/offers';
 import { setCity, setSorting } from './actions';
 import { OffersSlice } from './slices/offers';
 import { ReviewsSlice } from './slices/review';
-import { RequestStatus } from '../const'
+import { RequestStatus } from '../const';
 
 type offerState = {
   city: string;
   offers: TOffer[];
   sorting: string;
-  status: RequestStatus
+  status: RequestStatus;
 }
 
 const initialState: offerState = {

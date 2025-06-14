@@ -4,7 +4,6 @@ import ReviewPropType from '../../types/reviews';
 
 type ReviewListProp = { reviewList: ReviewPropType[] }
 function ReviewsList({ reviewList }: ReviewListProp): JSX.Element {
-  console.log(reviewList);
   const reviews = reviewList.map((review) => (
     <ReviewsItem
       key={review.id}

@@ -9,10 +9,8 @@ type offersProps = { offers: TOffer[] }
 function Offer(offersProps: offersProps): JSX.Element {
   const params = useParams();
   const [activeCard, setActiveCard] = useState(params.id);
-  console.log(activeCard);
   const selectedOffer = offersProps.offers.find((offer) => offer.id === activeCard);
   const selectedOffers = offersProps.offers.filter((offer) => offer.city?.name === selectedOffer?.city?.name);
-  console.log(selectedOffer);
   const selectedPoint = { title: selectedOffer?.title, lat: selectedOffer?.location.latitude, lng: selectedOffer?.location.longitude };
   if (selectedOffer) {
     return (
