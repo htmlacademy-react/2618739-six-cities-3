@@ -1,26 +1,26 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import Favorites from '../../pages/favorites/favorites';
 import Layout from '../layout';
 import Login from '../../pages/login/login';
 import Main from '../../pages/main/main';
 import Offer from '../../pages/offer/offer';
 import Page404 from '../404';
+import { useAppSelector } from '../../hooks';
+import { selectOffers, selectStatus } from '../../store/selectors/offers';
+import { RequestStatus } from '../../const';
 import TOffer from '../../types/offers';
 
-type MainPageProps = {
-  offersProps: TOffer[];
-}
-
-function App({ offersProps }: MainPageProps): JSX.Element {
+function App(): JSX.Element {
+  const offers: TOffer[] = useAppSelector(selectOffers);
+  const status: RequestStatus = useAppSelector(selectStatus);
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />} >
-          <Route index element={<Main offersProps={offersProps} />} />
+          <Route index element={<Main offersProps={offers} status={status} />} />
           <Route path="login" element={<Login />} />
-          <Route path='favorites' element={<Favorites offers={offersProps} />} />
-          <Route path="offer/:id" element={<Offer offers={offersProps} />} />
+          <Route path='favorites' element={<Favorites offers={offers} />} />
+          <Route path="offer/:id" element={<Offer offers={offers} />} />
           <Route path="*" element={<Page404 />} />
         </Route >
       </Routes >

@@ -2,7 +2,7 @@ import PlaceCardInfo from './place-card__info';
 import TOffer from '../../types/offers';
 import { Link } from 'react-router-dom';
 
-type PlaceCardProps = { offersProp: TOffer; setActiveCard: (id: number) => void; cardClass: string }
+type PlaceCardProps = { offersProp: TOffer; setActiveCard: (id: string) => void; cardClass: string }
 
 function PlaceCard({ offersProp, setActiveCard, cardClass }: PlaceCardProps): JSX.Element {
   const offerPath = `/offer/${offersProp.id}`;
@@ -17,7 +17,7 @@ function PlaceCard({ offersProp, setActiveCard, cardClass }: PlaceCardProps): JS
       </div>
       <div className={`${cardClass}__image-wrapper place-card__image-wrapper`}>
         <Link to={offerPath} >
-          <img className="place-card__image" src={offersProp.images[0]} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={offersProp.previewImage} width="260" height="200" alt="Place image" />
         </Link>
       </div>
       <PlaceCardInfo offersProp={offersProp} />

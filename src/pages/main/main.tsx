@@ -4,13 +4,14 @@ import CitiesList from '../../components/cities_list';
 import { useAppSelector } from '../../hooks/index';
 import TOffer from '../../types/offers';
 import Map from '../../components/map';
-import { CITIES } from '../../const';
+import { CITIES, RequestStatus } from '../../const';
 import { useState } from 'react';
 import { City } from '../../types/map_types';
 import SortingVariants from '../../components/sorting_variants';
 import useSortOffers from '../../hooks/sorting';
 
 type MainPageProps = {
+  status: RequestStatus;
   offersProps: TOffer[];
 }
 
@@ -18,17 +19,28 @@ function getCity(): City {
   return (CITIES.filter((city) => city.title === useAppSelector(selectCity))[0] || CITIES[0]);
 }
 
-function filterOffers(offers: TOffer[]): TOffer[] {
-  return (offers.filter((offer) => offer.city === useAppSelector(selectCity)));
+function filterOffers(offers: TOffer[], selectedCity: City): TOffer[] {
+  if (offers.length < 1) {
+    return (offers);
+  }
+  return (offers.filter((offer) => offer.city.name === selectedCity.title));
 }
-
 
 function Main(mainPageProps: MainPageProps): JSX.Element {
   const [activeCard, setActiveCard] = useState(0);
-  const selectedCard = mainPageProps.offersProps[activeCard];
-  const SelectedPoint = { title: selectedCard.title, lat: selectedCard.location[0], lng: selectedCard.location[0] };
   const selectedCity = getCity();
-  const selectedOffers = useSortOffers(filterOffers(mainPageProps.offersProps));
+  const selectedOffers = useSortOffers(filterOffers(mainPageProps.offersProps, selectedCity));
+
+  if (mainPageProps.status && mainPageProps.status === RequestStatus.Loading) {
+    return (
+      <div>Loading...
+        <div>
+          <img src="img/Spinner-5.gif" />
+        </div>
+      </div>);
+  }
+  const selectedCard = selectedOffers[activeCard];
+  const SelectedPoint = { title: selectedCard.title, lat: selectedCard.location.latitude, lng: selectedCard.location.longitude };
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>

@@ -1,29 +1,36 @@
-import { createReducer } from '@reduxjs/toolkit';
+import { createReducer, combineReducers } from '@reduxjs/toolkit';
 import TOffer from '../types/offers';
-import mockOffers from '../mock/offers_mock';
-import { fillOffers, setCity, setSorting } from './actions';
+import { setCity, setSorting } from './actions';
+import { OffersSlice } from './slices/offers';
+import { ReviewsSlice } from './slices/review';
+import { RequestStatus } from '../const';
 
 type offerState = {
   city: string;
   offers: TOffer[];
   sorting: string;
+  status: RequestStatus;
 }
 
 const initialState: offerState = {
   city: 'Paris',
   offers: [],
-  sorting: 'Popular'
+  sorting: 'Popular',
+  status: RequestStatus.Idle
 };
 
-const reducer = createReducer(initialState, (builder) => {
+const cityReducer = createReducer(initialState, (builder) => {
   builder.addCase(setCity, (state, action) => {
     state.city = action.payload;
   }
-  ).addCase(fillOffers, (state) => {
-    state.offers = mockOffers();
-  }).addCase(setSorting, (state, action) => {
+  ).addCase(setSorting, (state, action) => {
     state.sorting = action.payload;
   });
 });
 
-export { reducer };
+
+export const reducer = combineReducers({
+  [OffersSlice.name]: OffersSlice.reducer,
+  [cityReducer.name]: cityReducer,
+  [ReviewsSlice.name]: ReviewsSlice.reducer
+});

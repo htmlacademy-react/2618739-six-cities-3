@@ -6,9 +6,9 @@ export type City = {
 };
 
 export type Point = {
-    title: string;
-    lat: number;
-    lng: number;
+    title: string | undefined;
+    lat: number | undefined;
+    lng: number | undefined;
 };
 
 export type Points = Point[];

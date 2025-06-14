@@ -1,10 +1,10 @@
 type TOffer = {
-    id: number;
+    id: string;
     title: string;
     type: string;
     price: number;
-    city: string;
-    location: number[];
+    city: { name: string };
+    location: { latitude: number; longitude: number };
     isFavorite: boolean;
     isPremium: boolean;
     rating: number;
@@ -14,5 +14,6 @@ type TOffer = {
     host: string;
     images: string[];
     maxAdults: number;
+    previewImage: string;
 }
 export default TOffer;

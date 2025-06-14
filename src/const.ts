@@ -58,3 +58,14 @@ export const CITIES = [
     zoom: 0.5
   },
 ];
+
+export enum APIRoute {
+  Offers = '/offers',
+  Login = '/login',
+  Logout = '/logout',
+  Reviews = '/comments'
+}
+
+export enum RequestStatus {
+  Idle, Loading, Success, Failed
+}

@@ -1,9 +1,34 @@
+import { useParams } from 'react-router-dom';
 import ReviewsForm from './review_form';
 import ReviewsList from './review_list';
-import { mockReviews } from '../../mock/reviews';
+import Page404 from '../404';
+
 import TOffer from '../../types/offers';
+import { fetchReviewsAction } from '../../store/api-actions';
+import { useEffect } from 'react';
+import { store } from '../../store';
+import { useAppSelector } from '../../hooks';
+import { selectReviews, selectReviewsStatus } from '../../store/selectors/reviews';
+import { RequestStatus } from '../../const';
 type offerProp = { offer: TOffer };
+
 function OfferContainer({ offer }: offerProp): JSX.Element {
+  const Reviews = useAppSelector(selectReviews);
+  const reviewsState = useAppSelector(selectReviewsStatus);
+  const id = useParams().id || '';
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      await store.dispatch(fetchReviewsAction(id));
+    };
+    fetchReviews();
+  }, [id]);
+  if (!id) {
+    return (<div><Page404 /></div>);
+  }
+  if (reviewsState === RequestStatus.Loading) {
+    return (<div>Loading...</div>);
+  }
   return (
     <div className="offer__container container">
       <div className="offer__wrapper">
@@ -47,7 +72,7 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
         <div className="offer__inside">
           <h2 className="offer__inside-title">What&apos;s inside</h2>
           <ul className="offer__inside-list">
-            {offer.goods.map((good) => (
+            {offer.goods?.map((good) => (
               <li className="offer__inside-item" key={good}>
                 {good}
               </li>
@@ -77,8 +102,8 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
           </div>
         </div>
         <section className="offer__reviews reviews">
-          <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{mockReviews.length}</span></h2>
-          <ReviewsList reviewList={mockReviews} />
+          <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{Reviews.length}</span></h2>
+          <ReviewsList reviewList={Reviews} />
           <ReviewsForm />
         </section>
       </div>
