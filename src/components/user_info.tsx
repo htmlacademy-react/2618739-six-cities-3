@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../hooks';
-import { getAuthorizationStatus } from '../store/selectors/user';
+import { getAuthorizationStatus, getUserInfo } from '../store/selectors/user';
 import { AuthorizationStatus } from '../const';
 
 function UserInfo(): JSX.Element {
   const authStatus = useAppSelector(getAuthorizationStatus);
+  const user = useAppSelector(getUserInfo);
   if (authStatus === AuthorizationStatus.Auth) {
     return (
       <nav className="header__nav">
@@ -13,7 +14,7 @@ function UserInfo(): JSX.Element {
             <a className="header__nav-link header__nav-link--profile" href="#">
               <div className="header__avatar-wrapper user__avatar-wrapper">
               </div>
-              <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+              <span className="header__user-name user__name">{user.email}</span>
               <span className="header__favorite-count">3</span>
             </a>
           </li>

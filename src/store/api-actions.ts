@@ -32,26 +32,26 @@ export const fetchReviewsAction = createAsyncThunk<ReviewPropType[], offer_id, {
   },
 );
 
-export const checkAuthAction = createAsyncThunk<UserType[], void, {
+export const checkAuthAction = createAsyncThunk<UserType, void, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'user/checkAuthAction',
   async (_arg, { extra: api }) => {
-    const { data } = await api.get<UserType[]>(APIRoute.Login);
+    const { data } = await api.get<UserType>(APIRoute.Login);
     return data;
   },
 );
 
-export const login = createAsyncThunk<UserType[], AuthData, {
+export const login = createAsyncThunk<UserType, AuthData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'user/login',
   async (authData: AuthData, { extra: api }) => {
-    const { data } = await api.post<UserType[]>(APIRoute.Login, authData);
+    const { data } = await api.post<UserType>(APIRoute.Login, authData);
     return data;
   },
 );
