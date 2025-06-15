@@ -13,16 +13,18 @@ import { RequestStatus } from '../../const';
 type offerProp = { offer: TOffer };
 
 function OfferContainer({ offer }: offerProp): JSX.Element {
-  const Reviews = useAppSelector(selectReviews);
-  const reviewsState = useAppSelector(selectReviewsStatus);
   const id = useParams().id || '';
-
   useEffect(() => {
     const fetchReviews = async () => {
       await store.dispatch(fetchReviewsAction(id));
     };
     fetchReviews();
   }, [id]);
+  const Reviews = useAppSelector(selectReviews);
+  const reviewsState = useAppSelector(selectReviewsStatus);
+
+
+
   if (!id) {
     return (<div><Page404 /></div>);
   }

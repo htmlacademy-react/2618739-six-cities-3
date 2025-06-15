@@ -8,4 +8,6 @@ const selectSorting = (state: State) => state.sorting;
 
 const selectStatus = (state: State) => state.offers.status;
 
-export { selectOffers, selectCity, selectSorting, selectStatus };
+const selectAuth = (state: State) => state.user.auth;
+
+export { selectOffers, selectCity, selectSorting, selectStatus, selectAuth };
