@@ -1,4 +1,6 @@
 import Private from '../../components/private';
+import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/selectors/user';
 import TOffer from '../../types/offers';
 import { Link } from 'react-router-dom';
 type offersProps = { offers: TOffer[] }
@@ -42,7 +44,7 @@ function Favorites({ offers }: offersProps): JSX.Element {
         </div>
       </article >));
   return (
-    <Private authorizationStatus="Auth">
+    <Private authorizationStatus={useAppSelector(getAuthorizationStatus)}>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">

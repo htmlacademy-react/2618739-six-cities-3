@@ -69,3 +69,7 @@ export enum APIRoute {
 export enum RequestStatus {
   Idle, Loading, Success, Failed
 }
+
+export enum AuthorizationStatus {
+  Unknown, Auth, NoAuth
+}
