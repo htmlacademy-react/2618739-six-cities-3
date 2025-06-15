@@ -3,9 +3,6 @@ import axious from 'axios';
 import { StatusCodes } from 'http-status-codes';
 import { getToken } from './token';
 import { toast } from 'react-toastify';
-import { store } from '../store';
-import { AuthorizationStatus } from '../const';
-import { userActions } from '../store/slices/user'
 
 
 const enum Default {

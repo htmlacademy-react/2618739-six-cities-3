@@ -24,7 +24,6 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
   const reviewsState = useAppSelector(selectReviewsStatus);
 
 
-
   if (!id) {
     return (<div><Page404 /></div>);
   }

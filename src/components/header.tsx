@@ -1,4 +1,4 @@
-import UserInfo from './user_info'
+import UserInfo from './user_info';
 
 function Header(): JSX.Element {
   return (
