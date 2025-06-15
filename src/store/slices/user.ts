@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../../const';
-import { checkAuthAction } from '../api-actions';
+import { checkAuthAction, login } from '../api-actions';
 import { RequestStatus } from '../../const';
 
 
@@ -32,6 +32,14 @@ const userSlice = createSlice(
                     state.auth = AuthorizationStatus.Auth;
                     state.status = RequestStatus.Success;
                 }).addCase(checkAuthAction.rejected, (state) => {
+                    state.auth = AuthorizationStatus.NoAuth;
+                    state.status = RequestStatus.Failed;
+                }).addCase(login.pending, (state) => {
+                    state.status = RequestStatus.Loading;
+                }).addCase(login.fulfilled, (state) => {
+                    state.auth = AuthorizationStatus.Auth;
+                    state.status = RequestStatus.Success;
+                }).addCase(login.rejected, (state) => {
                     state.auth = AuthorizationStatus.NoAuth;
                     state.status = RequestStatus.Failed;
                 });

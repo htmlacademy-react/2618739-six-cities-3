@@ -8,6 +8,7 @@ import Page404 from '../404';
 import { useAppSelector } from '../../hooks';
 import { selectAuth, selectOffers, selectStatus } from '../../store/selectors/offers';
 import { AuthorizationStatus, RequestStatus } from '../../const';
+import { getAuthorizationStatus } from '../../store/selectors/user';
 import TOffer from '../../types/offers';
 
 function App(): JSX.Element {
@@ -15,10 +16,20 @@ function App(): JSX.Element {
   console.log(auth)
   const offers: TOffer[] = useAppSelector(selectOffers);
   const status: RequestStatus = useAppSelector(selectStatus);
+  const authStatus = useAppSelector(getAuthorizationStatus);
+  const loginPageRoute = (authStatus: AuthorizationStatus) => {
+    if (authStatus == AuthorizationStatus.Auth) {
+      const element = (< Main offersProps={offers} status={status} />);
+      return (<Route path="login" element={element} />)
+    }
+    else {
+      return (<Route path="login" element={<Login />} />)
+    };
+  }
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="login" element={<Login />} />
+        {loginPageRoute(authStatus)}
         <Route path="/" element={<Layout />} >
           <Route index element={<Main offersProps={offers} status={status} />} />
           <Route path='favorites' element={<Favorites offers={offers} />} />

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useAppSelector } from "../hooks";
 import { getAuthorizationStatus } from '../store/selectors/user';
 import { AuthorizationStatus } from '../const';
@@ -33,7 +34,9 @@ function UserInfo(): JSX.Element {
                         <a className="header__nav-link header__nav-link--profile" href="#">
                             <div className="header__avatar-wrapper user__avatar-wrapper">
                             </div>
-                            <span className="header__login">Sign in</span>
+                            <span className="header__login">
+                                <Link to="/login">Sign in</Link>
+                            </span>
                         </a>
                     </li>
                 </ul>

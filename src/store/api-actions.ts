@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import TOffer from '../types/offers';
 import ReviewPropType from '../types/reviews';
-import UserType from '../types/store'
+import { UserType, AuthData } from '../types/user'
 import { AppDispatch, State } from '../types/store';
 import { AxiosInstance } from 'axios';
 import { APIRoute } from '../const';
@@ -32,7 +32,6 @@ export const fetchReviewsAction = createAsyncThunk<ReviewPropType[], offer_id, {
   },
 );
 
-
 export const checkAuthAction = createAsyncThunk<UserType[], void, {
   dispatch: AppDispatch;
   state: State;
@@ -41,6 +40,18 @@ export const checkAuthAction = createAsyncThunk<UserType[], void, {
   'user/checkAuthAction',
   async (_arg, { extra: api }) => {
     const { data } = await api.get<UserType[]>(APIRoute.Login);
+    return data;
+  },
+);
+
+export const login = createAsyncThunk<UserType[], AuthData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/login',
+  async (authData: AuthData, { extra: api }) => {
+    const { data } = await api.post<UserType[]>(APIRoute.Login, authData);
     return data;
   },
 );
