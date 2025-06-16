@@ -8,7 +8,7 @@ function ReviewsList({ reviewList }: ReviewListProp): JSX.Element {
     <ReviewsItem
       key={review.id}
       id={review.id}
-      userName={review.userName}
+      user={review.user}
       comment={review.comment}
       date={review.date}
     />));
