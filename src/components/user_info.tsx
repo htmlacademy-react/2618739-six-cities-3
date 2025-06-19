@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../hooks';
 import { getAuthorizationStatus, getUserInfo } from '../store/selectors/user';
 import { AuthorizationStatus } from '../const';
+import { dropToken } from '../services/token';
 
 function UserInfo(): JSX.Element {
   const authStatus = useAppSelector(getAuthorizationStatus);
@@ -20,7 +21,7 @@ function UserInfo(): JSX.Element {
           </li>
           <li className="header__nav-item">
             <a className="header__nav-link" href="#">
-              <span className="header__signout">Sign out</span>
+              <span className="header__signout" onClick={dropToken}>Sign out</span>
             </a>
           </li>
         </ul>

@@ -4,6 +4,7 @@ import { AuthorizationStatus } from '../../const';
 import { checkAuthAction, login } from '../api-actions';
 import { RequestStatus } from '../../const';
 import { UserType } from '../../types/user';
+import { saveToken } from '../../services/token';
 
 
 interface UserState {
@@ -48,6 +49,7 @@ const userSlice = createSlice(
         }).addCase(login.fulfilled, (state, action) => {
           state.auth = AuthorizationStatus.Auth;
           state.info = action.payload;
+          saveToken(action.payload.token);
           state.status = RequestStatus.Success;
         }).addCase(login.rejected, (state) => {
           state.auth = AuthorizationStatus.NoAuth;

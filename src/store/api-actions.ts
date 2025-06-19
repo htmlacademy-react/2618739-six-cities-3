@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import TOffer from '../types/offers';
 import ReviewPropType from '../types/reviews';
 import { UserType, AuthData } from '../types/user';
+import { offerId } from '../types/reviews';
 import { AppDispatch, State } from '../types/store';
 import { AxiosInstance } from 'axios';
 import { APIRoute } from '../const';
@@ -18,15 +19,13 @@ export const fetchOfferAction = createAsyncThunk<TOffer[], undefined, {
   }
 );
 
-type offer_id = string;
-
-export const fetchReviewsAction = createAsyncThunk<ReviewPropType[], offer_id, {
+export const fetchReviewsAction = createAsyncThunk<ReviewPropType[], offerId, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchReviews',
-  async (id: offer_id, { extra: api }) => {
+  async (id: offerId, { extra: api }) => {
     const { data } = await api.get<ReviewPropType[]>(`${APIRoute.Reviews}/${id}`);
     return data;
   },
@@ -56,3 +55,16 @@ export const login = createAsyncThunk<UserType, AuthData, {
   },
 );
 
+export type reviewData = { id: string; comment: string; rating: number }
+
+export const putReviewsAction = createAsyncThunk<ReviewPropType, reviewData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/putReviews',
+  async ({ id, comment, rating }, { extra: api }) => {
+    const { data } = await api.post<ReviewPropType>(`${APIRoute.Reviews}/${id}`, { comment, rating });
+    return data;
+  },
+);

@@ -1,9 +1,16 @@
 import React from 'react';
 import FormRatingInput from './form_rating_input';
 import { useState } from 'react';
+import { useAppSelector } from '../../hooks';
+import { putReviewsAction } from '../../store/api-actions';
 import Star from './star';
+import { useParams } from 'react-router-dom';
+import { store } from '../../store';
+import { selectAuth } from '../../store/selectors/offers';
+import { AuthorizationStatus } from '../../const';
 
 function ReviewsForm(): JSX.Element {
+  const id = useParams().id || '';
   const [ReviewState, setReviewState] = useState({ stars: 0, text: '' });
   function setStars(newStars: number) {
     setReviewState({
@@ -19,8 +26,20 @@ function ReviewsForm(): JSX.Element {
     });
   }
 
+  function sendReview() {
+    const comment = ReviewState.text;
+    const rating = ReviewState.stars;
+    store.dispatch(putReviewsAction({ id, comment, rating }));
+  }
+
+  const disabledOption = false;
+  const auth = useAppSelector(selectAuth);
+  if (auth !== AuthorizationStatus.Auth) {
+    return (<div>Authorize to leave a review</div>)
+  }
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <div className="reviews__form form">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <FormRatingInput value={5} />
@@ -40,10 +59,10 @@ function ReviewsForm(): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={disabledOption} onClick={sendReview}>Submit</button>
       </div>
       Ваша оценка: {ReviewState.stars} Ваш отзыв: {ReviewState.text}
-    </form >);
+    </div>);
 }
 
 export default ReviewsForm;
