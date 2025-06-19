@@ -3,9 +3,9 @@ import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 function ReviewsItem(reviewProp: ReviewPropType): JSX.Element {
   const dateFromString = new Date(reviewProp.date);
-  console.log(reviewProp)
+  const stars = reviewProp.rating;
   if (!reviewProp.user) {
-    return (<div></div>)
+    return (<div></div>);
   }
   return (
     <li className="reviews__item">
@@ -20,7 +20,7 @@ function ReviewsItem(reviewProp: ReviewPropType): JSX.Element {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
+            <span style={{ width: stars * 20 }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

@@ -11,6 +11,7 @@ function ReviewsList({ reviewList }: ReviewListProp): JSX.Element {
       user={review.user}
       comment={review.comment}
       date={review.date}
+      rating={review.rating}
     />));
   return (
     <ul className="reviews__list">

@@ -1,9 +1,9 @@
 export type ApiReviewType = {
-    comment: string,
-    rating: number
+    comment: string;
+    rating: number;
 }
 
-export type offer_id = string;
+export type offerId = string;
 
 type ReviewPropType = {
     id: number;
