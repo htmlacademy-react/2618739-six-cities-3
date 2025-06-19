@@ -1,10 +1,13 @@
 import React from 'react';
 import FormRatingInput from './form_rating_input';
 import { useState } from 'react';
+import { useAppSelector } from '../../hooks';
 import { putReviewsAction } from '../../store/api-actions';
 import Star from './star';
 import { useParams } from 'react-router-dom';
 import { store } from '../../store';
+import { selectAuth } from '../../store/selectors/offers';
+import { AuthorizationStatus } from '../../const';
 
 function ReviewsForm(): JSX.Element {
   const id = useParams().id || '';
@@ -30,9 +33,13 @@ function ReviewsForm(): JSX.Element {
   }
 
   const disabledOption = false;
+  const auth = useAppSelector(selectAuth);
+  if (auth !== AuthorizationStatus.Auth) {
+    return (<div>Authorize to leave a review</div>)
+  }
 
   return (
-    <div className="reviews__form form" action="#" method="post">
+    <div className="reviews__form form">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <FormRatingInput value={5} />

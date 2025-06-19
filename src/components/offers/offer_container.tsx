@@ -23,7 +23,6 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
   const Reviews = useAppSelector(selectReviews);
   const reviewsState = useAppSelector(selectReviewsStatus);
 
-
   if (!id) {
     return (<div><Page404 /></div>);
   }
