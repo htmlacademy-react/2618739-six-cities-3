@@ -3,13 +3,13 @@ import TOffer from '../../types/offers';
 import { Link } from 'react-router-dom';
 import { memo } from 'react';
 
-type PlaceCardProps = { offersProp: TOffer; setActiveCard: (id: string) => void; cardClass: string }
+type PlaceCardProps = { offersProp: TOffer; setActiveCard: (offer: TOffer) => void; cardClass: string }
 
 function PlaceCard({ offersProp, setActiveCard, cardClass }: PlaceCardProps): JSX.Element {
   const offerPath = `/offer/${offersProp.id}`;
   return (
     <article className={`${cardClass}__card place-card`} onMouseOver={() => {
-      setActiveCard(offersProp.id);
+      setActiveCard(offersProp);
     }}
     >
       <div className="place-card__mark">
