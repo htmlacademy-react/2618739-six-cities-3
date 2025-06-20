@@ -1,13 +1,14 @@
 import TOffer from '../types/offers';
 import PlaceCard from './place-card/place-card';
+import { memo, useCallback } from 'react';
 
 type PlaceCardListType = { offersProps: TOffer[]; setActiveCard: (id: number) => void };
 
 function PlaceCardList({ offersProps, setActiveCard }: PlaceCardListType): JSX.Element {
   const cards = offersProps.map((offer: TOffer) => (
-    <PlaceCard offersProp={offer} key={offer.id} setActiveCard={() => {
+    <PlaceCard offersProp={offer} key={offer.id} setActiveCard={useCallback(() => {
       setActiveCard(offersProps.indexOf(offer));
-    }} cardClass={'cities'}
+    }, [])} cardClass={'cities'}
     />));
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -17,4 +18,4 @@ function PlaceCardList({ offersProps, setActiveCard }: PlaceCardListType): JSX.E
   );
 }
 
-export default PlaceCardList;
+export default memo(PlaceCardList);

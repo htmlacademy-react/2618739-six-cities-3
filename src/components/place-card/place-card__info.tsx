@@ -1,4 +1,5 @@
 import TOffer from '../../types/offers';
+import { memo } from 'react';
 
 type cardInfoProps = { offersProp: TOffer };
 function PlaceCardInfo({ offersProp }: cardInfoProps): JSX.Element {
@@ -29,4 +30,4 @@ function PlaceCardInfo({ offersProp }: cardInfoProps): JSX.Element {
     </div>);
 }
 
-export default PlaceCardInfo;
+export default memo(PlaceCardInfo);

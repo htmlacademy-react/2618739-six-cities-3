@@ -1,4 +1,5 @@
 import UserInfo from './user_info';
+import { memo } from 'react';
 
 function Header(): JSX.Element {
   return (
@@ -16,4 +17,4 @@ function Header(): JSX.Element {
     </header>);
 }
 
-export default Header;
+export default memo(Header);

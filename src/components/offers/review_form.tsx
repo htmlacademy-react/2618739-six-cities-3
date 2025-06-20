@@ -35,7 +35,7 @@ function ReviewsForm(): JSX.Element {
   const disabledOption = false;
   const auth = useAppSelector(selectAuth);
   if (auth !== AuthorizationStatus.Auth) {
-    return (<div>Authorize to leave a review</div>)
+    return (<div>Authorize to leave a review</div>);
   }
 
   return (
