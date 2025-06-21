@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { selectSorting } from '../store/selectors/offers';
 import { setSorting } from '../store/actions';
+import { Sorting } from '../types/sorting';
 
 function SortingVariants(): JSX.Element {
-  const selectedSorting = useAppSelector(selectSorting);
+  const selectedSorting = useAppSelector(selectSorting).toString();
   const [isExpanded, setExpand] = useState(false);
   function expand() {
     setExpand(!isExpanded);
@@ -23,7 +24,7 @@ function SortingVariants(): JSX.Element {
       return (false);
     }
   }
-  const sortingVariants = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
+  const sortingVariants = [Sorting.Low, Sorting.Hight, Sorting.Rated, Sorting.Default];
 
   return (
     <form className="places__sorting" action="#" method="get" onClick={expand}>

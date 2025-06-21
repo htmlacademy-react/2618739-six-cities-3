@@ -1,9 +1,11 @@
 import TOffer from '../types/offers';
 import PlaceCard from './place-card/place-card';
+import { memo } from 'react';
 
 type PlaceCardListType = { offersProps: TOffer[]; setActiveCard: (id: number) => void };
 
 function PlaceCardList({ offersProps, setActiveCard }: PlaceCardListType): JSX.Element {
+
   const cards = offersProps.map((offer: TOffer) => (
     <PlaceCard offersProp={offer} key={offer.id} setActiveCard={() => {
       setActiveCard(offersProps.indexOf(offer));
@@ -17,4 +19,4 @@ function PlaceCardList({ offersProps, setActiveCard }: PlaceCardListType): JSX.E
   );
 }
 
-export default PlaceCardList;
+export default memo(PlaceCardList, (prevProps, nextProp) => (prevProps.offersProps === nextProp.offersProps));

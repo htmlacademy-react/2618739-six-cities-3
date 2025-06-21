@@ -3,6 +3,7 @@ import { useAppSelector } from '../hooks';
 import { getAuthorizationStatus, getUserInfo } from '../store/selectors/user';
 import { AuthorizationStatus } from '../const';
 import { dropToken } from '../services/token';
+import { memo } from 'react';
 
 function UserInfo(): JSX.Element {
   const authStatus = useAppSelector(getAuthorizationStatus);
@@ -47,4 +48,4 @@ function UserInfo(): JSX.Element {
   }
 }
 
-export default UserInfo;
+export default memo(UserInfo);

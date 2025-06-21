@@ -5,6 +5,7 @@ import { OffersSlice } from './slices/offers';
 import { ReviewsSlice } from './slices/review';
 import { userSlice } from './slices/user';
 import { RequestStatus } from '../const';
+import { Sorting } from '../types/sorting';
 
 type offerState = {
   city: string;
@@ -16,8 +17,9 @@ type offerState = {
 const initialState: offerState = {
   city: 'Paris',
   offers: [],
-  sorting: 'Popular',
-  status: RequestStatus.Idle
+  sorting: Sorting.Default,
+  status: RequestStatus.Idle,
+
 };
 
 const cityReducer = createReducer(initialState, (builder) => {
