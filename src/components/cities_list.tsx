@@ -1,5 +1,6 @@
 import { useAppDispatch } from '../hooks/index';
 import { setCity } from '../store/actions';
+import { memo } from 'react';
 
 type citiesType = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
 type cityEl = { id: number; cityName: citiesType };
@@ -32,4 +33,4 @@ function CitiesList(): JSX.Element {
     </ul>);
 }
 
-export default CitiesList;
+export default memo(CitiesList);

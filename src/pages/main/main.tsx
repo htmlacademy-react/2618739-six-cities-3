@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { City } from '../../types/map_types';
 import SortingVariants from '../../components/sorting_variants';
 import useSortOffers from '../../hooks/sorting';
+import { useMemo } from 'react';
 
 type MainPageProps = {
   status: RequestStatus;
@@ -29,7 +30,8 @@ function filterOffers(offers: TOffer[], selectedCity: City): TOffer[] {
 function Main(mainPageProps: MainPageProps): JSX.Element {
   const [activeCard, setActiveCard] = useState(0);
   const selectedCity = getCity();
-  const selectedOffers = useSortOffers(filterOffers(mainPageProps.offersProps, selectedCity));
+  const filteredOffers = useMemo(() => filterOffers(mainPageProps.offersProps, selectedCity), [mainPageProps.offersProps, selectedCity])
+  const selectedOffers = useSortOffers(filteredOffers);
 
   if (mainPageProps.status && mainPageProps.status === RequestStatus.Loading) {
     return (
