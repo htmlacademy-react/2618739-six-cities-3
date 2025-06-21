@@ -24,4 +24,4 @@ function PlaceCard({ offersProp, setActiveCard, cardClass }: PlaceCardProps): JS
       <PlaceCardInfo offersProp={offersProp} />
     </article >);
 }
-export default memo(PlaceCard);
+export default memo(PlaceCard, (prevProps, nextProps) => { return (prevProps.offersProp === nextProps.offersProp) });
