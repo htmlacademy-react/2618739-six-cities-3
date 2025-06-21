@@ -5,7 +5,7 @@ import { setSorting } from '../store/actions';
 import { Sorting } from '../types/sorting';
 
 function SortingVariants(): JSX.Element {
-  const selectedSorting = useAppSelector(selectSorting);
+  const selectedSorting = useAppSelector(selectSorting).toString();
   const [isExpanded, setExpand] = useState(false);
   function expand() {
     setExpand(!isExpanded);
