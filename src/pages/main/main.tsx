@@ -9,7 +9,6 @@ import { useState } from 'react';
 import { City } from '../../types/map_types';
 import SortingVariants from '../../components/sorting_variants';
 import useSortOffers from '../../hooks/sorting';
-import { useCallback } from 'react';
 
 type MainPageProps = {
   status: RequestStatus;
@@ -20,12 +19,12 @@ function getCity(): City {
   return (CITIES.filter((city) => city.title === useAppSelector(selectCity))[0] || CITIES[0]);
 }
 
-const filterOffers = useCallback((offers: TOffer[], selectedCity: City): TOffer[] => {
+function filterOffers(offers: TOffer[], selectedCity: City): TOffer[] {
   if (offers.length < 1) {
     return (offers);
   }
   return (offers.filter((offer) => offer.city.name === selectedCity.title));
-}, []);
+};
 
 function Main(mainPageProps: MainPageProps): JSX.Element {
   const [activeCard, setActiveCard] = useState(0);
@@ -47,14 +46,7 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
-          <CitiesList citiesList={[
-            { id: 1, cityName: 'Paris' },
-            { id: 2, cityName: 'Cologne' },
-            { id: 3, cityName: 'Brussels' },
-            { id: 4, cityName: 'Amsterdam' },
-            { id: 5, cityName: 'Hamburg' },
-            { id: 6, cityName: 'Dusseldorf' }]}
-          />
+          <CitiesList />
         </section>
       </div>
       <div className="cities">

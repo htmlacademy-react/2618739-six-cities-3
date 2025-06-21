@@ -1,15 +1,16 @@
 import TOffer from '../types/offers';
 import { useAppSelector } from './index';
 import { selectSorting } from '../store/selectors/offers';
+import { Sorting } from '../types/sorting';
 
 function useSortOffers(selectedOffers: TOffer[]): TOffer[] {
   const selectedSorting = useAppSelector(selectSorting);
   switch (selectedSorting) {
-    case 'Price: low to high':
+    case Sorting.Low:
       return (selectedOffers.sort((a, b) => a.price - b.price));
-    case 'Price: high to low':
+    case Sorting.Hight:
       return (selectedOffers.sort((a, b) => a.price - b.price).reverse());
-    case 'Top rated first':
+    case Sorting.Rated:
       return (selectedOffers.sort((a, b) => a.rating - b.rating).reverse());
     default:
       return (selectedOffers);
