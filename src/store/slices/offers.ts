@@ -5,7 +5,6 @@ import { CITIES } from '../../const';
 import { fetchOfferAction } from '../api-actions';
 import { RequestStatus } from '../../const';
 import { Sorting } from '../../types/sorting';
-import { setSorting } from '../actions';
 
 
 interface OffersState {
