@@ -3,4 +3,4 @@ export enum Sorting {
     Hight = 'Price: high to low',
     Rated = 'Top rated first',
     Default = 'Popular'
-};
+}

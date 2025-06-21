@@ -25,12 +25,12 @@ function filterOffers(offers: TOffer[], selectedCity: City): TOffer[] {
     return (offers);
   }
   return (offers.filter((offer) => offer.city.name === selectedCity.title));
-};
+}
 
 function Main(mainPageProps: MainPageProps): JSX.Element {
   const [activeCard, setActiveCard] = useState(0);
   const selectedCity = getCity();
-  const filteredOffers = useMemo(() => filterOffers(mainPageProps.offersProps, selectedCity), [mainPageProps.offersProps, selectedCity])
+  const filteredOffers = useMemo(() => filterOffers(mainPageProps.offersProps, selectedCity), [mainPageProps.offersProps, selectedCity]);
   const selectedOffers = useSortOffers(filteredOffers);
 
   if (mainPageProps.status && mainPageProps.status === RequestStatus.Loading) {

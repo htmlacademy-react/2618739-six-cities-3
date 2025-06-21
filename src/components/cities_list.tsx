@@ -15,7 +15,7 @@ function CitiesList(): JSX.Element {
       { id: 4, cityName: 'Amsterdam' },
       { id: 5, cityName: 'Hamburg' },
       { id: 6, cityName: 'Dusseldorf' }
-    ]
+    ];
   const dispatch = useAppDispatch();
   const cities = citiesList.map((city: cityEl) => (
     <li className="locations__item" key={city.id}>

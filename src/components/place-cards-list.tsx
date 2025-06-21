@@ -19,6 +19,4 @@ function PlaceCardList({ offersProps, setActiveCard }: PlaceCardListType): JSX.E
   );
 }
 
-export default memo(PlaceCardList, (prevProps, nextProp) => {
-  return (prevProps.offersProps === nextProp.offersProps)
-});
+export default memo(PlaceCardList, (prevProps, nextProp) => (prevProps.offersProps === nextProp.offersProps));
