@@ -28,9 +28,8 @@ function filterOffers(offers: TOffer[], selectedCity: City): TOffer[] {
 }
 
 function Main(mainPageProps: MainPageProps): JSX.Element {
-  const [activeCard, setActiveCard] = useState(0);
   const selectedCity = getCity();
-  const filteredOffers = useMemo(() => filterOffers(mainPageProps.offersProps, selectedCity), [mainPageProps.offersProps, selectedCity]);
+  const filteredOffers = filterOffers(mainPageProps.offersProps, selectedCity);
   const selectedOffers = useSortOffers(filteredOffers);
 
   if (mainPageProps.status && mainPageProps.status === RequestStatus.Loading) {
@@ -41,8 +40,6 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
         </div>
       </div>);
   }
-  const selectedCard = selectedOffers[activeCard];
-  const SelectedPoint = { title: selectedCard.title, lat: selectedCard.location.latitude, lng: selectedCard.location.longitude };
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -57,12 +54,12 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{selectedOffers.length} places to stay in {selectedCity.title}</b>
             <SortingVariants />
-            <PlaceCardList offersProps={selectedOffers} setActiveCard={setActiveCard} />
+            <PlaceCardList offersProps={selectedOffers} />
           </section>
           <div className="cities__right-section">
             <section className="cities__map">
               < Map city={selectedCity}
-                offers={selectedOffers} selectedPoint={SelectedPoint}
+                offers={selectedOffers}
               />
             </section>
           </div>

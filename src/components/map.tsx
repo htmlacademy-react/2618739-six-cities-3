@@ -5,11 +5,12 @@ import { City, Point } from '../types/map_types';
 import TOffer from '../types/offers';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../const';
 import 'leaflet/dist/leaflet.css';
+import { useAppSelector } from '../hooks';
+import { selectActiveOffer } from '../store/selectors/offers';
 
 type MapProps = {
   city: City;
   offers: TOffer[];
-  selectedPoint: Point | undefined;
 };
 
 const defaultCustomIcon = new Icon({
@@ -25,13 +26,16 @@ const currentCustomIcon = new Icon({
 });
 
 function Map(props: MapProps): JSX.Element {
-  const { city, offers, selectedPoint } = props;
+  const { city, offers } = props;
+  const activeCard = useAppSelector(selectActiveOffer);
+  const selectedCard = offers[activeCard];
 
   const mapRef = useRef(null);
   const map = useMap(mapRef);
 
   useEffect(() => {
     if (map) {
+      const selectedPoint = { title: selectedCard.title, lat: selectedCard.location.latitude, lng: selectedCard.location.longitude };
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((offer) => {
         const marker = new Marker({
@@ -52,7 +56,7 @@ function Map(props: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, selectedPoint, city]);
+  }, [map, offers, city]);
 
   return <div style={{ height: '500px' }} ref={mapRef}></div>;
 }

@@ -5,11 +5,13 @@ import { CITIES } from '../../const';
 import { fetchOfferAction } from '../api-actions';
 import { RequestStatus } from '../../const';
 import { Sorting } from '../../types/sorting';
+import { setActiveOffer } from '../actions';
 
 
 interface OffersState {
   city: string;
   offers: TOffer[];
+  activeOffer: number;
   status: RequestStatus;
   sorting: Sorting;
 }
@@ -19,6 +21,7 @@ const offers: TOffer[] = [];
 const initialState: OffersState = {
   city: CITIES[0].title,
   offers,
+  activeOffer: 0,
   status: RequestStatus.Idle,
   sorting: Sorting.Default
 };
@@ -34,6 +37,9 @@ const OffersSlice = createSlice(
       },
       setSorting: (state, action: PayloadAction<Sorting>) => {
         state.sorting = action.payload;
+      },
+      setActiveOffer: (state, action: PayloadAction<number>) => {
+        state.activeOffer = action.payload;
       },
     },
     extraReducers(builder) {
