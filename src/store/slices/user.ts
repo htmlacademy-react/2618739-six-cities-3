@@ -8,9 +8,9 @@ import { saveToken } from '../../services/token';
 
 
 interface UserState {
-    auth: AuthorizationStatus;
-    status: RequestStatus;
-    info: UserType;
+  auth: AuthorizationStatus;
+  status: RequestStatus;
+  info: UserType;
 }
 
 const initialState = {
@@ -38,7 +38,8 @@ const userSlice = createSlice(
       builder.addCase(checkAuthAction.pending, (state) => {
         state.status = RequestStatus.Loading;
       })
-        .addCase(checkAuthAction.fulfilled, (state) => {
+        .addCase(checkAuthAction.fulfilled, (state, action) => {
+          state.info = action.payload;
           state.auth = AuthorizationStatus.Auth;
           state.status = RequestStatus.Success;
         }).addCase(checkAuthAction.rejected, (state) => {

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../hooks';
 import { getAuthorizationStatus, getUserInfo } from '../store/selectors/user';
+import { selectBookmarks } from '../store/selectors/offers';
 import { AuthorizationStatus } from '../const';
 import { dropToken } from '../services/token';
 import { memo } from 'react';
@@ -8,6 +9,7 @@ import { memo } from 'react';
 function UserInfo(): JSX.Element {
   const authStatus = useAppSelector(getAuthorizationStatus);
   const user = useAppSelector(getUserInfo);
+  const favorites = useAppSelector(selectBookmarks);
   if (authStatus === AuthorizationStatus.Auth) {
     return (
       <nav className="header__nav">
@@ -17,7 +19,7 @@ function UserInfo(): JSX.Element {
               <div className="header__avatar-wrapper user__avatar-wrapper">
               </div>
               <span className="header__user-name user__name">{user.email}</span>
-              <span className="header__favorite-count">3</span>
+              <span className="header__favorite-count">{favorites.length}</span>
             </a>
           </li>
           <li className="header__nav-item">

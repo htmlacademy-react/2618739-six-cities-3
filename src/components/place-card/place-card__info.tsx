@@ -10,17 +10,22 @@ type cardInfoProps = { offersProp: TOffer };
 function PlaceCardInfo({ offersProp }: cardInfoProps): JSX.Element {
   const bookmarks = useAppSelector(selectBookmarks);
   let state = false;
-  for (let bookmark of bookmarks) {
+  for (const bookmark of bookmarks) {
     if (bookmark.id == offersProp.id) {
       state = true;
     }
   }
   const bookmarkClass = () => {
-    if (state) { return ("place-card__bookmark-button place-card__bookmark-button--active  button") }
-    else { return ("place-card__bookmark-button button") }
+    if (state) {
+      return ('place-card__bookmark-button place-card__bookmark-button--active  button');
+    } else {
+      return ('place-card__bookmark-button button');
+    }
   };
   const bookMarkState = { id: offersProp.id, status: Number(!state) };
-  const toBookmarks = () => { store.dispatch(toBookmarksAction(bookMarkState)) };
+  const toBookmarks = () => {
+    store.dispatch(toBookmarksAction(bookMarkState));
+  };
   return (
     <div className="place-card__info">
       <div className="place-card__price-wrapper">
@@ -42,7 +47,7 @@ function PlaceCardInfo({ offersProp }: cardInfoProps): JSX.Element {
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href={"/offer/" + offersProp.id}>{offersProp.title}</a>
+        <a href={`/offer/${ offersProp.id}`}>{offersProp.title}</a>
       </h2>
       <p className="place-card__type">{offersProp.type}</p>
     </div>);

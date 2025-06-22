@@ -64,9 +64,8 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
             </div>
           </div>
         </div>
-      </main >)
-  }
-  else {
+      </main >);
+  } else {
     return (
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>

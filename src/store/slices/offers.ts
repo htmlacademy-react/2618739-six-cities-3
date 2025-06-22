@@ -59,9 +59,8 @@ const OffersSlice = createSlice(
           state.status = RequestStatus.Success;
           if (action.payload.isFavorite === true) {
             state.favorites.push(action.payload);
-          }
-          else {
-            const index = state.favorites.findIndex(item => item.id === action.payload.id);
+          } else {
+            const index = state.favorites.findIndex((item) => item.id === action.payload.id);
             if (index > -1) {
               state.favorites.splice(index);
             }

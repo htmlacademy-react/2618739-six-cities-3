@@ -44,7 +44,7 @@ function Favorites({ offers }: offersProps): JSX.Element {
         </div>
       </article >));
   return (
-    <Private authorizationStatus={useAppSelector(getAuthorizationStatus)}>
+    <Private>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
