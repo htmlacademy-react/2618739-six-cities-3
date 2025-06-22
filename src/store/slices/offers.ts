@@ -2,7 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type TOffer from '../../types/offers';
 import { CITIES } from '../../const';
-import { fetchOfferAction, toBookmarksAction } from '../api-actions';
+import { fetchOfferAction, toBookmarksAction, getBookmarksAction } from '../api-actions';
 import { RequestStatus } from '../../const';
 import { Sorting } from '../../types/sorting';
 
@@ -57,16 +57,24 @@ const OffersSlice = createSlice(
         })
         .addCase(toBookmarksAction.fulfilled, (state, action) => {
           state.status = RequestStatus.Success;
-          if (action.payload.isFavorite) {
+          if (action.payload.isFavorite === true) {
             state.favorites.push(action.payload);
           }
           else {
-            const index = state.favorites.indexOf(action.payload);
+            const index = state.favorites.findIndex(item => item.id === action.payload.id);
             if (index > -1) {
-              state.favorites.splice(index, 1);
+              state.favorites.splice(index);
             }
           }
         }).addCase(toBookmarksAction.rejected, (state) => {
+          state.status = RequestStatus.Failed;
+        }).addCase(getBookmarksAction.pending, (state) => {
+          state.status = RequestStatus.Loading;
+        })
+        .addCase(getBookmarksAction.fulfilled, (state, action) => {
+          state.status = RequestStatus.Success;
+          state.favorites = action.payload;
+        }).addCase(getBookmarksAction.rejected, (state) => {
           state.status = RequestStatus.Failed;
         });
     }

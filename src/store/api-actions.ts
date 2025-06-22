@@ -81,3 +81,15 @@ export const toBookmarksAction = createAsyncThunk<TOffer, BookMarkState, {
     return data;
   },
 );
+
+export const getBookmarksAction = createAsyncThunk<TOffer[], void, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/getBookmarks',
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<TOffer[]>(`${APIRoute.Favorites}`);
+    return data;
+  },
+);
