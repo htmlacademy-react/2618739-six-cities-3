@@ -13,7 +13,7 @@ interface OffersState {
   activeOffer: number;
   status: RequestStatus;
   sorting: Sorting;
-  favorites: string[];
+  favorites: TOffer[];
 }
 
 const offers: TOffer[] = [];
@@ -57,7 +57,15 @@ const OffersSlice = createSlice(
         })
         .addCase(toBookmarksAction.fulfilled, (state, action) => {
           state.status = RequestStatus.Success;
-          state.favorites.push(action.payload.id);
+          if (action.payload.isFavorite) {
+            state.favorites.push(action.payload);
+          }
+          else {
+            const index = state.favorites.indexOf(action.payload);
+            if (index > -1) {
+              state.favorites.splice(index, 1);
+            }
+          }
         }).addCase(toBookmarksAction.rejected, (state) => {
           state.status = RequestStatus.Failed;
         });

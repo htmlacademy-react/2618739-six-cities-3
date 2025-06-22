@@ -6,6 +6,7 @@ import { offerId } from '../types/reviews';
 import { AppDispatch, State } from '../types/store';
 import { AxiosInstance } from 'axios';
 import { APIRoute } from '../const';
+import { BookMarkState } from '../types/offers';
 
 export const fetchOfferAction = createAsyncThunk<TOffer[], undefined, {
   dispatch: AppDispatch;

@@ -9,7 +9,12 @@ type cardInfoProps = { offersProp: TOffer };
 
 function PlaceCardInfo({ offersProp }: cardInfoProps): JSX.Element {
   const bookmarks = useAppSelector(selectBookmarks);
-  const state = bookmarks.includes(offersProp.id);
+  let state = false;
+  for (let bookmark of bookmarks) {
+    if (bookmark.id == offersProp.id) {
+      state = true;
+    }
+  }
   const bookmarkClass = () => {
     if (state) { return ("place-card__bookmark-button place-card__bookmark-button--active  button") }
     else { return ("place-card__bookmark-button button") }
