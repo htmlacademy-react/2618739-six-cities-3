@@ -29,7 +29,6 @@ function Map(props: MapProps): JSX.Element {
   const { city, offers } = props;
   const activeCard = useAppSelector(selectActiveOffer);
   const selectedCard = offers[activeCard];
-
   const mapRef = useRef(null);
   const map = useMap(mapRef);
 
@@ -56,7 +55,7 @@ function Map(props: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, city]);
+  }, [map, offers, city, activeCard]);
 
   return <div style={{ height: '500px' }} ref={mapRef}></div>;
 }
