@@ -68,3 +68,15 @@ export const putReviewsAction = createAsyncThunk<ReviewPropType, reviewData, {
     return data;
   },
 );
+
+export const toBookmarksAction = createAsyncThunk<TOffer, BookMarkState, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/toBookmarks',
+  async ({ id, status }, { extra: api }) => {
+    const { data } = await api.post<TOffer>(`${APIRoute.Favorites}/${id}/${status}`);
+    return data;
+  },
+);

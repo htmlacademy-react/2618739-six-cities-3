@@ -35,7 +35,7 @@ function Map(props: MapProps): JSX.Element {
 
   useEffect(() => {
     if (map) {
-      const selectedPoint = { title: selectedCard.title, lat: selectedCard.location.latitude, lng: selectedCard.location.longitude };
+      const selectedPoint: Point = { title: selectedCard.title, lat: selectedCard.location.latitude, lng: selectedCard.location.longitude };
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((offer) => {
         const marker = new Marker({

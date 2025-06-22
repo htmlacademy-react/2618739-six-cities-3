@@ -5,11 +5,9 @@ import { useAppSelector } from '../../hooks/index';
 import TOffer from '../../types/offers';
 import Map from '../../components/map';
 import { CITIES, RequestStatus } from '../../const';
-import { useState } from 'react';
 import { City } from '../../types/map_types';
 import SortingVariants from '../../components/sorting_variants';
 import useSortOffers from '../../hooks/sorting';
-import { useMemo } from 'react';
 
 type MainPageProps = {
   status: RequestStatus;
@@ -40,31 +38,53 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
         </div>
       </div>);
   }
-  return (
-    <main className="page__main page__main--index">
-      <h1 className="visually-hidden">Cities</h1>
-      <div className="tabs">
-        <section className="locations container">
-          <CitiesList />
-        </section>
-      </div>
-      <div className="cities">
-        <div className="cities__places-container container">
-          <section className="cities__places places">
-            <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{selectedOffers.length} places to stay in {selectedCity.title}</b>
-            <SortingVariants />
-            <PlaceCardList offersProps={selectedOffers} />
+  if (selectedOffers.length > 0) {
+    return (
+      <main className="page__main page__main--index">
+        <h1 className="visually-hidden">Cities</h1>
+        <div className="tabs">
+          <section className="locations container">
+            <CitiesList />
           </section>
-          <div className="cities__right-section">
-            <section className="cities__map">
-              < Map city={selectedCity}
-                offers={selectedOffers}
-              />
+        </div>
+        <div className="cities">
+          <div className="cities__places-container container">
+            <section className="cities__places places">
+              <h2 className="visually-hidden">Places</h2>
+              <b className="places__found">{selectedOffers.length} places to stay in {selectedCity.title}</b>
+              <SortingVariants />
+              <PlaceCardList offersProps={selectedOffers} />
             </section>
+            <div className="cities__right-section">
+              <section className="cities__map">
+                < Map city={selectedCity}
+                  offers={selectedOffers}
+                />
+              </section>
+            </div>
           </div>
         </div>
-      </div>
-    </main >);
+      </main >)
+  }
+  else {
+    return (
+      <main className="page__main page__main--index">
+        <h1 className="visually-hidden">Cities</h1>
+        <div className="tabs">
+          <section className="locations container">
+            <CitiesList />
+          </section>
+        </div>
+        <div className="cities__places-container cities__places-container--empty container">
+          <section className="cities__no-places">
+            <div className="cities__status-wrapper tabs__content">
+              <b className="cities__status">No places to stay available</b>
+              <p className="cities__status-description">We could not find any property available at the moment in Dusseldorf</p>
+            </div>
+          </section>
+          <div className="cities__right-section"></div>
+        </div>
+      </main >);
+  }
 }
 export default Main;
