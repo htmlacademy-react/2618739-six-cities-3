@@ -3,7 +3,6 @@ export type ApiReviewType = {
     rating: number;
 }
 
-export type offerId = string;
 
 type ReviewPropType = {
     id: number;

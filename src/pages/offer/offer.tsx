@@ -48,9 +48,9 @@ function Offer(offersProps: offersProps): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <PlaceCard offersProp={offersProps.offers[0]} setActiveCard={setActiveCard} cardClass={'near-places'} />
-              <PlaceCard offersProp={offersProps.offers[1]} setActiveCard={setActiveCard} cardClass={'near-places'} />
-              <PlaceCard offersProp={offersProps.offers[2]} setActiveCard={setActiveCard} cardClass={'near-places'} />
+              <PlaceCard offersProp={offersProps.offers[0]} cardClass={'near-places'} />
+              <PlaceCard offersProp={offersProps.offers[1]} cardClass={'near-places'} />
+              <PlaceCard offersProp={offersProps.offers[2]} cardClass={'near-places'} />
             </div>
           </section>
         </div>

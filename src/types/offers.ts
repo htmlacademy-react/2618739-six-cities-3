@@ -1,3 +1,5 @@
+export type offerId = string;
+
 export type BookMarkState = { id: offerId, status: number };
 
 type TOffer = {

@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import TOffer from '../types/offers';
 import ReviewPropType from '../types/reviews';
 import { UserType, AuthData } from '../types/user';
-import { offerId } from '../types/reviews';
+import { offerId } from '../types/offers';
 import { AppDispatch, State } from '../types/store';
 import { AxiosInstance } from 'axios';
 import { APIRoute } from '../const';
