@@ -11,7 +11,6 @@ function Offer(offersProps: offersProps): JSX.Element {
   const activeCard = params.id;
   const selectedOffer = offersProps.offers.find((offer) => offer.id === activeCard);
   const selectedOffers = offersProps.offers.filter((offer) => offer.city?.name === selectedOffer?.city?.name);
-  const selectedPoint = { title: selectedOffer?.title, lat: selectedOffer?.location.latitude, lng: selectedOffer?.location.longitude };
   if (selectedOffer) {
     return (
       <main className="page__main page__main--offer">
