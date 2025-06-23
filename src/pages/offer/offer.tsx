@@ -40,7 +40,7 @@ function Offer(offersProps: offersProps): JSX.Element {
           </div>
           <OfferContainer offer={selectedOffer} />
           <section className="map">
-            < Map city={CITIES.find((city) => city.title === selectedOffer?.city.name) || CITIES[0]} offers={selectedOffers} selectedPoint={selectedPoint} />
+            < Map city={CITIES.find((city) => city.title === selectedOffer?.city.name) || CITIES[0]} offers={selectedOffers} />
           </section>
           {(CITIES.find((city) => city.title === selectedOffer?.city.name) || CITIES[0]).title}
         </section >
