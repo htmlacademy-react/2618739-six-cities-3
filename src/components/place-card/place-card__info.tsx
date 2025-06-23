@@ -11,7 +11,7 @@ function PlaceCardInfo({ offersProp }: cardInfoProps): JSX.Element {
   const bookmarks = useAppSelector(selectBookmarks);
   let state = false;
   for (const bookmark of bookmarks) {
-    if (bookmark.id == offersProp.id) {
+    if (bookmark.id === offersProp.id) {
       state = true;
     }
   }
@@ -47,7 +47,7 @@ function PlaceCardInfo({ offersProp }: cardInfoProps): JSX.Element {
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href={`/offer/${ offersProp.id}`}>{offersProp.title}</a>
+        <a href={`/offer/${offersProp.id}`}>{offersProp.title}</a>
       </h2>
       <p className="place-card__type">{offersProp.type}</p>
     </div>);

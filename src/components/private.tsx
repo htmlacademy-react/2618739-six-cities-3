@@ -10,7 +10,6 @@ function Private(props: PrivateRouteProps): JSX.Element {
   const { children } = props;
 
   const authorizationStatus = useAppSelector(selectAuth);
-  console.log(authorizationStatus);
 
   if (authorizationStatus === AuthorizationStatus.Unknown) {
     return (
@@ -18,13 +17,12 @@ function Private(props: PrivateRouteProps): JSX.Element {
         <div>
           <img src="img/Spinner-5.gif" />
         </div>
-      </div>);;
+      </div>);
   }
 
   if (authorizationStatus === AuthorizationStatus.Auth) {
     return (children);
-  }
-  else {
+  } else {
     return (<Navigate to='/login' />);
   }
 }
