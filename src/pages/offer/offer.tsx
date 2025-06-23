@@ -4,14 +4,13 @@ import TOffer from '../../types/offers';
 import { CITIES } from '../../const';
 import { useParams } from 'react-router-dom';
 import PlaceCard from '../../components/place-card/place-card';
-import { useState } from 'react';
+
 type offersProps = { offers: TOffer[] }
 function Offer(offersProps: offersProps): JSX.Element {
   const params = useParams();
-  const [activeCard, setActiveCard] = useState(params.id);
+  const activeCard = params.id;
   const selectedOffer = offersProps.offers.find((offer) => offer.id === activeCard);
   const selectedOffers = offersProps.offers.filter((offer) => offer.city?.name === selectedOffer?.city?.name);
-  const selectedPoint = { title: selectedOffer?.title, lat: selectedOffer?.location.latitude, lng: selectedOffer?.location.longitude };
   if (selectedOffer) {
     return (
       <main className="page__main page__main--offer">
@@ -40,7 +39,7 @@ function Offer(offersProps: offersProps): JSX.Element {
           </div>
           <OfferContainer offer={selectedOffer} />
           <section className="map">
-            < Map city={CITIES.find((city) => city.title === selectedOffer?.city.name) || CITIES[0]} offers={selectedOffers} selectedPoint={selectedPoint} />
+            < Map city={CITIES.find((city) => city.title === selectedOffer?.city.name) || CITIES[0]} offers={selectedOffers} />
           </section>
           {(CITIES.find((city) => city.title === selectedOffer?.city.name) || CITIES[0]).title}
         </section >
@@ -48,9 +47,9 @@ function Offer(offersProps: offersProps): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <PlaceCard offersProp={offersProps.offers[0]} setActiveCard={setActiveCard} cardClass={'near-places'} />
-              <PlaceCard offersProp={offersProps.offers[1]} setActiveCard={setActiveCard} cardClass={'near-places'} />
-              <PlaceCard offersProp={offersProps.offers[2]} setActiveCard={setActiveCard} cardClass={'near-places'} />
+              <PlaceCard offersProp={offersProps.offers[0]} id={0} cardClass={'near-places'} />
+              <PlaceCard offersProp={offersProps.offers[1]} id={1} cardClass={'near-places'} />
+              <PlaceCard offersProp={offersProps.offers[2]} id={2} cardClass={'near-places'} />
             </div>
           </section>
         </div>

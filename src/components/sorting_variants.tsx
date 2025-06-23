@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { selectSorting } from '../store/selectors/offers';
 import { setSorting } from '../store/actions';
@@ -24,7 +24,6 @@ function SortingVariants(): JSX.Element {
       return (false);
     }
   }
-  const sortingVariants = [Sorting.Low, Sorting.Hight, Sorting.Rated, Sorting.Default];
 
   return (
     <form className="places__sorting" action="#" method="get" onClick={expand}>
@@ -38,10 +37,10 @@ function SortingVariants(): JSX.Element {
       {isExpanded ?
         (
           <ul className="places__options places__options--custom places__options--opened">
-            {sortingVariants.map((variant) => (<li className={isActive(variant) ? 'places__option places__option--actives' : 'places__option'} onClick={sortOffers} tabIndex={0} key={variant}>{variant}</li>))}
+            {Object.values(Sorting).map((variant) => (<li className={isActive(variant) ? 'places__option places__option--actives' : 'places__option'} onClick={sortOffers} tabIndex={0} key={variant}>{variant}</li>))}
           </ul>
         ) : null}
     </form >
   );
 }
-export default SortingVariants;
+export default memo(SortingVariants);

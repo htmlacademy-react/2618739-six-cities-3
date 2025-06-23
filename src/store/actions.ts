@@ -7,4 +7,6 @@ const fillOffers = createAction<TOffer>('offers/fillOffers');
 
 const setSorting = createAction<string>('offers/setSorting');
 
-export { setCity, fillOffers, setSorting };
+const setActiveOffer = createAction<number>('offers/setActiveOffer');
+
+export { setCity, fillOffers, setSorting, setActiveOffer };

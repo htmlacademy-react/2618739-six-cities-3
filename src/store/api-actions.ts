@@ -2,10 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import TOffer from '../types/offers';
 import ReviewPropType from '../types/reviews';
 import { UserType, AuthData } from '../types/user';
-import { offerId } from '../types/reviews';
+import { offerId } from '../types/offers';
 import { AppDispatch, State } from '../types/store';
 import { AxiosInstance } from 'axios';
 import { APIRoute } from '../const';
+import { BookMarkState } from '../types/offers';
 
 export const fetchOfferAction = createAsyncThunk<TOffer[], undefined, {
   dispatch: AppDispatch;
@@ -65,6 +66,30 @@ export const putReviewsAction = createAsyncThunk<ReviewPropType, reviewData, {
   'data/putReviews',
   async ({ id, comment, rating }, { extra: api }) => {
     const { data } = await api.post<ReviewPropType>(`${APIRoute.Reviews}/${id}`, { comment, rating });
+    return data;
+  },
+);
+
+export const toBookmarksAction = createAsyncThunk<TOffer, BookMarkState, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/toBookmarks',
+  async ({ id, status }, { extra: api }) => {
+    const { data } = await api.post<TOffer>(`${APIRoute.Favorites}/${id}/${status}`);
+    return data;
+  },
+);
+
+export const getBookmarksAction = createAsyncThunk<TOffer[], void, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/getBookmarks',
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<TOffer[]>(`${APIRoute.Favorites}`);
     return data;
   },
 );

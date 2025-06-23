@@ -28,7 +28,7 @@ function App(): JSX.Element {
         {loginPageRoute(authStatus)}
         <Route path="/" element={<Layout />} >
           <Route index element={<Main offersProps={offers} status={status} />} />
-          <Route path='favorites' element={<Favorites offers={offers} />} />
+          <Route path='favorites' element={<Favorites />} />
           <Route path="offer/:id" element={<Offer offers={offers} />} />
           <Route path="*" element={<Page404 />} />
         </Route >
