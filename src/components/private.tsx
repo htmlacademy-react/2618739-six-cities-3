@@ -8,13 +8,25 @@ type PrivateRouteProps = {
 
 function Private(props: PrivateRouteProps): JSX.Element {
   const { children } = props;
+
   const authorizationStatus = useAppSelector(selectAuth);
   console.log(authorizationStatus);
-  return (
-    authorizationStatus === AuthorizationStatus.Auth
-      ? children
-      : <Navigate to='/login' />
-  );
+
+  if (authorizationStatus === AuthorizationStatus.Unknown) {
+    return (
+      <div>Loading...
+        <div>
+          <img src="img/Spinner-5.gif" />
+        </div>
+      </div>);;
+  }
+
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    return (children);
+  }
+  else {
+    return (<Navigate to='/login' />);
+  }
 }
 
 export default Private;
