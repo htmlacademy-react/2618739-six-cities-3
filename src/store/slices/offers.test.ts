@@ -15,7 +15,6 @@ describe("Offers slice tests", () => {
         };
 
         const result = OffersSlice.reducer(expectedState, emptyAction);
-        console.log(result);
         expect(result).toEqual(expectedState);
     });
 });
