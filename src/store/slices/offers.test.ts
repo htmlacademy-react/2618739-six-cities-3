@@ -34,10 +34,13 @@ describe("Offers slice tests", () => {
     it("choosing city", () => {
         const result = OffersSlice.reducer(undefined, OffersSlice.actions.setCity(CITIES[1].title));
         expect(result.city).toEqual(CITIES[1].title);
-    })
+    });
     it("set sorting", () => {
         const result = OffersSlice.reducer(undefined, OffersSlice.actions.setSorting(Sorting.Hight));
         expect(result.sorting).toEqual(Sorting.Hight);
-    })
-
+    });
+    it("set active offer", () => {
+        const result = OffersSlice.reducer(undefined, OffersSlice.actions.setActiveOffer(1));
+        expect(result.activeOffer).toEqual(1);
+    });
 });
