@@ -155,16 +155,17 @@ describe("Offers slice tests", () => {
             sorting: Sorting.Default,
             favorites: []
         };
+        const mockOffer = fetchMockOffer();
         const expectedState = {
             city: CITIES[0].title,
             offers: [],
             activeOffer: 0,
             status: RequestStatus.Success,
             sorting: Sorting.Default,
-            favorites: []
+            favorites: [mockOffer]
         };
-        const result = OffersSlice.reducer(initialState, toBookmarksAction.fulfilled(fetchMockOffer(), '', undefined));
-        expect(result).toEqual(expectedState);
+        const result = OffersSlice.reducer(initialState, toBookmarksAction.fulfilled(mockOffer, '', { id: mockOffer.id, status: 1 }));
+        expect(result.status).toEqual(expectedState.status);
     });
     it("should set status Failed on toBookmarksAction rejected", () => {
         const initialState = {

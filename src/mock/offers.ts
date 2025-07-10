@@ -1,6 +1,6 @@
 import TOffer from "../types/offers";
 import faker from 'faker';
-export function fetchMockOffer(): TOffer[] {
+export function fetchMockOffer(): TOffer {
     return (
         {
             id: faker.datatype.uuid(),
