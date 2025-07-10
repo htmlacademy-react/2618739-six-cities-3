@@ -1,8 +1,8 @@
 import { OffersSlice } from './offers';
 import { RequestStatus, CITIES } from '../../const';
 import { Sorting } from '../../types/sorting';
-import { fetchOfferAction } from '../api-actions';
-import { fetchMockOffers } from '../../mock/offers';
+import { fetchOfferAction, toBookmarksAction } from '../api-actions';
+import { fetchMockOffer } from '../../mock/offers';
 
 describe("Offers slice tests", () => {
     it('should return initial state with empty action', () => {
@@ -94,7 +94,7 @@ describe("Offers slice tests", () => {
             sorting: Sorting.Default,
             favorites: []
         };
-        const mockOffers = fetchMockOffers();
+        const mockOffers = [fetchMockOffer()];
         const expectedState = {
             city: CITIES[0].title,
             offers: mockOffers,
@@ -124,6 +124,66 @@ describe("Offers slice tests", () => {
             favorites: []
         };
         const result = OffersSlice.reducer(initialState, fetchOfferAction.rejected);
+        expect(result).toEqual(expectedState);
+    });
+    it("should set status Loading on toBookmarksAction pending", () => {
+        const initialState = {
+            city: CITIES[0].title,
+            offers: [],
+            activeOffer: 0,
+            status: RequestStatus.Idle,
+            sorting: Sorting.Default,
+            favorites: []
+        };
+        const expectedState = {
+            city: CITIES[0].title,
+            offers: [],
+            activeOffer: 0,
+            status: RequestStatus.Loading,
+            sorting: Sorting.Default,
+            favorites: []
+        };
+        const result = OffersSlice.reducer(initialState, toBookmarksAction.pending);
+        expect(result).toEqual(expectedState);
+    });
+    it("should set status Sucess on toBookmarksAction fulfilled", () => {
+        const initialState = {
+            city: CITIES[0].title,
+            offers: [],
+            activeOffer: 0,
+            status: RequestStatus.Idle,
+            sorting: Sorting.Default,
+            favorites: []
+        };
+        const expectedState = {
+            city: CITIES[0].title,
+            offers: [],
+            activeOffer: 0,
+            status: RequestStatus.Success,
+            sorting: Sorting.Default,
+            favorites: []
+        };
+        const result = OffersSlice.reducer(initialState, toBookmarksAction.fulfilled(fetchMockOffer(), '', undefined));
+        expect(result).toEqual(expectedState);
+    });
+    it("should set status Failed on toBookmarksAction rejected", () => {
+        const initialState = {
+            city: CITIES[0].title,
+            offers: [],
+            activeOffer: 0,
+            status: RequestStatus.Idle,
+            sorting: Sorting.Default,
+            favorites: []
+        };
+        const expectedState = {
+            city: CITIES[0].title,
+            offers: [],
+            activeOffer: 0,
+            status: RequestStatus.Failed,
+            sorting: Sorting.Default,
+            favorites: []
+        };
+        const result = OffersSlice.reducer(initialState, toBookmarksAction.rejected);
         expect(result).toEqual(expectedState);
     });
 });

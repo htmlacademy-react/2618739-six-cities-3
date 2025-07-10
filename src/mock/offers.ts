@@ -1,7 +1,7 @@
 import TOffer from "../types/offers";
 import faker from 'faker';
-export function fetchMockOffers(): TOffer[] {
-    return ([
+export function fetchMockOffer(): TOffer[] {
+    return (
         {
             id: faker.datatype.uuid(),
             title: faker.datatype.string(),
@@ -19,5 +19,5 @@ export function fetchMockOffers(): TOffer[] {
             images: [faker.internet.url()],
             maxAdults: faker.datatype.number(),
             previewImage: faker.datatype.string()
-        }])
+        })
 }
