@@ -6,7 +6,7 @@ import { putReviewsAction } from '../../store/api-actions';
 import Star from './star';
 import { useParams } from 'react-router-dom';
 import { store } from '../../store';
-import { selectAuth } from '../../store/selectors/offers';
+import { selectAuth } from '../../store/selectors/user';
 import { AuthorizationStatus } from '../../const';
 
 function ReviewsForm(): JSX.Element {
