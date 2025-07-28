@@ -6,7 +6,7 @@ import { putReviewsAction } from '../../store/api-actions';
 import Star from './star';
 import { useParams } from 'react-router-dom';
 import { store } from '../../store';
-import { selectAuth } from '../../store/selectors/user';
+import { getAuthorizationStatus } from '../../store/selectors/user';
 import { AuthorizationStatus } from '../../const';
 
 function ReviewsForm(): JSX.Element {
@@ -33,7 +33,7 @@ function ReviewsForm(): JSX.Element {
   }
 
   const disabledOption = false;
-  const auth = useAppSelector(selectAuth);
+  const auth = useAppSelector(getAuthorizationStatus);
   if (auth !== AuthorizationStatus.Auth) {
     return (<div>Authorize to leave a review</div>);
   }

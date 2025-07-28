@@ -165,7 +165,7 @@ describe("Offers slice tests", () => {
             favorites: [mockOffer]
         };
         const result = OffersSlice.reducer(initialState, toBookmarksAction.fulfilled(mockOffer, '', { id: mockOffer.id, status: 1 }));
-        expect(result.status).toEqual(expectedState.status);
+        expect(result).toEqual(expectedState);
     });
     it("should set status Failed on toBookmarksAction rejected", () => {
         const initialState = {

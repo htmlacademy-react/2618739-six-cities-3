@@ -9,7 +9,7 @@ export function fetchMockOffer(): TOffer {
             price: faker.datatype.number(),
             city: { name: faker.address.city() },
             location: { latitude: faker.datatype.number(), longitude: faker.datatype.number() },
-            isFavorite: faker.datatype.boolean(),
+            isFavorite: true,
             isPremium: faker.datatype.boolean(),
             rating: faker.datatype.number(),
             description: faker.datatype.string(),

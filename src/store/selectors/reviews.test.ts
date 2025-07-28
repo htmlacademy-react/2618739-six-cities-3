@@ -2,7 +2,7 @@ import { RequestStatus } from '../../const';
 import { selectReviews, selectReviewsStatus } from './reviews';
 import { mockReview } from "../../mock/reviews";
 
-describe('offers slice selectors', () => {
+describe('reviews slice selectors', () => {
 
     it('Shoud return reviews from the state', () => {
         const state = {
