@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import { Action } from 'redux';
 import { State, AppThunkDispatch } from '../types/store';
 import { APIRoute } from '../const';
-import { checkAuthAction, fetchOfferAction, fetchReviewsAction } from './api-actions';
+import { checkAuthAction, fetchOfferAction, fetchReviewsAction, putReviewsAction } from './api-actions';
 import { fetchMockOffer } from '../mock/offers';
 import { mockReview } from '../mock/reviews';
 
@@ -88,9 +88,35 @@ describe('Async actions', () => {
                 fetchReviewsAction.fulfilled.type,
             ]);
         });
-        it('should dispatch "fetchReviewsAction.pending" and "fetchReviewsAction.fulfilled" with thunk "fetchReviewsAction', async () => {
+        it('should dispatch "fetchReviewsAction.pending" and "fetchReviewsAction.rejected" with thunk "fetchReviewsAction', async () => {
             const id = "1111"
             mockAxiosAdapter.onGet(`${APIRoute.Reviews}/${id}`).reply(400);
+
+            await store.dispatch(fetchReviewsAction(id));
+            const actions = extractActionsTypes(store.getActions());
+
+            expect(actions).toEqual([
+                fetchReviewsAction.pending.type,
+                fetchReviewsAction.rejected.type,
+            ]);
+        });
+        it('should dispatch "putReviewsAction.pending" and "putReviewsAction.fulfilled" with thunk "putReviewsAction', async () => {
+            const id = String(mockReview.id)
+            mockAxiosAdapter.onPost(`${APIRoute.Reviews}/${id}`).reply(200, [mockReview]);
+
+            await store.dispatch(putReviewsAction({ id: String(mockReview.id), comment: mockReview.comment, rating: mockReview.rating }));
+            const actions = store.getActions();
+            const actionTypes = extractActionsTypes(actions);
+            const LoadedReviews = actions.at(1) as ReturnType<typeof putReviewsAction.fulfilled>;
+            expect(actionTypes).toEqual([
+                putReviewsAction.pending.type,
+                putReviewsAction.fulfilled.type,
+            ]);
+            expect(LoadedReviews.payload).toEqual([mockReview]);
+        });
+        it('should dispatch "putReviewsAction.pending" and "putReviewsAction.rejected" with thunk "putReviewsAction', async () => {
+            const id = "1111"
+            mockAxiosAdapter.onPost(`${APIRoute.Reviews}/${id}`).reply(400);
 
             await store.dispatch(fetchReviewsAction(id));
             const actions = extractActionsTypes(store.getActions());
