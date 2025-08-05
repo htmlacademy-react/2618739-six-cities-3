@@ -5,7 +5,10 @@ import thunk from 'redux-thunk';
 import { Action } from 'redux';
 import { AppThunkDispatch, State } from '../types/store';
 import { Provider } from 'react-redux';
-
+import { mockUser } from './user';
+import { AuthorizationStatus, CITIES, RequestStatus } from '../const';
+import { Sorting } from '../types/sorting';
+import { mockReview } from './reviews';
 
 type ComponentWithMockStore = {
     withStoreComponent: JSX.Element;
@@ -28,4 +31,26 @@ export function withStore(
         mockStore,
         mockAxiosAdapter,
     });
+}
+
+const userInfo = mockUser();
+
+export const mockStore = {
+    user: {
+        auth: AuthorizationStatus.Auth, status: RequestStatus.Idle, info: userInfo
+    },
+    offers:
+    {
+        city: CITIES[0].title,
+        offers: [],
+        favorites: [],
+        activeOffer: 1,
+        status: RequestStatus.Idle,
+        sorting: Sorting.Default
+    },
+    reviews:
+    {
+        reviews: [mockReview],
+        status: RequestStatus.Idle,
+    }
 }
