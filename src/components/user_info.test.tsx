@@ -7,6 +7,6 @@ describe('Component: UserInfo', () => {
     const { withStoreComponent } = withStore(<UserInfo />, mockStore);
     render(withStoreComponent);
     expect(screen.getByText(mockStore.user.info.email)).toBeInTheDocument();
-  })
+  });
 }
 );

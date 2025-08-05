@@ -21,6 +21,6 @@ describe('Component: PlaceCardInfo', () => {
     });
     render(withStoreComponent);
     expect(screen.getByText(mockOffer.title)).toBeInTheDocument();
-  })
+  });
 }
 );
