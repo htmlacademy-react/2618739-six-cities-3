@@ -6,7 +6,7 @@ import { fetchMockOffer } from '../mock/offers';
 describe('Component: PlaceCardList', () => {
   it('should render correctly', () => {
     vi.mock('./place-card/place-card');
-    const mockOffers = [fetchMockOffer()]
+    const mockOffers = [fetchMockOffer()];
     render(<PlaceCardList offersProps={mockOffers} />);
     expect(screen.getByTestId('card list')).toBeInTheDocument();
   });

@@ -8,11 +8,12 @@ describe('Component: PlaceCardInfo', () => {
   it('should render correctly', () => {
     const mockOffer = fetchMockOffer();
     const { withStoreComponent } = withStore(<PlaceCard offersProp={mockOffer} id={1} cardClass={'test'} />, mockStore);
-    const preparedComponent = (<MemoryRouter>
-      <Routes>
-        <Route path="/" element={withStoreComponent} />
-      </Routes>
-    </MemoryRouter>);
+    const preparedComponent = (
+      <MemoryRouter>
+        <Routes>
+          <Route path="/" element={withStoreComponent} />
+        </Routes>
+      </MemoryRouter>);
     render(preparedComponent);
     expect(screen.getByTestId('testCard')).toBeInTheDocument();
   });

@@ -6,10 +6,10 @@ describe('Component: OfferContainer', () => {
   it('should render correctly', () => {
     const mockOffer = fetchMockOffer();
     const { withStoreComponent } = withStore(<OfferContainer offer={mockOffer} />, mockStore);
-    vi.mock("react-router-dom", () => ({
-      ...vi.importActual("react-router-dom"),
+    vi.mock('react-router-dom', () => ({
+      ...vi.importActual('react-router-dom'),
       Link: () => { },
-      useParams: () => { return ({ id: 1 }) },
+      useParams: () => ({ id: 1 }),
     }));
     render(withStoreComponent);
     expect(screen.getByTestId('offer_container')).toBeInTheDocument();

@@ -4,8 +4,10 @@ import { mockReview } from '../../mock/reviews';
 
 describe('Component: ReviewsList', () => {
   it('should render correctly', () => {
-    render(<ReviewsList
-      reviewList={[mockReview]} />);
+    render(
+      <ReviewsList
+        reviewList={[mockReview]}
+      />);
     expect(screen.getByText(mockReview.user.name)).toBeInTheDocument();
   });
 }
