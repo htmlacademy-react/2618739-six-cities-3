@@ -9,6 +9,7 @@ import { mockUser } from './user';
 import { AuthorizationStatus, CITIES, RequestStatus } from '../const';
 import { Sorting } from '../types/sorting';
 import { mockReview } from './reviews';
+import { fetchMockOffer } from './offers';
 
 type ComponentWithMockStore = {
     withStoreComponent: JSX.Element;
@@ -17,40 +18,40 @@ type ComponentWithMockStore = {
 }
 
 export function withStore(
-  component: JSX.Element,
-  initialState: Partial<State> = {},
+    component: JSX.Element,
+    initialState: Partial<State> = {},
 ): ComponentWithMockStore {
-  const axios = createAPI();
-  const mockAxiosAdapter = new MockAdapter(axios);
-  const middleware = [thunk.withExtraArgument(axios)];
-  const mockStoreCreator = configureMockStore<State, Action<string>, AppThunkDispatch>(middleware);
-  const mockStore = mockStoreCreator(initialState);
+    const axios = createAPI();
+    const mockAxiosAdapter = new MockAdapter(axios);
+    const middleware = [thunk.withExtraArgument(axios)];
+    const mockStoreCreator = configureMockStore<State, Action<string>, AppThunkDispatch>(middleware);
+    const mockStore = mockStoreCreator(initialState);
 
-  return ({
-    withStoreComponent: <Provider store={mockStore}>{component}</Provider>,
-    mockStore,
-    mockAxiosAdapter,
-  });
+    return ({
+        withStoreComponent: <Provider store={mockStore}>{component}</Provider>,
+        mockStore,
+        mockAxiosAdapter,
+    });
 }
 
 const userInfo = mockUser();
 
 export const mockStore = {
-  user: {
-    auth: AuthorizationStatus.Auth, status: RequestStatus.Idle, info: userInfo
-  },
-  offers:
-    {
-      city: CITIES[0].title,
-      offers: [],
-      favorites: [],
-      activeOffer: 1,
-      status: RequestStatus.Idle,
-      sorting: Sorting.Default
+    user: {
+        auth: AuthorizationStatus.Auth, status: RequestStatus.Idle, info: userInfo
     },
-  reviews:
+    offers:
     {
-      reviews: [mockReview],
-      status: RequestStatus.Idle,
+        city: CITIES[0].title,
+        offers: [fetchMockOffer(), fetchMockOffer()],
+        favorites: [],
+        activeOffer: 1,
+        status: RequestStatus.Idle,
+        sorting: Sorting.Default
+    },
+    reviews:
+    {
+        reviews: [mockReview],
+        status: RequestStatus.Idle,
     }
 };

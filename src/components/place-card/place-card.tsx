@@ -10,7 +10,7 @@ type PlaceCardProps = { offersProp: TOffer; id: number; cardClass: string }
 function PlaceCard({ offersProp, id, cardClass }: PlaceCardProps): JSX.Element {
   const offerPath = `/offer/${offersProp.id}`;
   return (
-    <article className={`${cardClass}__card place-card`} onMouseOver={() => {
+    <article className={`${cardClass}__card place-card`} data-testid='testCard' onMouseOver={() => {
       store.dispatch(setActiveOffer(id));
     }}
     >
