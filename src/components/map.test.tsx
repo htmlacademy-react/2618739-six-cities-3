@@ -4,7 +4,7 @@ import Map from './map';
 import { CITIES } from '../const';
 import { fetchMockOffer } from '../mock/offers';
 
-describe('Component: Header', () => {
+describe('Component: Map', () => {
   it('should render correctly', () => {
     const { withStoreComponent } = withStore(<Map city={CITIES[0]} offers={[fetchMockOffer(), fetchMockOffer()]} />, mockStore);
     render(withStoreComponent);

@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import ReviewsForm from './review_form';
 import ReviewsList from './review_list';
-import Page404 from '../404';
+import { Page404 } from '../404';
 
 import TOffer from '../../types/offers';
 import { fetchReviewsAction } from '../../store/api-actions';
@@ -30,7 +30,7 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
     return (<div>Loading...</div>);
   }
   return (
-    <div className="offer__container container">
+    <div className="offer__container container" data-testid='offer_container'>
       <div className="offer__wrapper">
         <div className="offer__mark">
           {offer.isPremium ?
@@ -94,10 +94,7 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
           </div>
           <div className="offer__description">
             <p className="offer__text">
-              A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-            </p>
-            <p className="offer__text">
-              An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
+              {offer.description}
             </p>
           </div>
         </div>

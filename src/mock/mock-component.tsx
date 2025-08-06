@@ -52,6 +52,6 @@ export const mockStore = {
     reviews:
     {
         reviews: [mockReview],
-        status: RequestStatus.Idle,
+        status: RequestStatus.Success,
     }
 };

@@ -4,7 +4,7 @@ import Layout from '../layout';
 import Login from '../../pages/login/login';
 import Main from '../../pages/main/main';
 import Offer from '../../pages/offer/offer';
-import Page404 from '../404';
+import { Page404 } from '../404';
 import { useAppSelector } from '../../hooks';
 import { selectOffers, selectStatus } from '../../store/selectors/offers';
 import { AuthorizationStatus, RequestStatus } from '../../const';

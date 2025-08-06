@@ -39,7 +39,7 @@ function ReviewsForm(): JSX.Element {
   }
 
   return (
-    <div className="reviews__form form">
+    <div className="reviews__form form" data-testid='reviewForm'>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <FormRatingInput value={5} />

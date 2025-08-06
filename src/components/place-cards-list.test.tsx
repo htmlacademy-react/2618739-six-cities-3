@@ -3,7 +3,7 @@ import PlaceCardList from './place-cards-list';
 import { fetchMockOffer } from '../mock/offers';
 
 
-describe('Component: Header', () => {
+describe('Component: PlaceCardList', () => {
   it('should render correctly', () => {
     vi.mock('./place-card/place-card');
     const mockOffers = [fetchMockOffer()]
