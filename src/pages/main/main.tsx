@@ -8,6 +8,7 @@ import { CITIES, RequestStatus } from '../../const';
 import { City } from '../../types/map_types';
 import SortingVariants from '../../components/sorting_variants';
 import useSortOffers from '../../hooks/sorting';
+import { selectSorting } from '../../store/selectors/offers';
 
 type MainPageProps = {
   status: RequestStatus;
@@ -28,7 +29,8 @@ function filterOffers(offers: TOffer[], selectedCity: City): TOffer[] {
 function Main(mainPageProps: MainPageProps): JSX.Element {
   const selectedCity = getCity();
   const filteredOffers = filterOffers(mainPageProps.offersProps, selectedCity);
-  const selectedOffers = useSortOffers(filteredOffers);
+  const selectedSorting = useAppSelector(selectSorting);
+  const selectedOffers = useSortOffers(filteredOffers, selectedSorting);
 
   if (mainPageProps.status && mainPageProps.status === RequestStatus.Loading) {
     return (
