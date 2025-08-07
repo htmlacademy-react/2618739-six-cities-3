@@ -36,14 +36,14 @@ function Login(): JSX.Element {
             <h1 className="login__title">Sign in</h1>
             <div className="login__form form">
               <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">E-mail</label>
+                <label className="visually-hidden" data-testid="email">E-mail</label>
                 <input className="login__input form__input" type="email" name="email" placeholder="Email" required onChange={({ target }: ChangeEvent<HTMLInputElement>) => {
                   getLogin(target.value);
                 }}
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">Password</label>
+                <label className="visually-hidden" data-testid="password">Password</label>
                 <input className="login__input form__input" type="password" name="password" placeholder="Password" required onChange={({ target }: ChangeEvent<HTMLInputElement>) => {
                   getPassword(target.value);
                 }}

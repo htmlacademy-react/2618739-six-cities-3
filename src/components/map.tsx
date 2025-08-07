@@ -57,7 +57,7 @@ function Map(props: MapProps): JSX.Element {
     }
   }, [map, offers, city, activeCard]);
 
-  return <div style={{ height: '500px' }} ref={mapRef}></div>;
+  return <div style={{ height: '500px' }} ref={mapRef} data-testid='map'></div>;
 }
 
 export default Map;

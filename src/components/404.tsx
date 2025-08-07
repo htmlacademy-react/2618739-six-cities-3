@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 
-function Page404(): JSX.Element {
+
+export function Page404(): JSX.Element {
   return (
     <div>
       <h1>Ошибка 404. Страница не существует.</h1>
@@ -8,5 +9,3 @@ function Page404(): JSX.Element {
     </div>
   );
 }
-
-export default Page404;
