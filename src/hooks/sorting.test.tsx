@@ -1,7 +1,7 @@
 import { fetchMockOffer } from '../mock/offers';
 import { Sorting } from '../types/sorting';
 import useSortOffers from './sorting';
-import { renderHook, act } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 
 describe('sorting hook', () => {
   it('Shoud sort offers from by default', () => {
