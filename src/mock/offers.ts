@@ -1,13 +1,14 @@
+import { CITIES } from '../const';
 import TOffer from '../types/offers';
 import faker from 'faker';
 export function fetchMockOffer(): TOffer {
   return (
     {
-      id: faker.datatype.uuid(),
-      title: faker.datatype.string(),
+      id: '1',
+      title: faker.address.streetAddress(),
       type: faker.datatype.string(),
       price: faker.datatype.number(),
-      city: { name: faker.address.city() },
+      city: { name: CITIES[0].title },
       location: { latitude: faker.datatype.number(), longitude: faker.datatype.number() },
       isFavorite: true,
       isPremium: faker.datatype.boolean(),
