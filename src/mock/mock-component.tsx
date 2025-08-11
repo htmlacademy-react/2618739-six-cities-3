@@ -6,7 +6,7 @@ import { Action } from 'redux';
 import { AppThunkDispatch, State } from '../types/store';
 import { Provider } from 'react-redux';
 import { mockUser } from './user';
-import { AuthorizationStatus, CITIES, RequestStatus } from '../const';
+import { AuthorizationStatus, RequestStatus } from '../const';
 import { Sorting } from '../types/sorting';
 import { mockReview } from './reviews';
 import { fetchMockOffer } from './offers';

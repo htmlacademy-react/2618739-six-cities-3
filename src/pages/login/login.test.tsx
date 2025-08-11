@@ -27,23 +27,23 @@ describe('Page: Login', () => {
       </MemoryRouter>);
     const { withStoreComponent } = withStore(preparedComponent, mockStore);
     render(withStoreComponent);
-    const login = "User@mail.com"
-    const password = "Password"
+    const login = 'User@mail.com';
+    const password = 'Password';
     await userEvent.type(
-      screen.getByTestId("email"),
+      screen.getByTestId('email'),
       login,
     );
     await userEvent.type(
-      screen.getByTestId("password"),
+      screen.getByTestId('password'),
       password,
     );
     expect(screen.getByTestId('loginForm')).toBeInTheDocument();
     expect(screen.getByDisplayValue(login)).toBeInTheDocument();
-    expect(screen.getByTestId("password")).toBeVisible();
+    expect(screen.getByTestId('password')).toBeVisible();
   });
 
   it('should send user data by submit button', async () => {
-    vi.spyOn(actions, "login");
+    vi.spyOn(actions, 'login');
     const preparedComponent = (
       <MemoryRouter>
         <Routes>
@@ -52,17 +52,17 @@ describe('Page: Login', () => {
       </MemoryRouter>);
     const { withStoreComponent } = withStore(preparedComponent, mockStore);
     render(withStoreComponent);
-    const login = "User@mail.com"
-    const password = "Password"
+    const login = 'User@mail.com';
+    const password = 'Password';
     await userEvent.type(
-      screen.getByTestId("email"),
+      screen.getByTestId('email'),
       login,
     );
     await userEvent.type(
-      screen.getByTestId("password"),
+      screen.getByTestId('password'),
       password,
     );
-    await userEvent.click(screen.getByTestId("submitButton"));
+    await userEvent.click(screen.getByTestId('submitButton'));
     expect(actions.login).toBeCalled();
   });
 }

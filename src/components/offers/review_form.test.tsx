@@ -19,7 +19,7 @@ describe('Component: ReviewsForm', () => {
     expect(screen.getByTestId('reviewForm')).toBeInTheDocument();
   });
   it('should render correctly with user input', async () => {
-    vi.spyOn(actions, "putReviewsAction");
+    vi.spyOn(actions, 'putReviewsAction');
     const preparedComponent = (
       <MemoryRouter>
         <Routes>
@@ -28,14 +28,14 @@ describe('Component: ReviewsForm', () => {
       </MemoryRouter>);
     const { withStoreComponent } = withStore(preparedComponent, mockStore);
     render(withStoreComponent);
-    const reviewText = "Good place to stay"
+    const reviewText = 'Good place to stay';
     await userEvent.type(
-      screen.getByTestId("review_text"),
+      screen.getByTestId('review_text'),
       reviewText,
     );
     expect(screen.getByTestId('reviewForm')).toBeInTheDocument();
     expect(screen.getByDisplayValue(reviewText)).toBeInTheDocument();
-    await userEvent.click(screen.getByText("Submit"));
+    await userEvent.click(screen.getByText('Submit'));
     expect(actions.putReviewsAction).toBeCalled();
   });
 }

@@ -25,7 +25,7 @@ describe('Component: PlaceCardInfo', () => {
     expect(screen.getByText(mockOffer.title)).toBeInTheDocument();
   });
   it('should put offer to bookmarks by click on a button', async () => {
-    vi.spyOn(actions, "toBookmarksAction");
+    vi.spyOn(actions, 'toBookmarksAction');
     const mockOffer = fetchMockOffer();
     const { withStoreComponent } = withStore(<PlaceCardInfo offersProp={mockOffer} />, {
       offers:

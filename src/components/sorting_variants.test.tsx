@@ -11,7 +11,7 @@ describe('Component: UserInfo', () => {
     expect(screen.getByText('Popular')).toBeInTheDocument();
   });
   it('should render correctly with user selection', async () => {
-    vi.spyOn(actions, "setSorting")
+    vi.spyOn(actions, 'setSorting');
     const { withStoreComponent } = withStore(<SortingVariants />, mockStore);
     render(withStoreComponent);
     await userEvent.click(screen.getByTestId('sorting'));

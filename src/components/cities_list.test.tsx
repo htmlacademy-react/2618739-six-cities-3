@@ -12,8 +12,8 @@ describe('Component: CitiesList', () => {
     expect(screen.getByText('Paris')).toBeInTheDocument();
   });
   it('should set active city', async () => {
-    vi.spyOn(redux, "useAppDispatch");
-    vi.spyOn(actions, "setCity");
+    vi.spyOn(redux, 'useAppDispatch');
+    vi.spyOn(actions, 'setCity');
     const { withStoreComponent } = withStore(<CitiesList />, mockStore);
     render(withStoreComponent);
     await userEvent.click(screen.getByText('Amsterdam'));
