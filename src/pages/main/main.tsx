@@ -8,6 +8,7 @@ import { CITIES, RequestStatus } from '../../const';
 import { City } from '../../types/map_types';
 import SortingVariants from '../../components/sorting_variants';
 import useSortOffers from '../../hooks/sorting';
+import { selectSorting } from '../../store/selectors/offers';
 
 type MainPageProps = {
   status: RequestStatus;
@@ -28,7 +29,8 @@ function filterOffers(offers: TOffer[], selectedCity: City): TOffer[] {
 function Main(mainPageProps: MainPageProps): JSX.Element {
   const selectedCity = getCity();
   const filteredOffers = filterOffers(mainPageProps.offersProps, selectedCity);
-  const selectedOffers = useSortOffers(filteredOffers);
+  const selectedSorting = useAppSelector(selectSorting);
+  const selectedOffers = useSortOffers(filteredOffers, selectedSorting);
 
   if (mainPageProps.status && mainPageProps.status === RequestStatus.Loading) {
     return (
@@ -40,7 +42,7 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
   }
   if (selectedOffers.length > 0) {
     return (
-      <main className="page__main page__main--index">
+      <main className="page__main page__main--index" data-testid="mainPage">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
@@ -67,7 +69,7 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
       </main >);
   } else {
     return (
-      <main className="page__main page__main--index">
+      <main className="page__main page__main--index" data-testid="mainPage no offers">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
@@ -78,7 +80,7 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
           <section className="cities__no-places">
             <div className="cities__status-wrapper tabs__content">
               <b className="cities__status">No places to stay available</b>
-              <p className="cities__status-description">We could not find any property available at the moment in Dusseldorf</p>
+              <p className="cities__status-description">We could not find any property available at the moment in {selectedCity.title}</p>
             </div>
           </section>
           <div className="cities__right-section"></div>

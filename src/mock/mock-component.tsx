@@ -6,15 +6,15 @@ import { Action } from 'redux';
 import { AppThunkDispatch, State } from '../types/store';
 import { Provider } from 'react-redux';
 import { mockUser } from './user';
-import { AuthorizationStatus, CITIES, RequestStatus } from '../const';
+import { AuthorizationStatus, RequestStatus } from '../const';
 import { Sorting } from '../types/sorting';
 import { mockReview } from './reviews';
 import { fetchMockOffer } from './offers';
 
 type ComponentWithMockStore = {
-    withStoreComponent: JSX.Element;
-    mockStore: MockStore;
-    mockAxiosAdapter: MockAdapter;
+  withStoreComponent: JSX.Element;
+  mockStore: MockStore;
+  mockAxiosAdapter: MockAdapter;
 }
 
 export function withStore(
@@ -36,22 +36,24 @@ export function withStore(
 
 const userInfo = mockUser();
 
+const mockOffer = fetchMockOffer();
+
 export const mockStore = {
   user: {
     auth: AuthorizationStatus.Auth, status: RequestStatus.Idle, info: userInfo
   },
   offers:
-    {
-      city: CITIES[0].title,
-      offers: [fetchMockOffer(), fetchMockOffer()],
-      favorites: [],
-      activeOffer: 1,
-      status: RequestStatus.Idle,
-      sorting: Sorting.Default
-    },
+  {
+    city: mockOffer.city.name,
+    offers: [mockOffer, fetchMockOffer(), fetchMockOffer()],
+    favorites: [fetchMockOffer(), fetchMockOffer()],
+    activeOffer: 1,
+    status: RequestStatus.Idle,
+    sorting: Sorting.Default
+  },
   reviews:
-    {
-      reviews: [mockReview],
-      status: RequestStatus.Success,
-    }
+  {
+    reviews: [mockReview],
+    status: RequestStatus.Success,
+  }
 };

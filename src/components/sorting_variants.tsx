@@ -26,7 +26,7 @@ function SortingVariants(): JSX.Element {
   }
 
   return (
-    <form className="places__sorting" action="#" method="get" onClick={expand}>
+    <form className="places__sorting" action="#" method="get" onClick={expand} data-testid='sorting'>
       <span className="places__sorting-caption">Sort by </span>
       <span className="places__sorting-type" tabIndex={0}>
         {selectedSorting}

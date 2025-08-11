@@ -8,7 +8,7 @@ function Favorites(): JSX.Element {
   const offers: TOffer[] = useAppSelector(selectBookmarks);
   const cards = offers.map((offer: TOffer) =>
     (
-      <article key={offer.id} className="favorites__card place-card" >
+      <article key={offer.id} className="favorites__card place-card" data-testid='favoritesCard'>
         <div className="place-card__mark">
           {offer.isPremium ?
             <span>Premium</span> :

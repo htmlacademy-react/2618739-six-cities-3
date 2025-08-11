@@ -56,7 +56,7 @@ function Offer(offersProps: offersProps): JSX.Element {
       </main >
     );
   }
-  return (<div>Not found</div>);
+  return (<div>404: Not found</div>);
 }
 
 export default Offer;

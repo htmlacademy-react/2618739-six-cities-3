@@ -1,10 +1,7 @@
 import TOffer from '../types/offers';
-import { useAppSelector } from './index';
-import { selectSorting } from '../store/selectors/offers';
 import { Sorting } from '../types/sorting';
 
-function useSortOffers(selectedOffers: TOffer[]): TOffer[] {
-  const selectedSorting = useAppSelector(selectSorting);
+function useSortOffers(selectedOffers: TOffer[], selectedSorting: Sorting | undefined): TOffer[] {
   switch (selectedSorting) {
     case Sorting.Low:
       return (selectedOffers.sort((a, b) => a.price - b.price));

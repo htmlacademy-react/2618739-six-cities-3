@@ -53,7 +53,7 @@ function ReviewsForm(): JSX.Element {
         <FormRatingInput value={1} />
         <Star for_star={'1-stars'} title_star={'terribly'} setRating={() => setStars(1)} />
       </div>
-      <textarea onChange={setText} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved">
+      <textarea onChange={setText} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" data-testid="review_text">
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
