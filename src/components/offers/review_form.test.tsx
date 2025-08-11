@@ -3,6 +3,7 @@ import ReviewsForm from './review_form';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { withStore, mockStore } from '../../mock/mock-component';
 import userEvent from '@testing-library/user-event';
+import * as actions from '../../store/api-actions';
 
 describe('Component: ReviewsForm', () => {
 
@@ -18,6 +19,7 @@ describe('Component: ReviewsForm', () => {
     expect(screen.getByTestId('reviewForm')).toBeInTheDocument();
   });
   it('should render correctly with user input', async () => {
+    vi.spyOn(actions, "putReviewsAction");
     const preparedComponent = (
       <MemoryRouter>
         <Routes>
@@ -33,6 +35,8 @@ describe('Component: ReviewsForm', () => {
     );
     expect(screen.getByTestId('reviewForm')).toBeInTheDocument();
     expect(screen.getByDisplayValue(reviewText)).toBeInTheDocument();
+    await userEvent.click(screen.getByText("Submit"));
+    expect(actions.putReviewsAction).toBeCalled();
   });
 }
 );
