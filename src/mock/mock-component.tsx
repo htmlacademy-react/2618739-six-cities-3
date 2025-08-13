@@ -47,7 +47,8 @@ export const mockStore = {
     city: mockOffer.city.name,
     offers: [mockOffer, fetchMockOffer(), fetchMockOffer()],
     favorites: [fetchMockOffer(), fetchMockOffer()],
-    activeOffer: 1,
+    activeOfferId: 1,
+    activeOffer: fetchMockOffer(),
     status: RequestStatus.Idle,
     sorting: Sorting.Default
   },

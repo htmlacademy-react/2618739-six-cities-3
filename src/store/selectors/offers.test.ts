@@ -1,6 +1,6 @@
 import { RequestStatus, CITIES } from '../../const';
 import { Sorting } from '../../types/sorting';
-import { selectActiveOffer, selectCity, selectSorting, selectStatus, selectBookmarks, selectOffers } from './offers';
+import { selectActiveOfferId, selectCity, selectSorting, selectStatus, selectBookmarks, selectOffers } from './offers';
 import { fetchMockOffer } from '../../mock/offers';
 
 describe('offers slice selectors', () => {
@@ -11,7 +11,7 @@ describe('offers slice selectors', () => {
       offers: {
         city: CITIES[0].title,
         offers: mockOffers,
-        activeOffer: 333,
+        activeOfferId: 333,
         status: RequestStatus.Success,
         sorting: Sorting.Hight,
         favorites: []
@@ -27,7 +27,7 @@ describe('offers slice selectors', () => {
       offers: {
         city: CITIES[3].title,
         offers: [],
-        activeOffer: 0,
+        activeOfferId: 0,
         status: RequestStatus.Idle,
         sorting: Sorting.Default,
         favorites: []
@@ -42,7 +42,7 @@ describe('offers slice selectors', () => {
       offers: {
         city: CITIES[0].title,
         offers: [],
-        activeOffer: 0,
+        activeOfferId: 0,
         status: RequestStatus.Idle,
         sorting: Sorting.Hight,
         favorites: []
@@ -57,7 +57,7 @@ describe('offers slice selectors', () => {
       offers: {
         city: CITIES[0].title,
         offers: [],
-        activeOffer: 0,
+        activeOfferId: 0,
         status: RequestStatus.Success,
         sorting: Sorting.Hight,
         favorites: []
@@ -72,13 +72,13 @@ describe('offers slice selectors', () => {
       offers: {
         city: CITIES[0].title,
         offers: [],
-        activeOffer: 333,
+        activeOfferId: 333,
         status: RequestStatus.Success,
         sorting: Sorting.Hight,
         favorites: []
       }
     };
-    const res = selectActiveOffer(state);
+    const res = selectActiveOfferId(state);
     expect(res).toBe(333);
   });
   it('Shoud return favorites from the state', () => {
@@ -87,7 +87,7 @@ describe('offers slice selectors', () => {
       offers: {
         city: CITIES[0].title,
         offers: [],
-        activeOffer: 333,
+        activeOfferId: 333,
         status: RequestStatus.Success,
         sorting: Sorting.Hight,
         favorites: mockFavorites

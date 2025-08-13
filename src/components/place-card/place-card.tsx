@@ -3,7 +3,7 @@ import TOffer from '../../types/offers';
 import { Link } from 'react-router-dom';
 import { memo } from 'react';
 import { store } from '../../store';
-import { setActiveOffer } from '../../store/actions';
+import { setActiveOfferId } from '../../store/actions';
 
 type PlaceCardProps = { offersProp: TOffer; id: number; cardClass: string }
 
@@ -11,7 +11,7 @@ function PlaceCard({ offersProp, id, cardClass }: PlaceCardProps): JSX.Element {
   const offerPath = `/offer/${offersProp.id}`;
   return (
     <article className={`${cardClass}__card place-card`} data-testid='testCard' onMouseOver={() => {
-      store.dispatch(setActiveOffer(id));
+      store.dispatch(setActiveOfferId(id));
     }}
     >
       <div className="place-card__mark">

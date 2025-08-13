@@ -10,7 +10,7 @@ describe('Offers slice tests', () => {
     const expectedState = {
       city: CITIES[0].title,
       offers: [],
-      activeOffer: 0,
+      activeOfferId: 0,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
       favorites: []
@@ -24,7 +24,7 @@ describe('Offers slice tests', () => {
     const expectedState = {
       city: CITIES[0].title,
       offers: [],
-      activeOffer: 0,
+      activeOfferId: 0,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
       favorites: []
@@ -42,14 +42,14 @@ describe('Offers slice tests', () => {
     expect(result.sorting).toEqual(Sorting.Hight);
   });
   it('set active offer', () => {
-    const result = OffersSlice.reducer(undefined, OffersSlice.actions.setActiveOffer(1));
-    expect(result.activeOffer).toEqual(1);
+    const result = OffersSlice.reducer(undefined, OffersSlice.actions.setActiveOfferId(1));
+    expect(result.activeOfferId).toEqual(1);
   });
   it('should set status Loading on fetchOfferAction pending', () => {
     const initialState = {
       city: CITIES[0].title,
       offers: [],
-      activeOffer: 0,
+      activeOfferId: 0,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
       favorites: []
@@ -57,7 +57,7 @@ describe('Offers slice tests', () => {
     const expectedState = {
       city: CITIES[0].title,
       offers: [],
-      activeOffer: 0,
+      activeOfferId: 0,
       status: RequestStatus.Loading,
       sorting: Sorting.Default,
       favorites: []
@@ -69,7 +69,7 @@ describe('Offers slice tests', () => {
     const initialState = {
       city: CITIES[0].title,
       offers: [],
-      activeOffer: 0,
+      activeOfferId: 0,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
       favorites: []
@@ -77,7 +77,7 @@ describe('Offers slice tests', () => {
     const expectedState = {
       city: CITIES[0].title,
       offers: [],
-      activeOffer: 0,
+      activeOfferId: 0,
       status: RequestStatus.Loading,
       sorting: Sorting.Default,
       favorites: []
@@ -89,7 +89,7 @@ describe('Offers slice tests', () => {
     const initialState = {
       city: CITIES[0].title,
       offers: [],
-      activeOffer: 0,
+      activeOfferId: 0,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
       favorites: []
@@ -98,7 +98,7 @@ describe('Offers slice tests', () => {
     const expectedState = {
       city: CITIES[0].title,
       offers: mockOffers,
-      activeOffer: 0,
+      activeOfferId: 0,
       status: RequestStatus.Success,
       sorting: Sorting.Default,
       favorites: []
@@ -110,7 +110,7 @@ describe('Offers slice tests', () => {
     const initialState = {
       city: CITIES[0].title,
       offers: [],
-      activeOffer: 0,
+      activeOfferId: 0,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
       favorites: []
@@ -118,7 +118,7 @@ describe('Offers slice tests', () => {
     const expectedState = {
       city: CITIES[0].title,
       offers: [],
-      activeOffer: 0,
+      activeOfferId: 0,
       status: RequestStatus.Failed,
       sorting: Sorting.Default,
       favorites: []
@@ -130,7 +130,7 @@ describe('Offers slice tests', () => {
     const initialState = {
       city: CITIES[0].title,
       offers: [],
-      activeOffer: 0,
+      activeOfferId: 0,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
       favorites: []
@@ -138,7 +138,7 @@ describe('Offers slice tests', () => {
     const expectedState = {
       city: CITIES[0].title,
       offers: [],
-      activeOffer: 0,
+      activeOfferId: 0,
       status: RequestStatus.Loading,
       sorting: Sorting.Default,
       favorites: []
@@ -150,7 +150,7 @@ describe('Offers slice tests', () => {
     const initialState = {
       city: CITIES[0].title,
       offers: [],
-      activeOffer: 0,
+      activeOfferId: 0,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
       favorites: []
@@ -159,7 +159,7 @@ describe('Offers slice tests', () => {
     const expectedState = {
       city: CITIES[0].title,
       offers: [],
-      activeOffer: 0,
+      activeOfferId: 0,
       status: RequestStatus.Success,
       sorting: Sorting.Default,
       favorites: [mockOffer]
@@ -171,7 +171,7 @@ describe('Offers slice tests', () => {
     const initialState = {
       city: CITIES[0].title,
       offers: [],
-      activeOffer: 0,
+      activeOfferId: 0,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
       favorites: []
@@ -179,7 +179,7 @@ describe('Offers slice tests', () => {
     const expectedState = {
       city: CITIES[0].title,
       offers: [],
-      activeOffer: 0,
+      activeOfferId: 0,
       status: RequestStatus.Failed,
       sorting: Sorting.Default,
       favorites: []

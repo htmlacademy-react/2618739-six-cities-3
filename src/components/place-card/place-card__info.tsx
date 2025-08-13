@@ -42,7 +42,7 @@ function PlaceCardInfo({ offersProp }: cardInfoProps): JSX.Element {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span></span>
+          <span style={{ width: Math.round(offersProp.rating) * 20 }}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>

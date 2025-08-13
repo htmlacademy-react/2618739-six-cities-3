@@ -4,6 +4,11 @@ import TOffer from '../../types/offers';
 import { CITIES } from '../../const';
 import { useParams } from 'react-router-dom';
 import PlaceCard from '../../components/place-card/place-card';
+import { store } from '../../store';
+import { fetchOneOfferAction } from '../../store/api-actions';
+import { useEffect } from 'react';
+import { selectActiveOffer } from '../../store/selectors/offers';
+import { useAppSelector } from '../../hooks';
 
 type offersProps = { offers: TOffer[] }
 function Offer(offersProps: offersProps): JSX.Element {
@@ -11,7 +16,14 @@ function Offer(offersProps: offersProps): JSX.Element {
   const activeCard = params.id;
   const selectedOffer = offersProps.offers.find((offer) => offer.id === activeCard);
   const selectedOffers = offersProps.offers.filter((offer) => offer.city?.name === selectedOffer?.city?.name);
-  if (selectedOffer) {
+  useEffect(() => {
+    const fetchOfferById = async () => {
+      await store.dispatch(fetchOneOfferAction(activeCard || ''));
+    };
+    fetchOfferById();
+  }, [activeCard]);
+  const activeOffer = useAppSelector(selectActiveOffer) || selectedOffer;
+  if (selectedOffer && activeCard) {
     return (
       <main className="page__main page__main--offer">
         <section className="offer">
@@ -37,7 +49,7 @@ function Offer(offersProps: offersProps): JSX.Element {
               </div>
             </div>
           </div>
-          <OfferContainer offer={selectedOffer} />
+          <OfferContainer offer={activeOffer || selectedOffer} />
           <section className="map">
             < Map city={CITIES.find((city) => city.title === selectedOffer?.city.name) || CITIES[0]} offers={selectedOffers} />
           </section>

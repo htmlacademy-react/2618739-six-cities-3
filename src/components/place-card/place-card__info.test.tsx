@@ -16,7 +16,7 @@ describe('Component: PlaceCardInfo', () => {
         city: CITIES[0].title,
         offers: [],
         favorites: [],
-        activeOffer: 1,
+        activeOfferId: 1,
         status: RequestStatus.Idle,
         sorting: Sorting.Default
       },
@@ -33,7 +33,7 @@ describe('Component: PlaceCardInfo', () => {
         city: CITIES[0].title,
         offers: [],
         favorites: [],
-        activeOffer: 1,
+        activeOfferId: 1,
         status: RequestStatus.Idle,
         sorting: Sorting.Default
       },
