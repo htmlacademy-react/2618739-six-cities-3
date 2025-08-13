@@ -50,7 +50,8 @@ export const mockStore = {
     activeOfferId: 1,
     activeOffer: fetchMockOffer(),
     status: RequestStatus.Idle,
-    sorting: Sorting.Default
+    sorting: Sorting.Default,
+    nearOffers: []
   },
   reviews:
   {

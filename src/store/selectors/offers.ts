@@ -12,6 +12,8 @@ const selectActiveOffer = (state: Pick<State, 'offers'>) => state.offers.activeO
 
 const selectActiveOfferId = (state: Pick<State, 'offers'>) => state.offers.activeOfferId;
 
+const selectNearOffers = (state: Pick<State, 'offers'>) => state.offers.nearOffers;
+
 const selectBookmarks = (state: Pick<State, 'offers'>) => state.offers.favorites;
 
-export { selectOffers, selectCity, selectSorting, selectStatus, selectActiveOffer, selectActiveOfferId, selectBookmarks };
+export { selectOffers, selectCity, selectSorting, selectStatus, selectActiveOffer, selectActiveOfferId, selectBookmarks, selectNearOffers };

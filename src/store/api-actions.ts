@@ -32,6 +32,18 @@ export const fetchOneOfferAction = createAsyncThunk<TOffer, offerId, {
   }
 );
 
+export const fetchNearOffersAction = createAsyncThunk<TOffer[], offerId, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchNearOffers',
+  async (id: offerId, { extra: api }) => {
+    const { data } = await api.get<TOffer[]>(`${APIRoute.Offers}/${id}/nearby`);
+    return data;
+  }
+);
+
 export const fetchReviewsAction = createAsyncThunk<ReviewPropType[], offerId, {
   dispatch: AppDispatch;
   state: State;

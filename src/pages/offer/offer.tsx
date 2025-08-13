@@ -5,9 +5,9 @@ import { CITIES } from '../../const';
 import { useParams } from 'react-router-dom';
 import PlaceCard from '../../components/place-card/place-card';
 import { store } from '../../store';
-import { fetchOneOfferAction } from '../../store/api-actions';
+import { fetchNearOffersAction, fetchOneOfferAction } from '../../store/api-actions';
 import { useEffect } from 'react';
-import { selectActiveOffer } from '../../store/selectors/offers';
+import { selectActiveOffer, selectNearOffers } from '../../store/selectors/offers';
 import { useAppSelector } from '../../hooks';
 
 type offersProps = { offers: TOffer[] }
@@ -19,10 +19,14 @@ function Offer(offersProps: offersProps): JSX.Element {
   useEffect(() => {
     const fetchOfferById = async () => {
       await store.dispatch(fetchOneOfferAction(activeCard || ''));
+      await store.dispatch(fetchNearOffersAction(activeCard || ''));
     };
     fetchOfferById();
   }, [activeCard]);
   const activeOffer = useAppSelector(selectActiveOffer) || selectedOffer;
+  const nearOffers = useAppSelector(selectNearOffers);
+  const nearOffersList = nearOffers.map((nearOffer) => (<PlaceCard offersProp={nearOffer} key={nearOffer.id} id={nearOffer.id} cardClass={'near-places'} />));
+  <PlaceCard offersProp={offersProps.offers[0]} id={0} cardClass={'near-places'} />;
   if (selectedOffer && activeCard) {
     return (
       <main className="page__main page__main--offer">
@@ -59,9 +63,7 @@ function Offer(offersProps: offersProps): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <PlaceCard offersProp={offersProps.offers[0]} id={0} cardClass={'near-places'} />
-              <PlaceCard offersProp={offersProps.offers[1]} id={1} cardClass={'near-places'} />
-              <PlaceCard offersProp={offersProps.offers[2]} id={2} cardClass={'near-places'} />
+              {nearOffersList}
             </div>
           </section>
         </div>

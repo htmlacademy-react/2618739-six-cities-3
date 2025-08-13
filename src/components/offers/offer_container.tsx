@@ -12,7 +12,6 @@ import { RequestStatus } from '../../const';
 type offerProp = { offer: TOffer };
 
 function OfferContainer({ offer }: offerProp): JSX.Element {
-  console.log(offer)
   const id = useParams().id || '';
   useEffect(() => {
     const fetchReviews = async () => {
@@ -33,10 +32,10 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
     <div className="offer__container container" data-testid='offer_container'>
       <div className="offer__wrapper">
         {offer.isPremium ?
-          (<div className="offer__mark">
-
-            <span>Premium</span>
-          </div>) : null}
+          (
+            <div className="offer__mark">
+              <span>Premium</span>
+            </div>) : null}
         <div className="offer__name-wrapper">
           <h1 className="offer__name">
             {offer.title}
@@ -84,7 +83,7 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
           <h2 className="offer__host-title">Meet the host</h2>
           <div className="offer__host-user user">
             <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-              <img className="offer__avatar user__avatar" src={offer.host && offer.host.avatarUrl ? (offer.host.avatarUrl) : ""} width="74" height="74" alt="Host avatar" />
+              <img className="offer__avatar user__avatar" src={offer.host && offer.host.avatarUrl ? (offer.host.avatarUrl) : ''} width="74" height="74" alt="Host avatar" />
             </div>
             <span className="offer__user-name">
               {offer.host ? (offer.host.name) : null}

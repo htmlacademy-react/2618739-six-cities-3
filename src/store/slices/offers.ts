@@ -2,7 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type TOffer from '../../types/offers';
 import { CITIES } from '../../const';
-import { fetchOfferAction, fetchOneOfferAction, toBookmarksAction, getBookmarksAction } from '../api-actions';
+import { fetchOfferAction, fetchOneOfferAction, toBookmarksAction, getBookmarksAction, fetchNearOffersAction } from '../api-actions';
 import { RequestStatus } from '../../const';
 import { Sorting } from '../../types/sorting';
 
@@ -15,6 +15,7 @@ interface OffersState {
   status: RequestStatus;
   sorting: Sorting;
   favorites: TOffer[];
+  nearOffers: TOffer[];
 }
 
 const offers: TOffer[] = [];
@@ -26,7 +27,8 @@ const initialState: OffersState = {
   activeOffer: undefined,
   status: RequestStatus.Idle,
   sorting: Sorting.Default,
-  favorites: []
+  favorites: [],
+  nearOffers: []
 };
 
 const OffersSlice = createSlice(
@@ -83,6 +85,14 @@ const OffersSlice = createSlice(
           state.status = RequestStatus.Success;
           state.favorites = action.payload;
         }).addCase(getBookmarksAction.rejected, (state) => {
+          state.status = RequestStatus.Failed;
+        }).addCase(fetchNearOffersAction.pending, (state) => {
+          state.status = RequestStatus.Loading;
+        })
+        .addCase(fetchNearOffersAction.fulfilled, (state, action) => {
+          state.status = RequestStatus.Success;
+          state.nearOffers = action.payload;
+        }).addCase(fetchNearOffersAction.rejected, (state) => {
           state.status = RequestStatus.Failed;
         });
     }
