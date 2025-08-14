@@ -3,11 +3,12 @@ import ReviewsForm from './review_form';
 import ReviewsList from './review_list';
 import { Page404 } from '../404';
 import TOffer from '../../types/offers';
-import { fetchReviewsAction } from '../../store/api-actions';
+import { fetchReviewsAction, toBookmarksAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 import { store } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { selectReviews, selectReviewsStatus } from '../../store/selectors/reviews';
+import { selectBookmarks } from '../../store/selectors/offers';
 import { RequestStatus } from '../../const';
 type offerProp = { offer: TOffer };
 
@@ -21,7 +22,24 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
   }, [id]);
   const Reviews = useAppSelector(selectReviews);
   const reviewsState = useAppSelector(selectReviewsStatus);
-
+  const bookmarkClass = () => {
+    if (state) {
+      return ('offer__bookmark-button offer__bookmark-button--active  button');
+    } else {
+      return ('offer__bookmark-button button');
+    }
+  };
+  const bookmarks = useAppSelector(selectBookmarks);
+  let state = false;
+  for (const bookmark of bookmarks) {
+    if (bookmark.id === offer.id) {
+      state = true;
+    }
+  }
+  const bookMarkState = { id: offer.id, status: Number(!state) };
+  const toBookmarks = () => {
+    store.dispatch(toBookmarksAction(bookMarkState));
+  };
   if (!id) {
     return (<div><Page404 /></div>);
   }
@@ -40,7 +58,7 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
           <h1 className="offer__name">
             {offer.title}
           </h1>
-          <button className="offer__bookmark-button button" type="button">
+          <button className={bookmarkClass()} type="button" onClick={toBookmarks}>
             <svg className="offer__bookmark-icon" width="31" height="33">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
