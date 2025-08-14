@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import PlaceCardInfo from './place-card__info';
 import { fetchMockOffer } from '../../mock/offers';
 import { withStore } from '../../mock/mock-component';
-import { CITIES, RequestStatus } from '../../const';
+import { AuthorizationStatus, CITIES, RequestStatus } from '../../const';
 import { Sorting } from '../../types/sorting';
 import userEvent from '@testing-library/user-event';
 import * as actions from '../../store/api-actions';
@@ -20,6 +20,7 @@ describe('Component: PlaceCardInfo', () => {
         status: RequestStatus.Idle,
         sorting: Sorting.Default
       },
+      user: { auth: AuthorizationStatus.Auth }
     });
     render(withStoreComponent);
     expect(screen.getByText(mockOffer.title)).toBeInTheDocument();
@@ -37,6 +38,7 @@ describe('Component: PlaceCardInfo', () => {
         status: RequestStatus.Idle,
         sorting: Sorting.Default
       },
+      user: { auth: AuthorizationStatus.Auth }
     });
     render(withStoreComponent);
     await userEvent.click(screen.getByTestId('toBookMarks'));

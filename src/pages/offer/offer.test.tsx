@@ -23,7 +23,7 @@ describe('Page: Offer', () => {
       </MemoryRouter>);
     const { withStoreComponent } = withStore(preparedComponent, store);
     render(withStoreComponent);
-    expect(screen.getByText(store.offers.offers[0].title)).toBeInTheDocument();
+    expect(screen.getByText(store.offers.activeOffer.description)).toBeInTheDocument();
   });
 }
 );

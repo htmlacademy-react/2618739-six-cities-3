@@ -27,7 +27,9 @@ describe('Offers slice tests', () => {
       activeOfferId: 0,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
-      favorites: []
+      favorites: [],
+      activeOffer: undefined,
+      nearOffers: []
     };
 
     const result = OffersSlice.reducer(undefined, emptyAction);
