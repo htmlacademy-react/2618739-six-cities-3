@@ -53,17 +53,16 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
           <span className="visually-hidden">To bookmarks</span>
-        </button>)
-    }
-    else {
+        </button>);
+    } else {
       return (
         <Link to='/login' >
           <svg className="place-card__bookmark-icon" width="18" height="19">
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
-        </Link>)
+        </Link>);
     }
-  }
+  };
   if (!id) {
     return (<div><Page404 /></div>);
   }

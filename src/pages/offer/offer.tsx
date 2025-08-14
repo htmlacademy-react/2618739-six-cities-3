@@ -27,16 +27,17 @@ function Offer(offersProps: offersProps): JSX.Element {
   const nearOffers = useAppSelector(selectNearOffers);
   const nearOffersList = nearOffers.slice(0, 3).map((nearOffer) => (<PlaceCard offersProp={nearOffer} key={nearOffer.id} id={nearOffer.id} cardClass={'near-places'} />));
   <PlaceCard offersProp={offersProps.offers[0]} id={0} cardClass={'near-places'} />;
-  const offer_gallery = activeOffer?.images?.slice(0, 6).map((image) => (<div className="offer__image-wrapper" key={image}>
-    <img className="offer__image" src={image} alt="Photo studio" />
-  </div>))
+  const offerGallery = activeOffer?.images?.slice(0, 6).map((image) => (
+    <div className="offer__image-wrapper" key={image}>
+      <img className="offer__image" src={image} alt="Photo studio" />
+    </div>));
   if (selectedOffer && activeCard) {
     return (
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {offer_gallery}
+              {offerGallery}
             </div>
           </div>
           <OfferContainer offer={activeOffer || selectedOffer} />

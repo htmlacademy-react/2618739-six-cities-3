@@ -39,17 +39,16 @@ function PlaceCardInfo({ offersProp }: cardInfoProps): JSX.Element {
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
           <span className="visually-hidden">To bookmarks</span>
-        </button>)
-    }
-    else {
+        </button>);
+    } else {
       return (
         <Link to='/login' >
           <svg className="place-card__bookmark-icon" width="18" height="19">
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
-        </Link>)
+        </Link>);
     }
-  }
+  };
   return (
     <div className="place-card__info">
       <div className="place-card__price-wrapper">
