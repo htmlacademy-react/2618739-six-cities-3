@@ -10,6 +10,10 @@ import { useAppSelector } from '../../hooks';
 import { selectReviews, selectReviewsStatus } from '../../store/selectors/reviews';
 import { selectBookmarks } from '../../store/selectors/offers';
 import { RequestStatus } from '../../const';
+import { getAuthorizationStatus } from '../../store/selectors/user';
+import { Link } from 'react-router-dom';
+import { AuthorizationStatus } from '../../const';
+
 type offerProp = { offer: TOffer };
 
 function OfferContainer({ offer }: offerProp): JSX.Element {
@@ -40,6 +44,26 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
   const toBookmarks = () => {
     store.dispatch(toBookmarksAction(bookMarkState));
   };
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const bookmarkButton = () => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      return (
+        <button className={bookmarkClass()} type="button" data-testid='toBookMarks' onClick={toBookmarks}>
+          <svg className="place-card__bookmark-icon" width="18" height="19">
+            <use xlinkHref="#icon-bookmark"></use>
+          </svg>
+          <span className="visually-hidden">To bookmarks</span>
+        </button>)
+    }
+    else {
+      return (
+        <Link to='/login' >
+          <svg className="place-card__bookmark-icon" width="18" height="19">
+            <use xlinkHref="#icon-bookmark"></use>
+          </svg>
+        </Link>)
+    }
+  }
   if (!id) {
     return (<div><Page404 /></div>);
   }
@@ -58,12 +82,7 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
           <h1 className="offer__name">
             {offer.title}
           </h1>
-          <button className={bookmarkClass()} type="button" onClick={toBookmarks}>
-            <svg className="offer__bookmark-icon" width="31" height="33">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          {bookmarkButton()}
         </div>
         <div className="offer__rating rating">
           <div className="offer__stars rating__stars">
