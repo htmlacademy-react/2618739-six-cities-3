@@ -12,7 +12,7 @@ describe('Page: Offer', () => {
       return ({
         ...mod,
         Link: () => { },
-        useParams: () => ({ id: '1' }),
+        useParams: () => ({ id: 1 }),
       });
     });
     const preparedComponent = (
