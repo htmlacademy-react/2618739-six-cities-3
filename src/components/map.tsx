@@ -6,7 +6,7 @@ import TOffer from '../types/offers';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../const';
 import 'leaflet/dist/leaflet.css';
 import { useAppSelector } from '../hooks';
-import { selectActiveOffer } from '../store/selectors/offers';
+import { selectActiveOfferId } from '../store/selectors/offers';
 
 type MapProps = {
   city: City;
@@ -27,7 +27,7 @@ const currentCustomIcon = new Icon({
 
 function Map(props: MapProps): JSX.Element {
   const { city, offers } = props;
-  const activeCard = useAppSelector(selectActiveOffer);
+  const activeCard = useAppSelector(selectActiveOfferId);
   const selectedCard = offers[activeCard];
   const mapRef = useRef(null);
   const map = useMap(mapRef);

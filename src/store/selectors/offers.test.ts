@@ -1,6 +1,6 @@
 import { RequestStatus, CITIES } from '../../const';
 import { Sorting } from '../../types/sorting';
-import { selectActiveOffer, selectCity, selectSorting, selectStatus, selectBookmarks, selectOffers } from './offers';
+import { selectActiveOfferId, selectCity, selectSorting, selectStatus, selectBookmarks, selectOffers } from './offers';
 import { fetchMockOffer } from '../../mock/offers';
 
 describe('offers slice selectors', () => {
@@ -11,10 +11,12 @@ describe('offers slice selectors', () => {
       offers: {
         city: CITIES[0].title,
         offers: mockOffers,
-        activeOffer: 333,
+        activeOfferId: 333,
+        activeOffer: undefined,
         status: RequestStatus.Success,
         sorting: Sorting.Hight,
-        favorites: []
+        favorites: [],
+        nearOffers: []
       }
     };
     const res = selectOffers(state);
@@ -27,10 +29,12 @@ describe('offers slice selectors', () => {
       offers: {
         city: CITIES[3].title,
         offers: [],
-        activeOffer: 0,
+        activeOfferId: 0,
+        activeOffer: undefined,
         status: RequestStatus.Idle,
         sorting: Sorting.Default,
-        favorites: []
+        favorites: [],
+        nearOffers: []
       }
     };
     const res = selectCity(state);
@@ -42,10 +46,12 @@ describe('offers slice selectors', () => {
       offers: {
         city: CITIES[0].title,
         offers: [],
-        activeOffer: 0,
+        activeOfferId: 0,
+        activeOffer: undefined,
         status: RequestStatus.Idle,
         sorting: Sorting.Hight,
-        favorites: []
+        favorites: [],
+        nearOffers: []
       }
     };
     const res = selectSorting(state);
@@ -57,10 +63,12 @@ describe('offers slice selectors', () => {
       offers: {
         city: CITIES[0].title,
         offers: [],
-        activeOffer: 0,
+        activeOfferId: 0,
+        activeOffer: undefined,
         status: RequestStatus.Success,
         sorting: Sorting.Hight,
-        favorites: []
+        favorites: [],
+        nearOffers: []
       }
     };
     const res = selectStatus(state);
@@ -72,13 +80,15 @@ describe('offers slice selectors', () => {
       offers: {
         city: CITIES[0].title,
         offers: [],
-        activeOffer: 333,
+        activeOfferId: 333,
+        activeOffer: undefined,
         status: RequestStatus.Success,
         sorting: Sorting.Hight,
-        favorites: []
+        favorites: [],
+        nearOffers: []
       }
     };
-    const res = selectActiveOffer(state);
+    const res = selectActiveOfferId(state);
     expect(res).toBe(333);
   });
   it('Shoud return favorites from the state', () => {
@@ -87,10 +97,12 @@ describe('offers slice selectors', () => {
       offers: {
         city: CITIES[0].title,
         offers: [],
-        activeOffer: 333,
+        activeOfferId: 333,
+        activeOffer: undefined,
         status: RequestStatus.Success,
         sorting: Sorting.Hight,
-        favorites: mockFavorites
+        favorites: mockFavorites,
+        nearOffers: []
       }
     };
     const res = selectBookmarks(state);
