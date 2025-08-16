@@ -26,6 +26,13 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
   }, [id]);
   const Reviews = useAppSelector(selectReviews);
   const reviewsState = useAppSelector(selectReviewsStatus);
+  let state = false;
+  const bookmarks = useAppSelector(selectBookmarks);
+  for (const bookmark of bookmarks) {
+    if (bookmark.id === offer.id) {
+      state = true;
+    }
+  }
   const bookmarkClass = () => {
     if (state) {
       return ('offer__bookmark-button offer__bookmark-button--active  button');
@@ -33,13 +40,8 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
       return ('offer__bookmark-button button');
     }
   };
-  const bookmarks = useAppSelector(selectBookmarks);
-  let state = false;
-  for (const bookmark of bookmarks) {
-    if (bookmark.id === offer.id) {
-      state = true;
-    }
-  }
+
+
   const bookMarkState = { id: offer.id, status: Number(!state) };
   const toBookmarks = () => {
     store.dispatch(toBookmarksAction(bookMarkState));
