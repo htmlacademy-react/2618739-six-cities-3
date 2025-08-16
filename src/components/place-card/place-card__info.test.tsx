@@ -2,14 +2,12 @@ import { render, screen } from '@testing-library/react';
 import PlaceCardInfo from './place-card__info';
 import { fetchMockOffer } from '../../mock/offers';
 import { mockStore, withStore } from '../../mock/mock-component';
-import { AuthorizationStatus, CITIES, RequestStatus } from '../../const';
-import { Sorting } from '../../types/sorting';
 import userEvent from '@testing-library/user-event';
 import * as actions from '../../store/api-actions';
 
 describe('Component: PlaceCardInfo', () => {
   it('should render correctly', () => {
-    const { withStoreComponent } = withStore(<PlaceCardInfo offersProp={mockStore.offers.activeOffer} />, mockStore)
+    const { withStoreComponent } = withStore(<PlaceCardInfo offersProp={mockStore.offers.activeOffer} />, mockStore);
     render(withStoreComponent);
     expect(screen.getByText(mockStore.offers.activeOffer.title)).toBeInTheDocument();
   });
