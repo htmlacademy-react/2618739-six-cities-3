@@ -11,7 +11,9 @@ function PlaceCard({ offersProp, id, cardClass }: PlaceCardProps): JSX.Element {
   const offerPath = `/offer/${offersProp.id}`;
   return (
     <article className={`${cardClass}__card place-card`} data-testid='testCard' onMouseOver={() => {
-      store.dispatch(setActiveOfferId(id));
+      if (cardClass === 'cities') {
+        store.dispatch(setActiveOfferId(id));
+      }
     }}
     >
       <div className="place-card__mark">
