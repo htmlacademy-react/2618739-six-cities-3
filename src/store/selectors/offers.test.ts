@@ -12,9 +12,11 @@ describe('offers slice selectors', () => {
         city: CITIES[0].title,
         offers: mockOffers,
         activeOfferId: 333,
+        activeOffer: undefined,
         status: RequestStatus.Success,
         sorting: Sorting.Hight,
-        favorites: []
+        favorites: [],
+        nearOffers: []
       }
     };
     const res = selectOffers(state);
@@ -28,9 +30,11 @@ describe('offers slice selectors', () => {
         city: CITIES[3].title,
         offers: [],
         activeOfferId: 0,
+        activeOffer: undefined,
         status: RequestStatus.Idle,
         sorting: Sorting.Default,
-        favorites: []
+        favorites: [],
+        nearOffers: []
       }
     };
     const res = selectCity(state);
@@ -43,9 +47,11 @@ describe('offers slice selectors', () => {
         city: CITIES[0].title,
         offers: [],
         activeOfferId: 0,
+        activeOffer: undefined,
         status: RequestStatus.Idle,
         sorting: Sorting.Hight,
-        favorites: []
+        favorites: [],
+        nearOffers: []
       }
     };
     const res = selectSorting(state);
@@ -58,9 +64,11 @@ describe('offers slice selectors', () => {
         city: CITIES[0].title,
         offers: [],
         activeOfferId: 0,
+        activeOffer: undefined,
         status: RequestStatus.Success,
         sorting: Sorting.Hight,
-        favorites: []
+        favorites: [],
+        nearOffers: []
       }
     };
     const res = selectStatus(state);
