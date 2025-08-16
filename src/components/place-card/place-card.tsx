@@ -5,7 +5,7 @@ import { memo } from 'react';
 import { store } from '../../store';
 import { setActiveOfferId } from '../../store/actions';
 
-type PlaceCardProps = { offersProp: TOffer; id: number | string; cardClass: string }
+type PlaceCardProps = { offersProp: TOffer; id: number; cardClass: string }
 
 function PlaceCard({ offersProp, id, cardClass }: PlaceCardProps): JSX.Element {
   const offerPath = `/offer/${offersProp.id}`;
