@@ -11,9 +11,11 @@ describe('Offers slice tests', () => {
       city: CITIES[0].title,
       offers: [],
       activeOfferId: 0,
+      activeOffer: undefined,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
-      favorites: []
+      favorites: [],
+      nearOffers: []
     };
 
     const result = OffersSlice.reducer(expectedState, emptyAction);
@@ -52,17 +54,21 @@ describe('Offers slice tests', () => {
       city: CITIES[0].title,
       offers: [],
       activeOfferId: 0,
+      activeOffer: undefined,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
-      favorites: []
+      favorites: [],
+      nearOffers: []
     };
     const expectedState = {
       city: CITIES[0].title,
       offers: [],
       activeOfferId: 0,
+      activeOffer: undefined,
       status: RequestStatus.Loading,
       sorting: Sorting.Default,
-      favorites: []
+      favorites: [],
+      nearOffers: []
     };
     const result = OffersSlice.reducer(initialState, fetchOfferAction.pending);
     expect(result).toEqual(expectedState);
@@ -72,17 +78,21 @@ describe('Offers slice tests', () => {
       city: CITIES[0].title,
       offers: [],
       activeOfferId: 0,
+      activeOffer: undefined,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
-      favorites: []
+      favorites: [],
+      nearOffers: []
     };
     const expectedState = {
       city: CITIES[0].title,
       offers: [],
       activeOfferId: 0,
+      activeOffer: undefined,
       status: RequestStatus.Loading,
       sorting: Sorting.Default,
-      favorites: []
+      favorites: [],
+      nearOffers: []
     };
     const result = OffersSlice.reducer(initialState, fetchOfferAction.pending);
     expect(result).toEqual(expectedState);
@@ -92,18 +102,22 @@ describe('Offers slice tests', () => {
       city: CITIES[0].title,
       offers: [],
       activeOfferId: 0,
+      activeOffer: undefined,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
-      favorites: []
+      favorites: [],
+      nearOffers: []
     };
     const mockOffers = [fetchMockOffer()];
     const expectedState = {
       city: CITIES[0].title,
       offers: mockOffers,
       activeOfferId: 0,
+      activeOffer: undefined,
       status: RequestStatus.Success,
       sorting: Sorting.Default,
-      favorites: []
+      favorites: [],
+      nearOffers: []
     };
     const result = OffersSlice.reducer(initialState, fetchOfferAction.fulfilled(mockOffers, '', undefined));
     expect(result).toEqual(expectedState);
@@ -113,17 +127,21 @@ describe('Offers slice tests', () => {
       city: CITIES[0].title,
       offers: [],
       activeOfferId: 0,
+      activeOffer: undefined,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
-      favorites: []
+      favorites: [],
+      nearOffers: []
     };
     const expectedState = {
       city: CITIES[0].title,
       offers: [],
       activeOfferId: 0,
+      activeOffer: undefined,
       status: RequestStatus.Failed,
       sorting: Sorting.Default,
-      favorites: []
+      favorites: [],
+      nearOffers: []
     };
     const result = OffersSlice.reducer(initialState, fetchOfferAction.rejected);
     expect(result).toEqual(expectedState);
@@ -133,17 +151,21 @@ describe('Offers slice tests', () => {
       city: CITIES[0].title,
       offers: [],
       activeOfferId: 0,
+      activeOffer: undefined,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
-      favorites: []
+      favorites: [],
+      nearOffers: []
     };
     const expectedState = {
       city: CITIES[0].title,
       offers: [],
       activeOfferId: 0,
+      activeOffer: undefined,
       status: RequestStatus.Loading,
       sorting: Sorting.Default,
-      favorites: []
+      favorites: [],
+      nearOffers: []
     };
     const result = OffersSlice.reducer(initialState, toBookmarksAction.pending);
     expect(result).toEqual(expectedState);
@@ -153,18 +175,22 @@ describe('Offers slice tests', () => {
       city: CITIES[0].title,
       offers: [],
       activeOfferId: 0,
+      activeOffer: undefined,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
-      favorites: []
+      favorites: [],
+      nearOffers: []
     };
     const mockOffer = fetchMockOffer();
     const expectedState = {
       city: CITIES[0].title,
       offers: [],
       activeOfferId: 0,
+      activeOffer: undefined,
       status: RequestStatus.Success,
       sorting: Sorting.Default,
-      favorites: [mockOffer]
+      favorites: [mockOffer],
+      nearOffers: []
     };
     const result = OffersSlice.reducer(initialState, toBookmarksAction.fulfilled(mockOffer, '', { id: mockOffer.id, status: 1 }));
     expect(result).toEqual(expectedState);
@@ -174,17 +200,21 @@ describe('Offers slice tests', () => {
       city: CITIES[0].title,
       offers: [],
       activeOfferId: 0,
+      activeOffer: undefined,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
-      favorites: []
+      favorites: [],
+      nearOffers: []
     };
     const expectedState = {
       city: CITIES[0].title,
       offers: [],
       activeOfferId: 0,
+      activeOffer: undefined,
       status: RequestStatus.Failed,
       sorting: Sorting.Default,
-      favorites: []
+      favorites: [],
+      nearOffers: []
     };
     const result = OffersSlice.reducer(initialState, toBookmarksAction.rejected);
     expect(result).toEqual(expectedState);
