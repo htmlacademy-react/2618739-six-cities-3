@@ -48,7 +48,7 @@ export const mockStore = {
     offers: [mockOffer, fetchMockOffer(), fetchMockOffer()],
     favorites: [fetchMockOffer(), fetchMockOffer()],
     activeOfferId: 1,
-    activeOffer: fetchMockOffer(),
+    activeOffer: mockOffer,
     status: RequestStatus.Success,
     sorting: Sorting.Default,
     nearOffers: [fetchMockOffer()]

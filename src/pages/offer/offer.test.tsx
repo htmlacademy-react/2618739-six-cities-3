@@ -12,7 +12,7 @@ describe('Page: Offer', () => {
       return ({
         ...mod,
         Link: () => { },
-        useParams: () => ({ id: 1 }),
+        useParams: () => ({ id: '1' }),
       });
     });
     const preparedComponent = (
@@ -23,7 +23,7 @@ describe('Page: Offer', () => {
       </MemoryRouter>);
     const { withStoreComponent } = withStore(preparedComponent, store);
     render(withStoreComponent);
-    expect(screen.getByText(store.offers.activeOffer.description)).toBeInTheDocument();
+    expect(screen.getByText(store.offers.activeOffer.title)).toBeInTheDocument();
   });
 }
 );
