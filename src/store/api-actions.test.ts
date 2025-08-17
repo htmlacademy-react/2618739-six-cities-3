@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import { Action } from 'redux';
 import { State, AppThunkDispatch } from '../types/store';
 import { APIRoute } from '../const';
-import { checkAuthAction, fetchOfferAction, fetchReviewsAction, putReviewsAction, fetchNearOffersAction } from './api-actions';
+import { checkAuthAction, fetchOfferAction, fetchReviewsAction, putReviewsAction, fetchNearOffersAction, fetchOneOfferAction } from './api-actions';
 import { fetchMockOffer } from '../mock/offers';
 import { mockReview } from '../mock/reviews';
 
@@ -134,30 +134,58 @@ describe('Async actions', () => {
     });
   });
   describe('fetchNearOffersAction', () => {
-    it('should dispatch "fetchNearOffersAction.pending" and "fetchNearOffersAction.fulfilled" with thunk "putReviewsAction', async () => {
+    it('should dispatch "fetchNearOffersAction.pending" and "fetchNearOffersAction.fulfilled" with thunk "fetchNearOffersAction', async () => {
       const id = String(mockReview.id);
       mockAxiosAdapter.onGet(`${APIRoute.Offers}/${id}/nearby`).reply(200, [mockReview]);
 
       await store.dispatch(fetchNearOffersAction(String(mockReview.id)));
       const actions = store.getActions();
       const actionTypes = extractActionsTypes(actions);
-      const LoadedReviews = actions.at(1) as ReturnType<typeof putReviewsAction.fulfilled>;
+      const LoadedOffers = actions.at(1) as ReturnType<typeof fetchNearOffersAction.fulfilled>;
       expect(actionTypes).toEqual([
         fetchNearOffersAction.pending.type,
         fetchNearOffersAction.fulfilled.type,
       ]);
-      expect(LoadedReviews.payload).toEqual([mockReview]);
+      expect(LoadedOffers.payload).toEqual([mockReview]);
     });
-    it('should dispatch "fetchNearOffersAction.pending" and "fetchNearOffersAction.rejected" with thunk "putReviewsAction', async () => {
+    it('should dispatch "fetchNearOffersAction.pending" and "fetchNearOffersAction.rejected" with thunk "fetchNearOffersAction', async () => {
       const id = '1111';
       mockAxiosAdapter.onGet(`${APIRoute.Offers}/${id}/nearby`).reply(400);
 
-      await store.dispatch(fetchReviewsAction(id));
+      await store.dispatch(fetchNearOffersAction(id));
       const actions = extractActionsTypes(store.getActions());
 
       expect(actions).toEqual([
-        fetchReviewsAction.pending.type,
-        fetchReviewsAction.rejected.type,
+        fetchNearOffersAction.pending.type,
+        fetchNearOffersAction.rejected.type,
+      ]);
+    });
+  });
+  describe('fetchOneOfferAction', () => {
+    it('should dispatch "fetchOneOfferAction.pending" and "fetchOneOfferAction.fulfilled" with thunk "fetchOneOfferAction', async () => {
+      const id = String(mockReview.id);
+      mockAxiosAdapter.onGet(`${APIRoute.Offers}/${id}`).reply(200, [mockReview]);
+
+      await store.dispatch(fetchOneOfferAction(String(mockReview.id)));
+      const actions = store.getActions();
+      const actionTypes = extractActionsTypes(actions);
+      const LoadedOffer = actions.at(1) as ReturnType<typeof fetchOneOfferAction.fulfilled>;
+      expect(actionTypes).toEqual([
+        fetchOneOfferAction.pending.type,
+        fetchOneOfferAction.fulfilled.type,
+      ]);
+      expect(LoadedOffer.payload).toEqual([mockReview]);
+    });
+    it('should dispatch "fetchNearOffersAction.pending" and "fetchNearOffersAction.rejected" with thunk "putReviewsAction', async () => {
+      const id = '1111';
+      mockAxiosAdapter.onGet(`${APIRoute.Offers}/${id}`).reply(400);
+
+      await store.dispatch(fetchOneOfferAction(id));
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        fetchOneOfferAction.pending.type,
+        fetchOneOfferAction.rejected.type,
       ]);
     });
   });
