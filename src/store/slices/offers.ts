@@ -2,7 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type TOffer from '../../types/offers';
 import { CITIES } from '../../const';
-import { fetchOfferAction, toBookmarksAction, getBookmarksAction } from '../api-actions';
+import { fetchOfferAction, fetchOneOfferAction, toBookmarksAction, getBookmarksAction, fetchNearOffersAction } from '../api-actions';
 import { RequestStatus } from '../../const';
 import { Sorting } from '../../types/sorting';
 
@@ -10,10 +10,12 @@ import { Sorting } from '../../types/sorting';
 interface OffersState {
   city: string;
   offers: TOffer[];
-  activeOffer: number;
+  activeOfferId: number;
+  activeOffer: TOffer | undefined;
   status: RequestStatus;
   sorting: Sorting;
   favorites: TOffer[];
+  nearOffers: TOffer[];
 }
 
 const offers: TOffer[] = [];
@@ -21,10 +23,12 @@ const offers: TOffer[] = [];
 const initialState: OffersState = {
   city: CITIES[0].title,
   offers,
-  activeOffer: 0,
+  activeOfferId: 0,
+  activeOffer: undefined,
   status: RequestStatus.Idle,
   sorting: Sorting.Default,
-  favorites: []
+  favorites: [],
+  nearOffers: []
 };
 
 const OffersSlice = createSlice(
@@ -39,8 +43,8 @@ const OffersSlice = createSlice(
       setSorting: (state, action: PayloadAction<Sorting>) => {
         state.sorting = action.payload;
       },
-      setActiveOffer: (state, action: PayloadAction<number>) => {
-        state.activeOffer = action.payload;
+      setActiveOfferId: (state, action: PayloadAction<number>) => {
+        state.activeOfferId = action.payload;
       },
     },
     extraReducers(builder) {
@@ -51,6 +55,13 @@ const OffersSlice = createSlice(
           state.status = RequestStatus.Success;
           state.offers = action.payload;
         }).addCase(fetchOfferAction.rejected, (state) => {
+          state.status = RequestStatus.Failed;
+        }).addCase(fetchOneOfferAction.pending, (state) => {
+          state.status = RequestStatus.Loading;
+        }).addCase(fetchOneOfferAction.fulfilled, (state, action) => {
+          state.status = RequestStatus.Success;
+          state.activeOffer = action.payload;
+        }).addCase(fetchOneOfferAction.rejected, (state) => {
           state.status = RequestStatus.Failed;
         }).addCase(toBookmarksAction.pending, (state) => {
           state.status = RequestStatus.Loading;
@@ -74,6 +85,14 @@ const OffersSlice = createSlice(
           state.status = RequestStatus.Success;
           state.favorites = action.payload;
         }).addCase(getBookmarksAction.rejected, (state) => {
+          state.status = RequestStatus.Failed;
+        }).addCase(fetchNearOffersAction.pending, (state) => {
+          state.status = RequestStatus.Loading;
+        })
+        .addCase(fetchNearOffersAction.fulfilled, (state, action) => {
+          state.status = RequestStatus.Success;
+          state.nearOffers = action.payload;
+        }).addCase(fetchNearOffersAction.rejected, (state) => {
           state.status = RequestStatus.Failed;
         });
     }

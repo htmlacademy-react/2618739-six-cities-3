@@ -16,8 +16,8 @@ export function fetchMockOffer(): TOffer {
       description: faker.datatype.string(),
       bedrooms: faker.datatype.number(),
       goods: [faker.datatype.string()],
-      host: faker.name.firstName(),
-      images: [faker.internet.url()],
+      host: { name: faker.name.firstName(), avatarUrl: faker.internet.url(), isPro: faker.datatype.boolean() },
+      images: [faker.internet.url(), faker.internet.url()],
       maxAdults: faker.datatype.number(),
       previewImage: faker.datatype.string()
     });
