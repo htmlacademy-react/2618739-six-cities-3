@@ -1,6 +1,7 @@
-import { useAppDispatch } from '../hooks/index';
+import { useAppDispatch, useAppSelector } from '../hooks/index';
 import { setCity } from '../store/actions';
 import { memo } from 'react';
+import { selectCity } from '../store/selectors/offers';
 
 type citiesType = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
 type cityEl = { id: number; cityName: citiesType };
@@ -17,9 +18,10 @@ function CitiesList(): JSX.Element {
       { id: 6, cityName: 'Dusseldorf' }
     ];
   const dispatch = useAppDispatch();
+  const selectedCity = useAppSelector(selectCity);
   const cities = citiesList.map((city: cityEl) => (
     <li className="locations__item" key={city.id}>
-      <a className="locations__item-link tabs__item" href="#" onClick={() => {
+      <a className={city.cityName === selectedCity ? "locations__item-link tabs__item tabs__item--active" : "locations__item-link tabs__item"} href="#" onClick={() => {
         dispatch(setCity(city.cityName));
       }}
       >
