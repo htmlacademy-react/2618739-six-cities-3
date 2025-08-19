@@ -15,7 +15,7 @@ type TOffer = {
     description: string;
     bedrooms: number;
     goods: string[];
-    host: string;
+    host: { name: string; avatarUrl: string; isPro: boolean };
     images: string[];
     maxAdults: number;
     previewImage: string;

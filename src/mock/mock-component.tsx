@@ -40,16 +40,18 @@ const mockOffer = fetchMockOffer();
 
 export const mockStore = {
   user: {
-    auth: AuthorizationStatus.Auth, status: RequestStatus.Idle, info: userInfo
+    auth: AuthorizationStatus.Auth, status: RequestStatus.Success, info: userInfo
   },
   offers:
   {
     city: mockOffer.city.name,
     offers: [mockOffer, fetchMockOffer(), fetchMockOffer()],
     favorites: [fetchMockOffer(), fetchMockOffer()],
-    activeOffer: 1,
-    status: RequestStatus.Idle,
-    sorting: Sorting.Default
+    activeOfferId: 1,
+    activeOffer: mockOffer,
+    status: RequestStatus.Success,
+    sorting: Sorting.Default,
+    nearOffers: [fetchMockOffer()]
   },
   reviews:
   {

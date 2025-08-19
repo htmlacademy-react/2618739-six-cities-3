@@ -11,7 +11,7 @@ describe('Component: Page404', () => {
         </Routes>
       </MemoryRouter>);
     render(preparedComponent);
-    expect(screen.getByText('Ошибка 404. Страница не существует.')).toBeInTheDocument();
+    expect(screen.getByText('404 Not Found Ошибка 404. Страница не существует.')).toBeInTheDocument();
   });
 }
 );

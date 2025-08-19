@@ -2,14 +2,18 @@ import { useParams } from 'react-router-dom';
 import ReviewsForm from './review_form';
 import ReviewsList from './review_list';
 import { Page404 } from '../404';
-
 import TOffer from '../../types/offers';
-import { fetchReviewsAction } from '../../store/api-actions';
+import { fetchReviewsAction, toBookmarksAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 import { store } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { selectReviews, selectReviewsStatus } from '../../store/selectors/reviews';
+import { selectBookmarks } from '../../store/selectors/offers';
 import { RequestStatus } from '../../const';
+import { getAuthorizationStatus } from '../../store/selectors/user';
+import { Link } from 'react-router-dom';
+import { AuthorizationStatus } from '../../const';
+
 type offerProp = { offer: TOffer };
 
 function OfferContainer({ offer }: offerProp): JSX.Element {
@@ -22,7 +26,45 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
   }, [id]);
   const Reviews = useAppSelector(selectReviews);
   const reviewsState = useAppSelector(selectReviewsStatus);
+  let state = false;
+  const bookmarks = useAppSelector(selectBookmarks);
+  for (const bookmark of bookmarks) {
+    if (bookmark.id === offer.id) {
+      state = true;
+    }
+  }
+  const bookmarkClass = () => {
+    if (state) {
+      return ('offer__bookmark-button offer__bookmark-button--active  button');
+    } else {
+      return ('offer__bookmark-button button');
+    }
+  };
 
+
+  const bookMarkState = { id: offer.id, status: Number(!state) };
+  const toBookmarks = () => {
+    store.dispatch(toBookmarksAction(bookMarkState));
+  };
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const bookmarkButton = () => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      return (
+        <button className={bookmarkClass()} type="button" data-testid='toBookMarks' onClick={toBookmarks}>
+          <svg className="place-card__bookmark-icon" width="18" height="19">
+            <use xlinkHref="#icon-bookmark"></use>
+          </svg>
+          <span className="visually-hidden">To bookmarks</span>
+        </button>);
+    } else {
+      return (
+        <Link to='/login' >
+          <svg className="place-card__bookmark-icon" width="18" height="19">
+            <use xlinkHref="#icon-bookmark"></use>
+          </svg>
+        </Link>);
+    }
+  };
   if (!id) {
     return (<div><Page404 /></div>);
   }
@@ -32,24 +74,20 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
   return (
     <div className="offer__container container" data-testid='offer_container'>
       <div className="offer__wrapper">
-        <div className="offer__mark">
-          {offer.isPremium ?
-            (<span>Premium</span>) : null}
-        </div>
+        {offer.isPremium ?
+          (
+            <div className="offer__mark">
+              <span>Premium</span>
+            </div>) : null}
         <div className="offer__name-wrapper">
           <h1 className="offer__name">
-            {offer.description}
+            {offer.title}
           </h1>
-          <button className="offer__bookmark-button button" type="button">
-            <svg className="offer__bookmark-icon" width="31" height="33">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          {bookmarkButton()}
         </div>
         <div className="offer__rating rating">
           <div className="offer__stars rating__stars">
-            <span style={{ width: '80 %' }}></span>
+            <span style={{ width: Math.round(offer.rating) * 30 }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
           <span className="offer__rating-value rating__value">{offer.rating}</span>
@@ -83,14 +121,15 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
           <h2 className="offer__host-title">Meet the host</h2>
           <div className="offer__host-user user">
             <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-              <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
+              <img className="offer__avatar user__avatar" src={offer.host && offer.host.avatarUrl ? (offer.host.avatarUrl) : ''} width="74" height="74" alt="Host avatar" />
             </div>
             <span className="offer__user-name">
-              {offer.host}
+              {offer.host ? (offer.host.name) : null}
             </span>
-            <span className="offer__user-status">
-              Pro
-            </span>
+            {offer.host && offer.host.isPro ? (
+              <span className="offer__user-status">
+                Pro
+              </span>) : null}
           </div>
           <div className="offer__description">
             <p className="offer__text">
