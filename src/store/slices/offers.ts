@@ -73,7 +73,7 @@ const OffersSlice = createSlice(
           } else {
             const index = state.favorites.findIndex((item) => item.id === action.payload.id);
             if (index > -1) {
-              state.favorites.splice(index);
+              state.favorites.splice(index, 1);
             }
           }
         }).addCase(toBookmarksAction.rejected, (state) => {
