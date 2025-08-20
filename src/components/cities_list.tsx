@@ -21,7 +21,7 @@ function CitiesList(): JSX.Element {
   const selectedCity = useAppSelector(selectCity);
   const cities = citiesList.map((city: cityEl) => (
     <li className="locations__item" key={city.id}>
-      <a className={city.cityName === selectedCity ? "locations__item-link tabs__item tabs__item--active" : "locations__item-link tabs__item"} href="#" onClick={() => {
+      <a className={city.cityName === selectedCity ? 'locations__item-link tabs__item tabs__item--active' : 'locations__item-link tabs__item'} href="#" onClick={() => {
         dispatch(setCity(city.cityName));
       }}
       >

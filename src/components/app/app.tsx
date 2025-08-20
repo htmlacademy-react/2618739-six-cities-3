@@ -10,6 +10,7 @@ import { selectOffers, selectStatus } from '../../store/selectors/offers';
 import { AuthorizationStatus, RequestStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/selectors/user';
 import TOffer from '../../types/offers';
+import Private from '../private';
 
 function App(): JSX.Element {
   const offers: TOffer[] = useAppSelector(selectOffers);
@@ -28,7 +29,7 @@ function App(): JSX.Element {
         {loginPageRoute(authStatus)}
         <Route path="/" element={<Layout />} >
           <Route index element={<Main offersProps={offers} status={status} />} />
-          <Route path='favorites' element={<Favorites />} />
+          <Route path='favorites' element={<Private><Favorites /></Private>} />
           <Route path="offer/:id" element={<Offer offers={offers} />} />
           <Route path="*" element={<Page404 />} />
         </Route >
