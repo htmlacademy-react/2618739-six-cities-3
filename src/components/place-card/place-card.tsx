@@ -16,10 +16,11 @@ function PlaceCard({ offersProp, id, cardClass }: PlaceCardProps): JSX.Element {
       }
     }}
     >
-      <div className="place-card__mark">
-        {offersProp.isPremium ?
-          <span>Premium</span> : null}
-      </div>
+      {offersProp.isPremium ?
+        <div className="place-card__mark">
+
+          <span>Premium</span>
+        </div> : null}
       <div className={`${cardClass}__image-wrapper place-card__image-wrapper`}>
         <Link to={offerPath} >
           <img className="place-card__image" src={offersProp.previewImage} width="260" height="200" alt="Place image" />
