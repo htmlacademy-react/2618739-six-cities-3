@@ -1,6 +1,10 @@
 import { useState, ChangeEvent } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { login } from '../../store/api-actions';
+import { Link } from 'react-router-dom';
+import { store } from '../../store';
+import { setCity } from '../../store/actions';
+import { CITIES } from '../../const';
 
 
 function Login(): JSX.Element {
@@ -16,6 +20,7 @@ function Login(): JSX.Element {
   const submit = () => {
     dispatch(login({ email: userLogin, password: userPassword }));
   };
+  const randomCity = CITIES[Math.floor(Math.random() * CITIES.length)].title;
   return (
     <div className="page page--gray page--login">
       <header className="header">
@@ -54,9 +59,9 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link className="locations__item-link" to="/" onClick={() => { store.dispatch(setCity(randomCity)) }}>
+                <span>{randomCity}</span>
+              </Link>
             </div>
           </section>
         </div>
