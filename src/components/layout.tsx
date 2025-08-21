@@ -3,7 +3,7 @@ import Header from './header';
 
 function Layout(): JSX.Element {
   return (
-    <div className="page">
+    <div className="page page--gray" >
       <Header />
       <Outlet />
     </div>);
