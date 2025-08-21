@@ -17,7 +17,7 @@ function Login(): JSX.Element {
   const getPassword = (newPassword: string) => {
     setPassword(newPassword);
   };
-  const submit = () => {
+  const handleSubmit = () => {
     dispatch(login({ email: userLogin, password: userPassword }));
   };
   const randomCity = CITIES[Math.floor(Math.random() * CITIES.length)].title;
@@ -54,7 +54,7 @@ function Login(): JSX.Element {
                 }}
                 />
               </div>
-              <button className="login__submit form__submit button" data-testid="submitButton" onClick={submit}>Sign in</button>
+              <button className="login__submit form__submit button" data-testid="submitButton" onClick={handleSubmit}>Sign in</button>
             </div>
           </section>
           <section className="locations locations--login locations--current">
