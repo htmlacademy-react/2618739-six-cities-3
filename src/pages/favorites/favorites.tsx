@@ -25,20 +25,20 @@ function Favorites(): JSX.Element {
     let cards: JSX.Element[];
     for (const city of CITIES) {
       cards = offers.filter((offerCity) => offerCity.city.name === city.title).map((offer: TOffer) =>
-      (
-        <article key={offer.id} className="favorites__card place-card" data-testid='favoritesCard'>
-          {offer.isPremium ?
-            <div className="place-card__mark">
-              <span>Premium</span>
-            </div> :
-            null}
-          <div className="favorites__image-wrapper place-card__image-wrapper">
-            <Link to={`/offer/${offer.id}`}>
-              <img className="place-card__image" src={offer.previewImage} width="150" height="110" alt="Place image" />
-            </Link>
-          </div>
-          <PlaceCardInfo offersProp={offer} />
-        </article >));
+        (
+          <article key={offer.id} className="favorites__card place-card" data-testid='favoritesCard'>
+            {offer.isPremium ?
+              <div className="place-card__mark">
+                <span>Premium</span>
+              </div> :
+              null}
+            <div className="favorites__image-wrapper place-card__image-wrapper">
+              <Link to={`/offer/${offer.id}`}>
+                <img className="place-card__image" src={offer.previewImage} width="150" height="110" alt="Place image" />
+              </Link>
+            </div>
+            <PlaceCardInfo offersProp={offer} />
+          </article >));
       if (cards.length > 0) {
         citiesList.push(
           <li className="favorites__locations-items">

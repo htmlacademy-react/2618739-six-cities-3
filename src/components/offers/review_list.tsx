@@ -5,7 +5,7 @@ import { memo } from 'react';
 
 type ReviewListProp = { reviewList: ReviewPropType[] }
 function ReviewsList({ reviewList }: ReviewListProp): JSX.Element {
-  let reviewsProp = [...reviewList];
+  const reviewsProp = [...reviewList];
   reviewsProp.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
   const reviews = reviewsProp.slice(0, 10).map((review) => (
     <ReviewsItem
