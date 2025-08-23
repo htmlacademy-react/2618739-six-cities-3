@@ -57,7 +57,7 @@ function Map(props: MapProps): JSX.Element {
     }
   }, [map, offers, city, activeCard]);
 
-  return <section className="cities__map" style={{ height: '500px' }} ref={mapRef} data-testid='map'></section>;
+  return <section className="cities__map map" style={{ height: '500px' }} ref={mapRef} data-testid='map'></section>;
 }
 
 export default Map;
