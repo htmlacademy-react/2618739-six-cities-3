@@ -20,6 +20,11 @@ function Login(): JSX.Element {
   const handleSubmit = () => {
     dispatch(login({ email: userLogin, password: userPassword }));
   };
+  const handleEnterPress = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key === 'Enter') {
+      dispatch(login({ email: userLogin, password: userPassword }));
+    }
+  }
   const randomCity = CITIES[Math.floor(Math.random() * CITIES.length)].title;
   return (
     <div className="page page--gray page--login">
@@ -52,6 +57,7 @@ function Login(): JSX.Element {
                 <input className="login__input form__input" type="password" name="password" placeholder="Password" required onChange={({ target }: ChangeEvent<HTMLInputElement>) => {
                   getPassword(target.value);
                 }}
+                  onKeyDown={handleEnterPress}
                 />
               </div>
               <button className="login__submit form__submit button" data-testid="submitButton" onClick={handleSubmit}>Sign in</button>
