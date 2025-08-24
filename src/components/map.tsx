@@ -11,7 +11,7 @@ import { selectActiveOfferId } from '../store/selectors/offers';
 type MapProps = {
   city: City;
   offers: TOffer[];
-  style: { height: string } | undefined
+  style: { height: string } | undefined;
 };
 
 const defaultCustomIcon = new Icon({

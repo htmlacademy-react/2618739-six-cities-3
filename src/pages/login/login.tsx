@@ -75,7 +75,7 @@ function Login(): JSX.Element {
                 <input className="login__input form__input" data-testid="password" type="password" name="password" placeholder="Password" required onBlur={({ target }: ChangeEvent<HTMLInputElement>) => {
                   getPassword(target.value);
                 }}
-                  onKeyDown={handleEnterPress}
+                onKeyDown={handleEnterPress}
                 />
               </div>
               <button className="login__submit form__submit button" data-testid="submitButton" >Sign in</button>
