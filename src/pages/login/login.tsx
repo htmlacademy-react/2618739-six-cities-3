@@ -71,11 +71,11 @@ function Login(): JSX.Element {
                 <ToastContainer />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden" data-testid="password">Password</label>
-                <input className="login__input form__input" type="password" name="password" placeholder="Password" required onBlur={({ target }: ChangeEvent<HTMLInputElement>) => {
+                <label className="visually-hidden" >Password</label>
+                <input className="login__input form__input" data-testid="password" type="password" name="password" placeholder="Password" required onBlur={({ target }: ChangeEvent<HTMLInputElement>) => {
                   getPassword(target.value);
                 }}
-                onKeyDown={handleEnterPress}
+                  onKeyDown={handleEnterPress}
                 />
               </div>
               <button className="login__submit form__submit button" data-testid="submitButton" >Sign in</button>

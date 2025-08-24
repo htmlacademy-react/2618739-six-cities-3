@@ -53,7 +53,7 @@ describe('Page: Login', () => {
     const { withStoreComponent } = withStore(preparedComponent, mockStore);
     render(withStoreComponent);
     const login = 'User@mail.com';
-    const password = 'Password';
+    const password = 'Password22';
     await userEvent.type(
       screen.getByTestId('email'),
       login,
