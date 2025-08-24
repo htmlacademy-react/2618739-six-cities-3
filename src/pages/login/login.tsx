@@ -20,10 +20,9 @@ function Login(): JSX.Element {
   const getPassword = (newPassword: string) => {
     if (newPassword.length >= 2) {
       setPassword(newPassword);
-    }
-    else {
-      toast.error("Incorrect password")
-      setPassword("");
+    } else {
+      toast.error('Incorrect password');
+      setPassword('');
     }
   };
   const handleSubmit: FormEventHandler<HTMLFormElement> = (evt: FormEvent<HTMLFormElement>) => {
@@ -36,7 +35,7 @@ function Login(): JSX.Element {
     if (event.key === 'Enter') {
       dispatch(login({ email: userLogin, password: userPassword }));
     }
-  }
+  };
   const randomCity = CITIES[Math.floor(Math.random() * CITIES.length)].title;
   return (
     <div className="page page--gray page--login">
@@ -62,9 +61,8 @@ function Login(): JSX.Element {
                 <input className="login__input form__input" type="email" name="email" data-testid="email" placeholder="Email" defaultValue="" required onBlur={({ target }: ChangeEvent<HTMLInputElement>) => {
                   if (validateEmail(target.value)) {
                     getLogin(target.value);
-                  }
-                  else {
-                    toast.error("Incorrect e-mail"
+                  } else {
+                    toast.error('Incorrect e-mail'
                     );
                     getLogin('');
                   }
@@ -77,7 +75,7 @@ function Login(): JSX.Element {
                 <input className="login__input form__input" type="password" name="password" placeholder="Password" required onBlur={({ target }: ChangeEvent<HTMLInputElement>) => {
                   getPassword(target.value);
                 }}
-                  onKeyDown={handleEnterPress}
+                onKeyDown={handleEnterPress}
                 />
               </div>
               <button className="login__submit form__submit button" data-testid="submitButton" >Sign in</button>

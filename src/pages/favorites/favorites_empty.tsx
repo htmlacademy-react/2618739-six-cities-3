@@ -18,9 +18,8 @@ export function FavoritesEmpty(): JSX.Element {
           </section>
         </div>
       </main>);
-  }
-  else {
+  } else {
     return (
       <Navigate to='/favorites' />);
   }
-};
+}

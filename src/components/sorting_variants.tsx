@@ -39,7 +39,7 @@ function SortingVariants(): JSX.Element {
           <ul className="places__options places__options--custom places__options--opened">
             {Object.values(Sorting).map((variant) => (<li className={isActive(variant) ? 'places__option places__option--actives' : 'places__option'} onClick={handleSortOffers} tabIndex={0} key={variant}>{variant}</li>))}
           </ul>
-        ) : <ul className="places__options places__options--custom places__options--opened" hidden={true} />}
+        ) : <ul className="places__options places__options--custom places__options--opened" hidden />}
     </form >
   );
 }

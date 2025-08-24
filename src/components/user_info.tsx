@@ -14,8 +14,8 @@ function UserInfo(): JSX.Element {
   const favorites = useAppSelector(selectBookmarks);
   const handleClick = () => {
     dropToken();
-    store.dispatch(userSlice.actions.setAuthStatus(AuthorizationStatus.NoAuth))
-  }
+    store.dispatch(userSlice.actions.setAuthStatus(AuthorizationStatus.NoAuth));
+  };
   if (authStatus === AuthorizationStatus.Auth) {
     return (
       <nav className="header__nav">
