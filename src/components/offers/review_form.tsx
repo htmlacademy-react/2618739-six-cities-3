@@ -26,13 +26,19 @@ function ReviewsForm(): JSX.Element {
     });
   }
 
-  function sendReview() {
+  function handleSendReview() {
     const comment = ReviewState.text;
     const rating = ReviewState.stars;
     store.dispatch(putReviewsAction({ id, comment, rating }));
   }
 
-  const disabledOption = false;
+  const disabledOption = () => {
+    if (ReviewState.stars && ReviewState.text.length > 50 && ReviewState.text.length < 300) {
+      return false;
+    } else {
+      return true;
+    }
+  };
   const auth = useAppSelector(getAuthorizationStatus);
   if (auth !== AuthorizationStatus.Auth) {
     return (<div>Authorize to leave a review</div>);
@@ -59,7 +65,7 @@ function ReviewsForm(): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={disabledOption} onClick={sendReview}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={disabledOption()} onClick={handleSendReview}>Submit</button>
       </div>
       Ваша оценка: {ReviewState.stars} Ваш отзыв: {ReviewState.text}
     </div>);

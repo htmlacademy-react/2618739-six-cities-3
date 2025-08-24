@@ -15,7 +15,6 @@ describe('Component: UserInfo', () => {
     const { withStoreComponent } = withStore(<SortingVariants />, mockStore);
     render(withStoreComponent);
     await userEvent.click(screen.getByTestId('sorting'));
-    //await userEvent.click(screen.getByText('Price: high to low',));
     expect(screen.getByText('Top rated first')).toBeInTheDocument();
     expect(screen.getByText('Price: high to low')).toBeInTheDocument();
     expect(screen.getByText('Price: low to high',)).toBeInTheDocument();
