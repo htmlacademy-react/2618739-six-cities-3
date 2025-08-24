@@ -7,11 +7,11 @@ import { Sorting } from '../types/sorting';
 function SortingVariants(): JSX.Element {
   const selectedSorting = useAppSelector(selectSorting).toString();
   const [isExpanded, setExpand] = useState(false);
-  function expand() {
+  function handleClickOnSorting() {
     setExpand(!isExpanded);
   }
   const dispatch = useAppDispatch();
-  function sortOffers(e: React.MouseEvent<HTMLElement>) {
+  function handleSortOffers(e: React.MouseEvent<HTMLElement>) {
     if (e.currentTarget.textContent) {
       dispatch(setSorting(e.currentTarget.textContent));
     }
@@ -26,7 +26,7 @@ function SortingVariants(): JSX.Element {
   }
 
   return (
-    <form className="places__sorting" action="#" method="get" onClick={expand} data-testid='sorting'>
+    <form className="places__sorting" action="#" method="get" onClick={handleClickOnSorting} data-testid='sorting'>
       <span className="places__sorting-caption">Sort by </span>
       <span className="places__sorting-type" tabIndex={0}>
         {selectedSorting}
@@ -37,9 +37,9 @@ function SortingVariants(): JSX.Element {
       {isExpanded ?
         (
           <ul className="places__options places__options--custom places__options--opened">
-            {Object.values(Sorting).map((variant) => (<li className={isActive(variant) ? 'places__option places__option--actives' : 'places__option'} onClick={sortOffers} tabIndex={0} key={variant}>{variant}</li>))}
+            {Object.values(Sorting).map((variant) => (<li className={isActive(variant) ? 'places__option places__option--actives' : 'places__option'} onClick={handleSortOffers} tabIndex={0} key={variant}>{variant}</li>))}
           </ul>
-        ) : null}
+        ) : <ul className="places__options places__options--custom places__options--opened" hidden />}
     </form >
   );
 }

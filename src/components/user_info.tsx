@@ -5,11 +5,17 @@ import { selectBookmarks } from '../store/selectors/offers';
 import { AuthorizationStatus } from '../const';
 import { dropToken } from '../services/token';
 import { memo } from 'react';
+import { store } from '../store';
+import { userSlice } from '../store/slices/user';
 
 function UserInfo(): JSX.Element {
   const authStatus = useAppSelector(getAuthorizationStatus);
   const user = useAppSelector(getUserInfo);
   const favorites = useAppSelector(selectBookmarks);
+  const handleClick = () => {
+    dropToken();
+    store.dispatch(userSlice.actions.setAuthStatus(AuthorizationStatus.NoAuth));
+  };
   if (authStatus === AuthorizationStatus.Auth) {
     return (
       <nav className="header__nav">
@@ -24,7 +30,7 @@ function UserInfo(): JSX.Element {
           </li>
           <li className="header__nav-item">
             <a className="header__nav-link" href="#">
-              <span className="header__signout" onClick={dropToken}>Sign out</span>
+              <span className="header__signout" onClick={handleClick}>Sign out</span>
             </a>
           </li>
         </ul>

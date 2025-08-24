@@ -28,13 +28,13 @@ function PlaceCardInfo({ offersProp }: cardInfoProps): JSX.Element {
   const bookMarkState = { id: offersProp.id, status: Number(!state) };
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  const toBookmarks = () => {
+  const handleToBookmarks = () => {
     store.dispatch(toBookmarksAction(bookMarkState));
   };
   const bookmarkButton = () => {
     if (authorizationStatus === AuthorizationStatus.Auth) {
       return (
-        <button className={bookmarkClass()} type="button" data-testid='toBookMarks' onClick={toBookmarks}>
+        <button className={bookmarkClass()} type="button" data-testid='toBookMarks' onClick={handleToBookmarks}>
           <svg className="place-card__bookmark-icon" width="18" height="19">
             <use xlinkHref="#icon-bookmark"></use>
           </svg>

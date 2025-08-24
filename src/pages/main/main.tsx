@@ -58,11 +58,10 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
               <PlaceCardList offersProps={selectedOffers} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map">
-                < Map city={selectedCity}
-                  offers={selectedOffers}
-                />
-              </section>
+              < Map city={selectedCity}
+                offers={selectedOffers}
+                style={undefined}
+              />
             </div>
           </div>
         </div>

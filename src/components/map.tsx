@@ -11,6 +11,7 @@ import { selectActiveOfferId } from '../store/selectors/offers';
 type MapProps = {
   city: City;
   offers: TOffer[];
+  style: { height: string } | undefined;
 };
 
 const defaultCustomIcon = new Icon({
@@ -26,7 +27,7 @@ const currentCustomIcon = new Icon({
 });
 
 function Map(props: MapProps): JSX.Element {
-  const { city, offers } = props;
+  const { city, offers, style } = props;
   const activeCard = useAppSelector(selectActiveOfferId);
   const selectedCard = offers[activeCard];
   const mapRef = useRef(null);
@@ -57,7 +58,7 @@ function Map(props: MapProps): JSX.Element {
     }
   }, [map, offers, city, activeCard]);
 
-  return <div style={{ height: '500px' }} ref={mapRef} data-testid='map'></div>;
+  return <section className="cities__map map" {...style ? { style } : null} ref={mapRef} data-testid='map'></section>;
 }
 
 export default Map;

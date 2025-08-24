@@ -1,15 +1,15 @@
-import Private from '../../components/private';
 import { useAppSelector } from '../../hooks';
 import { selectBookmarks } from '../../store/selectors/offers';
 import TOffer from '../../types/offers';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import PlaceCardInfo from '../../components/place-card/place-card__info';
 import { CITIES } from '../../const';
 
 function Favorites(): JSX.Element {
   const offers: TOffer[] = useAppSelector(selectBookmarks);
   if (offers.length === 0) {
-    return <div>Nothing yet saved</div>;
+    return (
+      <Navigate to='/favorites_empty' />);
   } else {
     const citiesList: JSX.Element[] = [];
     let cards: JSX.Element[];
@@ -45,23 +45,20 @@ function Favorites(): JSX.Element {
           </li>);
       }
     }
-
-
     return (
-      <Private>
-        <main className="page__main page__main--favorites">
-          <div className="page__favorites-container container">
-            <section className="favorites">
-              <h1 className="favorites__title">Saved listing</h1>
-              <ul className="favorites__list">
-                {citiesList}
-              </ul>
-            </section>
-          </div>
-        </main>
-      </Private >
+      <main className="page__main page__main--favorites">
+        <div className="page__favorites-container container">
+          <section className="favorites">
+            <h1 className="favorites__title">Saved listing</h1>
+            <ul className="favorites__list">
+              {citiesList}
+            </ul>
+          </section>
+        </div>
+      </main>
     );
   }
 }
+
 
 export default Favorites;
