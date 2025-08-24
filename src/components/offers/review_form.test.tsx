@@ -5,7 +5,6 @@ import { withStore, mockStore } from '../../mock/mock-component';
 import userEvent from '@testing-library/user-event';
 import * as actions from '../../store/api-actions';
 import faker from 'faker';
-import { store } from '../../store';
 
 describe('Component: ReviewsForm', () => {
 

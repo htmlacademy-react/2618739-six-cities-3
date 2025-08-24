@@ -6,7 +6,7 @@ import { fetchMockOffer } from '../mock/offers';
 
 describe('Component: Map', () => {
   it('should render correctly', () => {
-    const { withStoreComponent } = withStore(<Map city={CITIES[0]} offers={[fetchMockOffer(), fetchMockOffer()]} />, mockStore);
+    const { withStoreComponent } = withStore(<Map city={CITIES[0]} offers={[fetchMockOffer(), fetchMockOffer()]} style={undefined} />, mockStore);
     render(withStoreComponent);
     expect(screen.getByTestId('map')).toBeInTheDocument();
   });
