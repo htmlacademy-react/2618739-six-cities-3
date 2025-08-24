@@ -60,6 +60,7 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
             <div className="cities__right-section">
               < Map city={selectedCity}
                 offers={selectedOffers}
+                style={undefined}
               />
             </div>
           </div>
