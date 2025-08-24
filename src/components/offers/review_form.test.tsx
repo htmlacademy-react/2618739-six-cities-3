@@ -35,8 +35,7 @@ describe('Component: ReviewsForm', () => {
     );
     await userEvent.type(
       screen.getByTestId('review_text'),
-      reviewText)
-    console.log();
+      reviewText);
     expect(screen.getByTestId('reviewForm')).toBeInTheDocument();
     expect(screen.getByDisplayValue(reviewText)).toBeInTheDocument();
     expect(screen.getByText('Submit')).toBeEnabled();
