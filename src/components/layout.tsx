@@ -17,6 +17,9 @@ function Layout(): JSX.Element {
   if (pathname.includes('offer')) {
     pageClass += ' page__main--offer';
   }
+  if (pathname.includes('login')) {
+    pageClass += ' page--login';
+  }
 
   return (
     <div className={pageClass} >
