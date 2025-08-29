@@ -29,13 +29,21 @@ const currentCustomIcon = new Icon({
 function Map(props: MapProps): JSX.Element {
   const { city, offers, style } = props;
   const activeCard = useAppSelector(selectActiveOfferId);
-  const selectedCard = offers[activeCard];
+  let selectedCard: TOffer | undefined = undefined;
+  if (activeCard) {
+    selectedCard = offers[activeCard];
+  }
+
   const mapRef = useRef(null);
   const map = useMap(mapRef);
 
   useEffect(() => {
     if (map) {
-      const selectedPoint: Point = { title: selectedCard.title, lat: selectedCard.location.latitude, lng: selectedCard.location.longitude };
+      let selectedPoint: Point | undefined = undefined;
+      if (selectedCard) {
+        selectedPoint = { title: selectedCard.title, lat: selectedCard.location.latitude, lng: selectedCard.location.longitude };
+      }
+
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((offer) => {
         const marker = new Marker({
