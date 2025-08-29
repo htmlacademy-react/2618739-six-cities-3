@@ -30,7 +30,7 @@ function Map(props: MapProps): JSX.Element {
   const { city, offers, style } = props;
   const activeCard = useAppSelector(selectActiveOfferId);
   let selectedCard: TOffer | undefined = undefined;
-  if (activeCard) {
+  if (activeCard != undefined) {
     selectedCard = offers[activeCard];
   }
 
