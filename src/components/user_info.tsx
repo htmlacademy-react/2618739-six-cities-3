@@ -13,8 +13,8 @@ function UserInfo(): JSX.Element {
   const user = useAppSelector(getUserInfo);
   const favorites = useAppSelector(selectBookmarks);
   const handleClick = () => {
-    dropToken();
     store.dispatch(userSlice.actions.setAuthStatus(AuthorizationStatus.NoAuth));
+    dropToken();
   };
   if (authStatus === AuthorizationStatus.Auth) {
     return (

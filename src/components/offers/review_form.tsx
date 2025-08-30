@@ -7,7 +7,7 @@ import Star from './star';
 import { useParams } from 'react-router-dom';
 import { store } from '../../store';
 import { getAuthorizationStatus } from '../../store/selectors/user';
-import { AuthorizationStatus } from '../../const';
+import { AuthorizationStatus, MIN_REVIEW_LENGTH, MAX_REVIEW_LENGTH } from '../../const';
 
 function ReviewsForm(): JSX.Element {
   const id = useParams().id || '';
@@ -26,14 +26,14 @@ function ReviewsForm(): JSX.Element {
     });
   }
 
-  function handleSendReview() {
+  function handleSubmit() {
     const comment = ReviewState.text;
     const rating = ReviewState.stars;
     store.dispatch(putReviewsAction({ id, comment, rating }));
   }
 
   const disabledOption = () => {
-    if (ReviewState.stars && ReviewState.text.length > 50 && ReviewState.text.length < 300) {
+    if (ReviewState.stars && ReviewState.text.length > MIN_REVIEW_LENGTH && ReviewState.text.length < MAX_REVIEW_LENGTH) {
       return false;
     } else {
       return true;
@@ -65,7 +65,7 @@ function ReviewsForm(): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={disabledOption()} onClick={handleSendReview}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={disabledOption()} onClick={handleSubmit}>Submit</button>
       </div>
       Ваша оценка: {ReviewState.stars} Ваш отзыв: {ReviewState.text}
     </div>);

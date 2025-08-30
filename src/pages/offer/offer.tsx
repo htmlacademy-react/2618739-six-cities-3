@@ -1,7 +1,7 @@
 import OfferContainer from '../../components/offers/offer_container';
 import Map from '../../components/map';
 import TOffer from '../../types/offers';
-import { CITIES } from '../../const';
+import { CITIES, MAX_OFFER_PHOTOS, MAX_NEAR_PLACES } from '../../const';
 import { useParams } from 'react-router-dom';
 import PlaceCard from '../../components/place-card/place-card';
 import { store } from '../../store';
@@ -25,9 +25,8 @@ function Offer(offersProps: offersProps): JSX.Element {
   }, [activeCard]);
   const activeOffer = useAppSelector(selectActiveOffer) || selectedOffer;
   const nearOffers = useAppSelector(selectNearOffers);
-  const nearOffersList = nearOffers.slice(0, 3).map((nearOffer) => (<PlaceCard offersProp={nearOffer} key={nearOffer.id} id={0} cardClass={'near-places'} />));
-  <PlaceCard offersProp={offersProps.offers[0]} id={0} cardClass={'near-places'} />;
-  const offerGallery = activeOffer?.images?.slice(0, 6).map((image) => (
+  const nearOffersList = nearOffers.slice(0, MAX_NEAR_PLACES).map((nearOffer) => (<PlaceCard offersProp={nearOffer} key={nearOffer.id} id={0} cardClass={'near-places'} />));
+  const offerGallery = activeOffer?.images?.slice(0, MAX_OFFER_PHOTOS).map((image) => (
     <div className="offer__image-wrapper" key={image}>
       <img className="offer__image" src={image} alt="Photo studio" />
     </div>));
