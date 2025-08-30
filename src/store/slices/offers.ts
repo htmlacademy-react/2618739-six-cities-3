@@ -10,7 +10,7 @@ import { Sorting } from '../../types/sorting';
 interface OffersState {
   city: string;
   offers: TOffer[];
-  activeOfferId: number;
+  activeOfferId: number | undefined;
   activeOffer: TOffer | undefined;
   status: RequestStatus;
   sorting: Sorting;
@@ -23,7 +23,7 @@ const offers: TOffer[] = [];
 const initialState: OffersState = {
   city: CITIES[0].title,
   offers,
-  activeOfferId: 0,
+  activeOfferId: undefined,
   activeOffer: undefined,
   status: RequestStatus.Idle,
   sorting: Sorting.Default,

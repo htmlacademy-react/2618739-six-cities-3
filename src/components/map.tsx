@@ -16,26 +16,34 @@ type MapProps = {
 
 const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39]
 });
 
 const currentCustomIcon = new Icon({
   iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39]
 });
 
 function Map(props: MapProps): JSX.Element {
   const { city, offers, style } = props;
   const activeCard = useAppSelector(selectActiveOfferId);
-  const selectedCard = offers[activeCard];
+  let selectedCard: TOffer | undefined = undefined;
+  if (activeCard !== undefined) {
+    selectedCard = offers[activeCard];
+  }
+
   const mapRef = useRef(null);
   const map = useMap(mapRef);
 
   useEffect(() => {
     if (map) {
-      const selectedPoint: Point = { title: selectedCard.title, lat: selectedCard.location.latitude, lng: selectedCard.location.longitude };
+      let selectedPoint: Point | undefined = undefined;
+      if (selectedCard) {
+        selectedPoint = { title: selectedCard.title, lat: selectedCard.location.latitude, lng: selectedCard.location.longitude };
+      }
+
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((offer) => {
         const marker = new Marker({

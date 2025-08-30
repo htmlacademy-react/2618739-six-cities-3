@@ -43,14 +43,14 @@ function OfferContainer({ offer }: offerProp): JSX.Element {
 
 
   const bookMarkState = { id: offer.id, status: Number(!state) };
-  const handleToBookmarks = () => {
+  const handleAddToBookmarksClick = () => {
     store.dispatch(toBookmarksAction(bookMarkState));
   };
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const bookmarkButton = () => {
     if (authorizationStatus === AuthorizationStatus.Auth) {
       return (
-        <button className={bookmarkClass()} type="button" data-testid='toBookMarks' onClick={handleToBookmarks}>
+        <button className={bookmarkClass()} type="button" data-testid='toBookMarks' onClick={handleAddToBookmarksClick}>
           <svg className="place-card__bookmark-icon" width="18" height="19">
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
