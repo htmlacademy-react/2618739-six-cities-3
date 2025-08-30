@@ -26,7 +26,7 @@ describe('Offers slice tests', () => {
     const expectedState = {
       city: CITIES[0].title,
       offers: [],
-      activeOfferId: 0,
+      activeOfferId: undefined,
       status: RequestStatus.Idle,
       sorting: Sorting.Default,
       favorites: [],
