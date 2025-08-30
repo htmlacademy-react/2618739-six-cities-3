@@ -18,22 +18,27 @@ function Login(): JSX.Element {
     setLogin(newLogin);
   };
   const getPassword = (newPassword: string) => {
-    if (newPassword.length >= 2) {
-      setPassword(newPassword);
-    } else {
-      toast.error('Incorrect password');
-      setPassword('');
-    }
+    setPassword(newPassword);
   };
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    if (userLogin.length > 0 && userPassword.length > 0) {
-      dispatch(login({ email: userLogin, password: userPassword }));
+  function checkAndDispatch(email: string, password: string) {
+    if (!validateEmail(email)) {
+      toast.error('Incorrect e-mail');
+      return;
     }
+    if (password.length < 2) {
+      toast.error('Incorrect password');
+      return;
+    }
+    dispatch(login({ email: email, password: userPassword }));
+
+  }
+  const handleFormSubmit: FormEventHandler<HTMLFormElement> = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    checkAndDispatch(userLogin, userPassword);
   };
   const handleEnterPress = (event: React.KeyboardEvent<HTMLElement>) => {
     if (event.key === 'Enter') {
-      dispatch(login({ email: userLogin, password: userPassword }));
+      checkAndDispatch(userLogin, userPassword);
     }
   };
   const randomCity = CITIES[Math.floor(Math.random() * CITIES.length)].title;
@@ -55,24 +60,18 @@ function Login(): JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" onSubmit={handleSubmit}>
+            <form className="login__form form" onSubmit={handleFormSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input className="login__input form__input" type="email" name="email" data-testid="email" placeholder="Email" defaultValue="" required onBlur={({ target }: ChangeEvent<HTMLInputElement>) => {
-                  if (validateEmail(target.value)) {
-                    getLogin(target.value);
-                  } else {
-                    toast.error('Incorrect e-mail'
-                    );
-                    getLogin('');
-                  }
+                  getLogin(target.value);
                 }}
                 />
                 <ToastContainer />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden" >Password</label>
-                <input className="login__input form__input" data-testid="password" type="password" name="password" placeholder="Password" required onBlur={({ target }: ChangeEvent<HTMLInputElement>) => {
+                <input className="login__input form__input" data-testid="password" type="password" name="password" placeholder="Password" required onChange={({ target }: ChangeEvent<HTMLInputElement>) => {
                   getPassword(target.value);
                 }}
                 onKeyDown={handleEnterPress}
