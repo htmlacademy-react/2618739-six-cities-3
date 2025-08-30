@@ -32,15 +32,14 @@ const userSlice = createSlice(
     reducers: {
       setAuthStatus: (state, action: PayloadAction<AuthorizationStatus>) => {
         state.auth = action.payload;
-        alert(state.auth)
-        if (action.payload = AuthorizationStatus.NoAuth) {
+        if (action.payload === AuthorizationStatus.NoAuth) {
           state.info = {
             name: '',
             avatarUrl: '',
             isPro: false,
             email: '',
             token: ''
-          }
+          };
         }
       },
     },
