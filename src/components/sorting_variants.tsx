@@ -11,7 +11,7 @@ function SortingVariants(): JSX.Element {
     setExpand(!isExpanded);
   }
   const dispatch = useAppDispatch();
-  function handleSortOffers(e: React.MouseEvent<HTMLElement>) {
+  function handleSortingVariantClick(e: React.MouseEvent<HTMLElement>) {
     if (e.currentTarget.textContent) {
       dispatch(setSorting(e.currentTarget.textContent));
     }
@@ -37,7 +37,7 @@ function SortingVariants(): JSX.Element {
       {isExpanded ?
         (
           <ul className="places__options places__options--custom places__options--opened">
-            {Object.values(Sorting).map((variant) => (<li className={isActive(variant) ? 'places__option places__option--actives' : 'places__option'} onClick={handleSortOffers} tabIndex={0} key={variant}>{variant}</li>))}
+            {Object.values(Sorting).map((variant) => (<li className={isActive(variant) ? 'places__option places__option--actives' : 'places__option'} onClick={handleSortingVariantClick} tabIndex={0} key={variant}>{variant}</li>))}
           </ul>
         ) : <ul className="places__options places__options--custom places__options--opened" hidden />}
     </form >
