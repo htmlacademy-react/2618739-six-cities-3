@@ -53,7 +53,7 @@ function Main(mainPageProps: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{selectedOffers.length} place{selectedOffers.length > 1 ? "s" : null} to stay in {selectedCity.title}</b>
+              <b className="places__found">{selectedOffers.length} place{selectedOffers.length > 1 ? 's' : null} to stay in {selectedCity.title}</b>
               <SortingVariants />
               <PlaceCardList offersProps={selectedOffers} />
             </section>
