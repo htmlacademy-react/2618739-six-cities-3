@@ -60,3 +60,9 @@ export enum RequestStatus {
 export enum AuthorizationStatus {
   Unknown, Auth, NoAuth
 }
+
+export const MAX_REVIEW_LENGTH = 300;
+export const MIN_REVIEW_LENGTH = 50;
+export const MAX_REVIEW_NUM = 10;
+export const MAX_OFFER_PHOTOS = 6;
+export const MAX_NEAR_PLACES = 3;

@@ -7,7 +7,7 @@ import Star from './star';
 import { useParams } from 'react-router-dom';
 import { store } from '../../store';
 import { getAuthorizationStatus } from '../../store/selectors/user';
-import { AuthorizationStatus } from '../../const';
+import { AuthorizationStatus, MIN_REVIEW_LENGTH, MAX_REVIEW_LENGTH } from '../../const';
 
 function ReviewsForm(): JSX.Element {
   const id = useParams().id || '';
@@ -33,7 +33,7 @@ function ReviewsForm(): JSX.Element {
   }
 
   const disabledOption = () => {
-    if (ReviewState.stars && ReviewState.text.length > 50 && ReviewState.text.length < 300) {
+    if (ReviewState.stars && ReviewState.text.length > MIN_REVIEW_LENGTH && ReviewState.text.length < MAX_REVIEW_LENGTH) {
       return false;
     } else {
       return true;
